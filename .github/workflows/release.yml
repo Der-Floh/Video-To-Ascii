@@ -31,7 +31,7 @@ jobs:
 
     # 4. Build the MSI
     - name: Build MSI with Advanced Installer
-      uses: caphyon/advinst-github-action@v2
+      uses: caphyon/advinst-github-action@main
       with:
         aip-path: VideoToAscii.aip
         aip-commands: |
