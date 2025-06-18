@@ -11,7 +11,7 @@ jobs:
       # Convenience variables
       VERSION: ${{ github.ref_name }}
       GITHUB_ENV: ${{ github.ref_name }}
-      PUBLISH_DIR: ${{ github.workspace }}\artifacts\publish
+      PUBLISH_DIR: ${{ github.workspace }}\bin\Publish
 
     steps:
     # 1. Checkout source
