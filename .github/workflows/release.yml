@@ -11,7 +11,7 @@ jobs:
       # Convenience variables
       VERSION: ${{ github.ref_name }}
       GITHUB_ENV: ${{ github.ref_name }}
-      PUBLISH_DIR: ${{ github.workspace }}\bin\Publish
+      PUBLISH_DIR: ${{ github.workspace }}\bin\Publish\VideoToAscii
 
     steps:
     # 1. Checkout source
