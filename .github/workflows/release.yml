@@ -37,13 +37,6 @@ jobs:
       run: |
         dotnet publish VideoToAscii/VideoToAscii.csproj -c Release -o "$env:PUBLISH_DIR" -r win-x64 --self-contained true -p:Version=$env:CLEAN_VERSION
 
-    - name: Show publish contents
-      shell: pwsh
-      run: |
-        Get-ChildItem -Path "C:\a\Video-To-Ascii\Video-To-Ascii\VideoToAscii\bin\Publish\VideoToAscii" -Recurse |
-          Select-Object @{N='Size(KB)';E={"{0:N0}" -f ($_.Length/1KB)}}, FullName |
-          Format-Table -AutoSize
-
     # 5. Build the MSI
     - name: Build MSI with Advanced Installer
       uses: caphyon/advinst-github-action@main
