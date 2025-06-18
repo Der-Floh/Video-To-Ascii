@@ -4,6 +4,9 @@ on:
   push:
     tags: ['v*']
 
+permissions:
+  contents: write
+
 jobs:
   release:
     runs-on: windows-latest
@@ -94,9 +97,10 @@ jobs:
       run: |
         cd Package\chocolatey
         choco pack videotoascii.nuspec
-        choco push videotoascii.${{ env.GITHUB_ENV }}.nupkg `
-          --source "https://push.chocolatey.org/" `
-          --api-key ${{ secrets.CHOCO_API_KEY }}
+        
+    #choco push videotoascii.${{ env.GITHUB_ENV }}.nupkg `
+    #--source "https://push.chocolatey.org/" `
+    #--api-key ${{ secrets.CHOCO_API_KEY }}
 
     # 11. ──── Scoop  ────────────────────────────────────────────────
     #- name: Update Scoop bucket
