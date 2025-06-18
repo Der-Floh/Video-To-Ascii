@@ -27,7 +27,6 @@ jobs:
       shell: pwsh
       run: |
         dotnet publish VideoToAscii/VideoToAscii.csproj -c Release -o "$env:PUBLISH_DIR"
-        echo "CLEAN_VERSION=$($env:VERSION.TrimStart('v'))" >> $env:GITHUB_ENV
 
     # 4. Build the MSI
     - name: Build MSI with Advanced Installer
