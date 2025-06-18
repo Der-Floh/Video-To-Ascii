@@ -41,7 +41,7 @@ jobs:
     - name: Build MSI with Advanced Installer
       uses: caphyon/advinst-github-action@main
       with:
-        aip-path: VideoToAscii.aip
+        aip-path: ./Package/VideoToAscii.aip
         aip-commands: |
           SetPathVariable BUILD_OUTPUT "$env:PUBLISH_DIR"
           Build
