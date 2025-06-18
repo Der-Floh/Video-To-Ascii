@@ -10,7 +10,7 @@ jobs:
     env:
       # Convenience variables
       VERSION: ${{ github.ref_name }}
-      CLEAN_VERSION: ${{ github.ref_name }}
+      GITHUB_ENV: ${{ github.ref_name }}
       PUBLISH_DIR: ${{ github.workspace }}\artifacts\publish
 
     steps:
@@ -27,13 +27,12 @@ jobs:
       shell: pwsh
       run: |
         dotnet publish VideoToAscii/VideoToAscii.csproj -c Release -o "$env:PUBLISH_DIR"
-        echo "CLEAN_VERSION=$($env:VERSION.TrimStart('v'))" >> $env:GITHUB_ENV
+        echo "GITHUB_ENV=$($env:VERSION.TrimStart('v'))" >> $env:GITHUB_ENV
 
     # 4. Build the MSI
     - name: Build MSI with Advanced Installer
       uses: caphyon/advinst-github-action@v2
       with:
-        advinst-license: ${{ secrets.ADV_LICENSE }}
         aip-path: VideoToAscii.aip
         aip-commands: |
           SetPathVariable BUILD_OUTPUT "$env:PUBLISH_DIR"
@@ -60,7 +59,7 @@ jobs:
       shell: pwsh
       run: |
         $replacements = @{
-          '\{\{VERSION\}\}'  = "${{ env.CLEAN_VERSION }}"
+          '\{\{VERSION\}\}'  = "${{ env.GITHUB_ENV }}"
           '\{\{SHA256\}\}'   = "${{ steps.hash.outputs.sha }}"
         }
         Get-ChildItem Package -Recurse -Filter *.template | ForEach-Object {
@@ -87,20 +86,20 @@ jobs:
       shell: pwsh
       run: |
         cd Package\chocolatey
-        choco pack videotoascii.nuspec         # builds .nupkg
-        choco push videotoascii.${{ env.CLEAN_VERSION }}.nupkg `
+        choco pack videotoascii.nuspec
+        choco push videotoascii.${{ env.GITHUB_ENV }}.nupkg `
           --source "https://push.chocolatey.org/" `
-          --api-key ${{ secrets.CHOCO_API_KEY }}  # docs :contentReference[oaicite:2]{index=2}
+          --api-key ${{ secrets.CHOCO_API_KEY }}
 
     # 10. ───── Scoop  ────────────────────────────────────────────────
-    - name: Update Scoop bucket
-      shell: pwsh
-      run: |
-        git clone https://github.com/Der-Floh/videotoascii-bucket.git bucket
-        Copy-Item Package\scoop\videotoascii.json bucket\bucket\videotoascii.json -Force
-        cd bucket
-        git config user.name  "github-actions"
-        git config user.email "action@github.com"
-        git add bucket/videotoascii.json
-        git commit -m "VideoToAscii ${{ env.CLEAN_VERSION }}"
-        git push https://${{ secrets.SCOOP_PAT }}@github.com/Der-Floh/videotoascii-bucket.git HEAD:main
+    #- name: Update Scoop bucket
+    #  shell: pwsh
+    #  run: |
+    #    git clone https://github.com/Der-Floh/videotoascii-bucket.git bucket
+    #    Copy-Item Package\scoop\videotoascii.json bucket\bucket\videotoascii.json -Force
+    #    cd bucket
+    #    git config user.name  "github-actions"
+    #    git config user.email "action@github.com"
+    #    git add bucket/videotoascii.json
+    #    git commit -m "VideoToAscii ${{ env.GITHUB_ENV }}"
+    #    git push https://${{ secrets.SCOOP_PAT }}@github.com/Der-Floh/videotoascii-bucket.git HEAD:main
