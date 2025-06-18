@@ -1,0 +1,106 @@
+name: Build-and-publish VideoToAscii
+
+on:
+  push:
+    tags: ['v*']
+
+jobs:
+  release:
+    runs-on: windows-latest
+    env:
+      # Convenience variables
+      VERSION: ${{ github.ref_name }}
+      CLEAN_VERSION: ${{ github.ref_name }}
+      PUBLISH_DIR: ${{ github.workspace }}\artifacts\publish
+
+    steps:
+    # 1. Checkout source
+    - uses: actions/checkout@v4
+
+    # 2. Install .NET 9 SDK
+    - uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0.x'
+
+    # 3. Build & publish
+    - name: Build .NET app
+      shell: pwsh
+      run: |
+        dotnet publish VideoToAscii/VideoToAscii.csproj -c Release -o "$env:PUBLISH_DIR"
+        echo "CLEAN_VERSION=$($env:VERSION.TrimStart('v'))" >> $env:GITHUB_ENV
+
+    # 4. Build the MSI
+    - name: Build MSI with Advanced Installer
+      uses: caphyon/advinst-github-action@v2
+      with:
+        advinst-license: ${{ secrets.ADV_LICENSE }}
+        aip-path: VideoToAscii.aip
+        aip-commands: |
+          SetPathVariable BUILD_OUTPUT "$env:PUBLISH_DIR"
+          Build
+
+    # 5. Upload the MSI to GitHub Release
+    - uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          **/VideoToAscii-*.msi
+
+    # 6. Calculate SHA-256
+    - name: Compute MSI hash
+      id: hash
+      shell: pwsh
+      run: |
+        $msi = Get-ChildItem -Filter "VideoToAscii-*.msi" -Recurse | Select-Object -First 1
+        $sha = (Get-FileHash $msi.FullName -Algorithm SHA256).Hash
+        echo "sha=$sha" >> $env:GITHUB_OUTPUT
+        echo "msipath=$($msi.FullName)" >> $env:GITHUB_OUTPUT
+
+    # 7. Render package-manager templates
+    - name: Render packaging templates
+      shell: pwsh
+      run: |
+        $replacements = @{
+          '\{\{VERSION\}\}'  = "${{ env.CLEAN_VERSION }}"
+          '\{\{SHA256\}\}'   = "${{ steps.hash.outputs.sha }}"
+        }
+        Get-ChildItem Package -Recurse -Filter *.template | ForEach-Object {
+          $content = Get-Content $_ -Raw
+          foreach ($k in $replacements.Keys) { $content = $content -replace $k, $replacements[$k] }
+          $dest = $_.FullName -replace '\.template$',''
+          $content | Set-Content $dest
+        }
+
+    # 8. ───── WinGet  ────────────────────────────────────────────────
+    - name: Install wingetcreate
+      run: winget install --id=Microsoft.WingetCreate -e --accept-package-agreements --disable-interactivity
+    - name: Submit WinGet manifest
+      shell: pwsh
+      run: |
+        wingetcreate update `
+          --manifest Package\winget\Der_Floh.VideoToAscii.yaml `
+          --submit `
+          --replace `
+          --token ${{ secrets.WINGET_TOKEN }}
+
+    # 9. ───── Chocolatey  ────────────────────────────────────────────
+    - name: Pack & push Chocolatey package
+      shell: pwsh
+      run: |
+        cd Package\chocolatey
+        choco pack videotoascii.nuspec         # builds .nupkg
+        choco push videotoascii.${{ env.CLEAN_VERSION }}.nupkg `
+          --source "https://push.chocolatey.org/" `
+          --api-key ${{ secrets.CHOCO_API_KEY }}  # docs :contentReference[oaicite:2]{index=2}
+
+    # 10. ───── Scoop  ────────────────────────────────────────────────
+    - name: Update Scoop bucket
+      shell: pwsh
+      run: |
+        git clone https://github.com/Der-Floh/videotoascii-bucket.git bucket
+        Copy-Item Package\scoop\videotoascii.json bucket\bucket\videotoascii.json -Force
+        cd bucket
+        git config user.name  "github-actions"
+        git config user.email "action@github.com"
+        git add bucket/videotoascii.json
+        git commit -m "VideoToAscii ${{ env.CLEAN_VERSION }}"
+        git push https://${{ secrets.SCOOP_PAT }}@github.com/Der-Floh/videotoascii-bucket.git HEAD:main
