@@ -1,0 +1,823 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DOCUMENT Type="Advanced Installer" CreateVersion="22.7" version="22.7" Modules="simple" RootPath="." Language="de" Id="{1C2FC445-EB56-489F-8BDB-6D20A991FFB5}">
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
+    <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
+    <ROW Property="ALLUSERS" Value="1"/>
+    <ROW Property="ARPPRODUCTICON" Value="icon.exe" Type="8"/>
+    <ROW Property="ARPURLINFOABOUT" Value="https://github.com/Der-Floh/Video-To-Ascii"/>
+    <ROW Property="Manufacturer" Value="Der_Floh"/>
+    <ROW Property="ProductCode" Value="1031:{0D4AC0C3-4B87-4FA2-9494-21B45975EE9B} " Type="16"/>
+    <ROW Property="ProductLanguage" Value="1033"/>
+    <ROW Property="ProductName" Value="VideoToAscii"/>
+    <ROW Property="ProductVersion" Value="1.0.0" Options="32"/>
+    <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
+    <ROW Property="UpgradeCode" Value="{1C942D37-731F-447C-90DB-87BC35901376}"/>
+    <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
+    <ROW Property="WindowsType9XDisplay" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT40" MultiBuildValue="DefaultBuild:Windows NT 4.0" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT40Display" MultiBuildValue="DefaultBuild:Windows NT 4.0" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT50" MultiBuildValue="DefaultBuild:Windows 2000" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT50Display" MultiBuildValue="DefaultBuild:Windows 2000" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT5X" MultiBuildValue="DefaultBuild:Windows XP/2003" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT5XDisplay" MultiBuildValue="DefaultBuild:Windows XP/2003" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT60" MultiBuildValue="DefaultBuild:Windows Vista/Server 2008" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT60Display" MultiBuildValue="DefaultBuild:Windows Vista/Server 2008" ValueLocId="-"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiDirsComponent">
+    <ROW Directory="APPDIR" Directory_Parent="TARGETDIR" DefaultDir="APPDIR:." IsPseudoRoot="1" DirectoryOptions="3"/>
+    <ROW Directory="Resources_Dir" Directory_Parent="VideoToAscii_Dir" DefaultDir="RESOUR~1|Resources" DirectoryOptions="3"/>
+    <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
+    <ROW Directory="VideoToAscii_Dir" Directory_Parent="APPDIR" DefaultDir="VIDEOT~1|VideoToAscii" DirectoryOptions="3"/>
+    <ROW Directory="cs_Dir" Directory_Parent="VideoToAscii_Dir" DefaultDir="cs" DirectoryOptions="3"/>
+    <ROW Directory="de_Dir" Directory_Parent="VideoToAscii_Dir" DefaultDir="de" DirectoryOptions="3"/>
+    <ROW Directory="es_Dir" Directory_Parent="VideoToAscii_Dir" DefaultDir="es" DirectoryOptions="3"/>
+    <ROW Directory="fr_Dir" Directory_Parent="VideoToAscii_Dir" DefaultDir="fr" DirectoryOptions="3"/>
+    <ROW Directory="it_Dir" Directory_Parent="VideoToAscii_Dir" DefaultDir="it" DirectoryOptions="3"/>
+    <ROW Directory="ja_Dir" Directory_Parent="VideoToAscii_Dir" DefaultDir="ja" DirectoryOptions="3"/>
+    <ROW Directory="ko_Dir" Directory_Parent="VideoToAscii_Dir" DefaultDir="ko" DirectoryOptions="3"/>
+    <ROW Directory="pl_Dir" Directory_Parent="VideoToAscii_Dir" DefaultDir="pl" DirectoryOptions="3"/>
+    <ROW Directory="ptBR_Dir" Directory_Parent="VideoToAscii_Dir" DefaultDir="pt-BR" DirectoryOptions="3"/>
+    <ROW Directory="ru_Dir" Directory_Parent="VideoToAscii_Dir" DefaultDir="ru" DirectoryOptions="3"/>
+    <ROW Directory="tr_Dir" Directory_Parent="VideoToAscii_Dir" DefaultDir="tr" DirectoryOptions="3"/>
+    <ROW Directory="zhHans_Dir" Directory_Parent="VideoToAscii_Dir" DefaultDir="zh-Hans" DirectoryOptions="3"/>
+    <ROW Directory="zhHant_Dir" Directory_Parent="VideoToAscii_Dir" DefaultDir="zh-Hant" DirectoryOptions="3"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.SideBySideGuidComponent">
+    <ROW Component="APPDIR" Value="{030570DB-F9C7-4766-8FFD-E4E69C8D74DC}"/>
+    <ROW Component="ProductInformation" Value="{B92C5103-1452-43F1-84B7-700BB4622B6D}"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
+    <ROW Component="APPDIR" ComponentId="{030570DB-F9C7-4766-8FFD-E4E69C8D74DC}" Directory_="APPDIR" Attributes="0"/>
+    <ROW Component="FFMpegCore.dll" ComponentId="{94CEC64F-B638-4D15-9091-AA8879B4FFA7}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="FFMpegCore.dll"/>
+    <ROW Component="Instances.dll" ComponentId="{575B6BDB-AE4A-4913-84C8-60372BFBD24A}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="Instances.dll"/>
+    <ROW Component="Iso639.dll" ComponentId="{6F14C63C-8CDF-4526-97B1-2D7069D0DE62}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="Iso639.dll"/>
+    <ROW Component="Microsoft.CSharp.dll" ComponentId="{46E25FF9-970D-466A-8C3E-692C8D75A74C}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="Microsoft.CSharp.dll"/>
+    <ROW Component="Microsoft.DiaSymReader.Native.amd64.dll" ComponentId="{DF67B979-3A37-402F-A805-D422547D9194}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="Microsoft.DiaSymReader.Native.amd64.dll"/>
+    <ROW Component="Microsoft.VisualBasic.Core.dll" ComponentId="{3281DE11-EE89-42F1-A3C4-1CC596F88DFC}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="Microsoft.VisualBasic.Core.dll"/>
+    <ROW Component="Microsoft.VisualBasic.dll" ComponentId="{62AF5B73-D3FC-4B44-93F2-BA81E271DD2E}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="Microsoft.VisualBasic.dll"/>
+    <ROW Component="Microsoft.Win32.Primitives.dll" ComponentId="{ED05C79D-B6AD-42B8-96FF-CDBB0544490D}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="Microsoft.Win32.Primitives.dll"/>
+    <ROW Component="Microsoft.Win32.Registry.dll" ComponentId="{4A7B9580-9CC8-4BE9-9C5A-56F2E86659CB}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="Microsoft.Win32.Registry.dll"/>
+    <ROW Component="NAudio.Asio.dll" ComponentId="{DB38315D-0AB0-45D3-862A-269F0843F0B1}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="NAudio.Asio.dll"/>
+    <ROW Component="NAudio.Core.dll" ComponentId="{46446552-C1C6-454B-9F8D-162508103BF6}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="NAudio.Core.dll"/>
+    <ROW Component="NAudio.Midi.dll" ComponentId="{8E9252F7-4C86-4BC7-A058-D4989ADF8ED1}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="NAudio.Midi.dll"/>
+    <ROW Component="NAudio.Wasapi.dll" ComponentId="{06658A9A-ADC6-4EBF-91CC-DF56861E1984}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="NAudio.Wasapi.dll"/>
+    <ROW Component="NAudio.WinMM.dll" ComponentId="{802B6DEE-0E78-4E96-B378-0092864B0825}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="NAudio.WinMM.dll"/>
+    <ROW Component="NAudio.dll" ComponentId="{A44C080A-200A-483A-B991-F0E854F39A35}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="NAudio.dll"/>
+    <ROW Component="OpenCvSharp.dll" ComponentId="{39471FD9-3614-478C-A2FA-D8CBE65CD563}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="OpenCvSharp.dll"/>
+    <ROW Component="OpenCvSharpExtern.dll" ComponentId="{2385B095-A635-4FEC-AB76-31996BCCDAF1}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="OpenCvSharpExtern.dll"/>
+    <ROW Component="ProductInformation" ComponentId="{B92C5103-1452-43F1-84B7-700BB4622B6D}" Directory_="APPDIR" Attributes="260" KeyPath="Version"/>
+    <ROW Component="SoundTouch.Net.NAudioSupport.dll" ComponentId="{5B2E456E-5B2F-4652-BC36-6C23C44C2591}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="SoundTouch.Net.NAudioSupport.dll"/>
+    <ROW Component="SoundTouch.Net.dll" ComponentId="{E928E646-31DC-43FD-8E5C-5FA41F59FD4D}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="SoundTouch.Net.dll"/>
+    <ROW Component="System.AppContext.dll" ComponentId="{87CC5C67-8225-46AA-8358-3EBBFC3A0C4E}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.AppContext.dll"/>
+    <ROW Component="System.Buffers.dll" ComponentId="{AC6FC56F-D8E5-47A8-B337-A9CF0611BF75}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Buffers.dll"/>
+    <ROW Component="System.Collections.Concurrent.dll" ComponentId="{0615D0F8-6DF8-4C39-B2E6-253D378A5580}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Collections.Concurrent.dll"/>
+    <ROW Component="System.Collections.Immutable.dll" ComponentId="{9DE97AA9-36AC-4D30-B75C-202A92BE5013}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Collections.Immutable.dll"/>
+    <ROW Component="System.Collections.NonGeneric.dll" ComponentId="{AD543EBE-8448-4B6F-BC3F-CA95467AE322}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Collections.NonGeneric.dll"/>
+    <ROW Component="System.Collections.Specialized.dll" ComponentId="{67C1D207-2AEE-4AEF-A613-EF2BB215F93A}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Collections.Specialized.dll"/>
+    <ROW Component="System.Collections.dll" ComponentId="{0F7C4898-BBEF-4123-9DBE-DA41A70330EF}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Collections.dll"/>
+    <ROW Component="System.CommandLine.dll" ComponentId="{B9343EE0-8B50-4BAF-A82E-DEE3B12864DB}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.CommandLine.dll"/>
+    <ROW Component="System.CommandLine.resources.dll" ComponentId="{E58D2292-AA49-467A-8CAA-77772084E3BE}" Directory_="cs_Dir" Attributes="0" KeyPath="System.CommandLine.resources.dll"/>
+    <ROW Component="System.CommandLine.resources.dll_1" ComponentId="{4C2F3BDA-4008-492C-A6FF-20C926600D5D}" Directory_="de_Dir" Attributes="0" KeyPath="System.CommandLine.resources.dll_1"/>
+    <ROW Component="System.CommandLine.resources.dll_10" ComponentId="{1C62BBE8-3348-4280-A75F-4059933E38F9}" Directory_="tr_Dir" Attributes="0" KeyPath="System.CommandLine.resources.dll_10"/>
+    <ROW Component="System.CommandLine.resources.dll_11" ComponentId="{BDA3C5BD-6524-47C6-8681-A7874657F447}" Directory_="zhHans_Dir" Attributes="0" KeyPath="System.CommandLine.resources.dll_11"/>
+    <ROW Component="System.CommandLine.resources.dll_12" ComponentId="{6F2AF0F1-89F7-4A6D-BDE8-D5613F9411A1}" Directory_="zhHant_Dir" Attributes="0" KeyPath="System.CommandLine.resources.dll_12"/>
+    <ROW Component="System.CommandLine.resources.dll_2" ComponentId="{3FCC6EC7-1BE6-4AEB-94BB-E796C5E45259}" Directory_="es_Dir" Attributes="0" KeyPath="System.CommandLine.resources.dll_2"/>
+    <ROW Component="System.CommandLine.resources.dll_3" ComponentId="{FE666403-4967-41DA-8A7D-5A9BD9A713A0}" Directory_="fr_Dir" Attributes="0" KeyPath="System.CommandLine.resources.dll_3"/>
+    <ROW Component="System.CommandLine.resources.dll_4" ComponentId="{38FFBABA-0367-4F95-8CC3-374CA429714F}" Directory_="it_Dir" Attributes="0" KeyPath="System.CommandLine.resources.dll_4"/>
+    <ROW Component="System.CommandLine.resources.dll_5" ComponentId="{DEA4A732-5521-4A2E-82A5-9973CF72ED82}" Directory_="ja_Dir" Attributes="0" KeyPath="System.CommandLine.resources.dll_5"/>
+    <ROW Component="System.CommandLine.resources.dll_6" ComponentId="{EBDFFEFE-35E5-4C77-AB43-50DE2828DDBD}" Directory_="ko_Dir" Attributes="0" KeyPath="System.CommandLine.resources.dll_6"/>
+    <ROW Component="System.CommandLine.resources.dll_7" ComponentId="{FB42AAA0-B22F-4749-9C16-5B2F25364E72}" Directory_="pl_Dir" Attributes="0" KeyPath="System.CommandLine.resources.dll_7"/>
+    <ROW Component="System.CommandLine.resources.dll_8" ComponentId="{CA572EBF-6723-4126-A8AC-853916E007DE}" Directory_="ptBR_Dir" Attributes="0" KeyPath="System.CommandLine.resources.dll_8"/>
+    <ROW Component="System.CommandLine.resources.dll_9" ComponentId="{2DD45C05-36F4-4DD3-8E49-E29945A26993}" Directory_="ru_Dir" Attributes="0" KeyPath="System.CommandLine.resources.dll_9"/>
+    <ROW Component="System.ComponentModel.Annotations.dll" ComponentId="{971C65D6-9B68-4ED6-B355-DD38677E16F3}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.ComponentModel.Annotations.dll"/>
+    <ROW Component="System.ComponentModel.DataAnnotations.dll" ComponentId="{3C996D92-2CA3-490A-A77C-046E0C4DCACF}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.ComponentModel.DataAnnotations.dll"/>
+    <ROW Component="System.ComponentModel.EventBasedAsync.dll" ComponentId="{9B7A4917-DCBE-425C-875E-823B3D2BCCB1}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.ComponentModel.EventBasedAsync.dll"/>
+    <ROW Component="System.ComponentModel.Primitives.dll" ComponentId="{4C5FB432-CA1E-4FD6-A207-B23C6A32F54A}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.ComponentModel.Primitives.dll"/>
+    <ROW Component="System.ComponentModel.TypeConverter.dll" ComponentId="{B5A269FD-683C-41CB-BA7F-BE493BCCF67D}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.ComponentModel.TypeConverter.dll"/>
+    <ROW Component="System.ComponentModel.dll" ComponentId="{2510EB2B-B6E3-4A0E-9BDC-1E07DF05DDD1}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.ComponentModel.dll"/>
+    <ROW Component="System.Configuration.dll" ComponentId="{F121152D-F7AC-4082-8658-AACD43B0A76F}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Configuration.dll"/>
+    <ROW Component="System.Console.dll" ComponentId="{B7EF737A-3F2D-4A45-BBD9-AF1CE0E9D62E}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Console.dll"/>
+    <ROW Component="System.Core.dll" ComponentId="{879FF49F-CB3A-4E11-8B7A-D94A5BD76E3C}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Core.dll"/>
+    <ROW Component="System.Data.Common.dll" ComponentId="{14804F8A-4FAA-4EF2-9BF7-6424CA3E80C0}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Data.Common.dll"/>
+    <ROW Component="System.Data.DataSetExtensions.dll" ComponentId="{44860FAC-4B4A-456C-B512-B4EA56AB384A}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Data.DataSetExtensions.dll"/>
+    <ROW Component="System.Data.dll" ComponentId="{1CFD0972-69F3-42F4-B3CB-B016F6D4EFCE}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Data.dll"/>
+    <ROW Component="System.Diagnostics.Contracts.dll" ComponentId="{26B954AC-9565-4341-B5A6-C82B6B17F7E5}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Diagnostics.Contracts.dll"/>
+    <ROW Component="System.Diagnostics.Debug.dll" ComponentId="{25E15D1F-52B7-46AF-8527-47003F46C0F0}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Diagnostics.Debug.dll"/>
+    <ROW Component="System.Diagnostics.DiagnosticSource.dll" ComponentId="{00087EC8-B6E2-45AB-8D39-83F9A13D3FF3}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Diagnostics.DiagnosticSource.dll"/>
+    <ROW Component="System.Diagnostics.FileVersionInfo.dll" ComponentId="{D4B5886D-76F7-4D58-B497-BADF0A384BC5}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Diagnostics.FileVersionInfo.dll"/>
+    <ROW Component="System.Diagnostics.Process.dll" ComponentId="{2409E23E-FF87-42FC-A50C-768EF6067480}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Diagnostics.Process.dll"/>
+    <ROW Component="System.Diagnostics.StackTrace.dll" ComponentId="{A84808E1-880F-4EA8-80FA-441BC39742FE}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Diagnostics.StackTrace.dll"/>
+    <ROW Component="System.Diagnostics.TextWriterTraceListener.dll" ComponentId="{CDBDDAD3-E922-4FD6-A55B-D794E7609E52}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Diagnostics.TextWriterTraceListener.dll"/>
+    <ROW Component="System.Diagnostics.Tools.dll" ComponentId="{DCC26289-2578-4F50-8360-CE861982E35F}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Diagnostics.Tools.dll"/>
+    <ROW Component="System.Diagnostics.TraceSource.dll" ComponentId="{021DD203-162B-4CCD-BFF5-AEA283CB2FF0}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Diagnostics.TraceSource.dll"/>
+    <ROW Component="System.Diagnostics.Tracing.dll" ComponentId="{3F3DBC15-2E78-482F-858A-49D1E696D829}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Diagnostics.Tracing.dll"/>
+    <ROW Component="System.Drawing.Primitives.dll" ComponentId="{101EBCFE-B3EB-4008-A9C5-BFCA734A02CD}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Drawing.Primitives.dll"/>
+    <ROW Component="System.Drawing.dll" ComponentId="{15E26091-0555-4427-94D7-D257972928DA}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Drawing.dll"/>
+    <ROW Component="System.Dynamic.Runtime.dll" ComponentId="{48A2EE55-F481-405D-AE67-C25A55CCA3FF}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Dynamic.Runtime.dll"/>
+    <ROW Component="System.Formats.Asn1.dll" ComponentId="{7CF42F52-14A4-4EF7-834E-B1A231EFC85B}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Formats.Asn1.dll"/>
+    <ROW Component="System.Formats.Tar.dll" ComponentId="{77177943-C7C6-4E05-B6C8-69291146172F}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Formats.Tar.dll"/>
+    <ROW Component="System.Globalization.Calendars.dll" ComponentId="{31B5C020-D610-492F-9A68-453DF17E0027}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Globalization.Calendars.dll"/>
+    <ROW Component="System.Globalization.Extensions.dll" ComponentId="{EC95EDBC-AFC4-4B6A-B84F-18F5338D71BA}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Globalization.Extensions.dll"/>
+    <ROW Component="System.Globalization.dll" ComponentId="{9B64F814-71F8-4CDC-A23D-D6E15AC46553}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Globalization.dll"/>
+    <ROW Component="System.IO.Compression.Brotli.dll" ComponentId="{D108E2E4-7DD7-465A-BB4D-6EC22C661AC7}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.IO.Compression.Brotli.dll"/>
+    <ROW Component="System.IO.Compression.FileSystem.dll" ComponentId="{1CDB64EE-5598-4415-A569-B39448C6AB4A}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.IO.Compression.FileSystem.dll"/>
+    <ROW Component="System.IO.Compression.Native.dll" ComponentId="{8354850D-8D85-493A-85B8-2A66C1ED021D}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.IO.Compression.Native.dll"/>
+    <ROW Component="System.IO.Compression.ZipFile.dll" ComponentId="{483CA1EB-FF86-4620-B5C5-103A13EFF52F}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.IO.Compression.ZipFile.dll"/>
+    <ROW Component="System.IO.Compression.dll" ComponentId="{FB3A9493-F61F-4BE2-87FD-BCD24D0E1A7B}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.IO.Compression.dll"/>
+    <ROW Component="System.IO.FileSystem.AccessControl.dll" ComponentId="{C36313CC-BEF8-46F6-BF99-AD75EEA341AD}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.IO.FileSystem.AccessControl.dll"/>
+    <ROW Component="System.IO.FileSystem.DriveInfo.dll" ComponentId="{DA9846C4-772D-4C62-8B95-B4AD7F181ADF}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.IO.FileSystem.DriveInfo.dll"/>
+    <ROW Component="System.IO.FileSystem.Primitives.dll" ComponentId="{1CFEF6B6-EB77-4F58-9E55-A02D4C41BF62}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.IO.FileSystem.Primitives.dll"/>
+    <ROW Component="System.IO.FileSystem.Watcher.dll" ComponentId="{856CAD83-F380-4199-8D89-4F62209238DD}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.IO.FileSystem.Watcher.dll"/>
+    <ROW Component="System.IO.FileSystem.dll" ComponentId="{69FD08F5-0BDD-4AFF-84A3-EF51290D2D91}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.IO.FileSystem.dll"/>
+    <ROW Component="System.IO.IsolatedStorage.dll" ComponentId="{44ED6472-FF7F-4D5E-8B1A-A8E33CE6A619}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.IO.IsolatedStorage.dll"/>
+    <ROW Component="System.IO.MemoryMappedFiles.dll" ComponentId="{9FB9F4E3-C4B9-4E28-BE2C-930042A9F4DD}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.IO.MemoryMappedFiles.dll"/>
+    <ROW Component="System.IO.Pipelines.dll" ComponentId="{D739E97C-4531-4212-9D18-0D1320967F1A}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.IO.Pipelines.dll"/>
+    <ROW Component="System.IO.Pipes.AccessControl.dll" ComponentId="{5FE75EF0-1841-4218-BB03-49FC131320A1}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.IO.Pipes.AccessControl.dll"/>
+    <ROW Component="System.IO.Pipes.dll" ComponentId="{925F289A-59E8-46D5-BDEB-37FACBAD5DAF}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.IO.Pipes.dll"/>
+    <ROW Component="System.IO.UnmanagedMemoryStream.dll" ComponentId="{AD76A0B7-0EF0-4410-80CA-477EAF0CE7A1}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.IO.UnmanagedMemoryStream.dll"/>
+    <ROW Component="System.IO.dll" ComponentId="{9C3E5C5B-0E9A-43F0-BB5E-3300AB51B1D2}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.IO.dll"/>
+    <ROW Component="System.Linq.Expressions.dll" ComponentId="{E5AEAB5D-F11B-426F-9000-AFFF4A1A3498}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Linq.Expressions.dll"/>
+    <ROW Component="System.Linq.Parallel.dll" ComponentId="{75431C58-06CD-4983-BBC2-8A7F148750E4}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Linq.Parallel.dll"/>
+    <ROW Component="System.Linq.Queryable.dll" ComponentId="{CE651476-F69C-4FA3-BF1A-B7FB3B1494EF}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Linq.Queryable.dll"/>
+    <ROW Component="System.Linq.dll" ComponentId="{36428B10-8175-40A6-BB68-7F523EF5410C}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Linq.dll"/>
+    <ROW Component="System.Memory.dll" ComponentId="{273E60BD-C939-451E-AC92-5BEA48E95BB1}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Memory.dll"/>
+    <ROW Component="System.Net.Http.Json.dll" ComponentId="{57ECFA3C-B0E2-4B35-AFCF-87D41E55EF0B}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Net.Http.Json.dll"/>
+    <ROW Component="System.Net.Http.dll" ComponentId="{B8845F23-3C59-4448-B763-55FCA012D3AD}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Net.Http.dll"/>
+    <ROW Component="System.Net.HttpListener.dll" ComponentId="{CD0D92C9-9E44-4671-9032-4EEAC4EEFA7D}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Net.HttpListener.dll"/>
+    <ROW Component="System.Net.Mail.dll" ComponentId="{D800BDB9-4FD8-4B85-974E-A924C29D09AF}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Net.Mail.dll"/>
+    <ROW Component="System.Net.NameResolution.dll" ComponentId="{71BA5C98-49B9-4A61-9BE4-7CB5946DD1A8}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Net.NameResolution.dll"/>
+    <ROW Component="System.Net.NetworkInformation.dll" ComponentId="{47D9664C-B472-4C6E-8606-34A11311CD2C}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Net.NetworkInformation.dll"/>
+    <ROW Component="System.Net.Ping.dll" ComponentId="{64BD5680-CAD1-4BE1-A909-569942E0B438}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Net.Ping.dll"/>
+    <ROW Component="System.Net.Primitives.dll" ComponentId="{6C220DC7-6421-4102-8374-3A0CDA92DED3}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Net.Primitives.dll"/>
+    <ROW Component="System.Net.Quic.dll" ComponentId="{8A1E031A-1495-4A5F-A835-D93617CCE14C}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Net.Quic.dll"/>
+    <ROW Component="System.Net.Requests.dll" ComponentId="{393175C5-98FD-4F78-97D0-C18886A319A0}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Net.Requests.dll"/>
+    <ROW Component="System.Net.Security.dll" ComponentId="{CD730192-2449-40DD-99AF-C6A7718A65B3}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Net.Security.dll"/>
+    <ROW Component="System.Net.ServicePoint.dll" ComponentId="{2218D607-5E2E-4F48-A11D-5BF84FFF2846}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Net.ServicePoint.dll"/>
+    <ROW Component="System.Net.Sockets.dll" ComponentId="{4E906BD5-A766-42CB-8963-2A7582276495}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Net.Sockets.dll"/>
+    <ROW Component="System.Net.WebClient.dll" ComponentId="{6EC323D0-4617-4C41-AFAB-CC536C0B5649}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Net.WebClient.dll"/>
+    <ROW Component="System.Net.WebHeaderCollection.dll" ComponentId="{BA70F4B5-6691-4090-A432-1E64A78B67AC}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Net.WebHeaderCollection.dll"/>
+    <ROW Component="System.Net.WebProxy.dll" ComponentId="{6C003DE6-0AB1-42AA-8948-70429C0F9F56}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Net.WebProxy.dll"/>
+    <ROW Component="System.Net.WebSockets.Client.dll" ComponentId="{144F35B7-EAB5-47D8-BA92-F51EEA70CD83}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Net.WebSockets.Client.dll"/>
+    <ROW Component="System.Net.WebSockets.dll" ComponentId="{B96B9C3D-6A67-44AF-B756-A5242802D63A}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Net.WebSockets.dll"/>
+    <ROW Component="System.Net.dll" ComponentId="{E15386E0-6C76-4ACA-8787-E518D968D0F3}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Net.dll"/>
+    <ROW Component="System.Numerics.Vectors.dll" ComponentId="{BEE0BB4D-04CA-4908-BB1F-39311832DA6A}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Numerics.Vectors.dll"/>
+    <ROW Component="System.Numerics.dll" ComponentId="{FB6AE8D3-A851-4B77-811F-49ED0831FDB7}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Numerics.dll"/>
+    <ROW Component="System.ObjectModel.dll" ComponentId="{58A812D0-7208-4736-BFEB-9349E6763EDC}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.ObjectModel.dll"/>
+    <ROW Component="System.Private.CoreLib.dll" ComponentId="{682DCC99-FCFC-48ED-8BF7-9EC9CC5C9A3E}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Private.CoreLib.dll"/>
+    <ROW Component="System.Private.DataContractSerialization.dll" ComponentId="{9971ABAD-CA67-49C5-8474-9356A398E248}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Private.DataContractSerialization.dll"/>
+    <ROW Component="System.Private.Uri.dll" ComponentId="{20A00B2B-3262-4408-881F-720A0FA150A9}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Private.Uri.dll"/>
+    <ROW Component="System.Private.Xml.Linq.dll" ComponentId="{D6EC98A3-7027-47CB-922C-C6894209547B}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Private.Xml.Linq.dll"/>
+    <ROW Component="System.Private.Xml.dll" ComponentId="{8500437F-E4CF-431B-AF04-F9D33FF50EB0}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Private.Xml.dll"/>
+    <ROW Component="System.Reflection.DispatchProxy.dll" ComponentId="{627B591B-34B3-46A9-A00F-28911EF705EB}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Reflection.DispatchProxy.dll"/>
+    <ROW Component="System.Reflection.Emit.ILGeneration.dll" ComponentId="{AA61A109-56AC-4F9A-84AA-8E8D8BBDFA78}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Reflection.Emit.ILGeneration.dll"/>
+    <ROW Component="System.Reflection.Emit.Lightweight.dll" ComponentId="{53DBCBCB-AA7C-4E00-B590-5A046D0755F9}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Reflection.Emit.Lightweight.dll"/>
+    <ROW Component="System.Reflection.Emit.dll" ComponentId="{515720CC-44D8-48A2-9271-8BBADD78BF62}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Reflection.Emit.dll"/>
+    <ROW Component="System.Reflection.Extensions.dll" ComponentId="{F449DCC9-F815-4620-987D-9462AD2F4CA8}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Reflection.Extensions.dll"/>
+    <ROW Component="System.Reflection.Metadata.dll" ComponentId="{9E78E7EB-EA96-4C89-AAF2-21BDEA7FD294}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Reflection.Metadata.dll"/>
+    <ROW Component="System.Reflection.Primitives.dll" ComponentId="{E5362581-60DF-424B-8AA0-D359CDFCB87B}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Reflection.Primitives.dll"/>
+    <ROW Component="System.Reflection.TypeExtensions.dll" ComponentId="{58741D52-1C84-453E-A05B-01B2F78AC5E9}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Reflection.TypeExtensions.dll"/>
+    <ROW Component="System.Reflection.dll" ComponentId="{E4E9CF8E-0E93-43BC-85BB-84932C3FD996}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Reflection.dll"/>
+    <ROW Component="System.Resources.Reader.dll" ComponentId="{3267263A-94CF-4C4B-865B-6FF848164306}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Resources.Reader.dll"/>
+    <ROW Component="System.Resources.ResourceManager.dll" ComponentId="{A993324E-2686-42B5-A78A-9916B8EF27FE}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Resources.ResourceManager.dll"/>
+    <ROW Component="System.Resources.Writer.dll" ComponentId="{E6648D29-B797-4902-A8E2-4D860C61AE89}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Resources.Writer.dll"/>
+    <ROW Component="System.Runtime.CompilerServices.Unsafe.dll" ComponentId="{196B64C7-E783-4570-B1EC-A8DC951A033F}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Runtime.CompilerServices.Unsafe.dll"/>
+    <ROW Component="System.Runtime.CompilerServices.VisualC.dll" ComponentId="{54F203A5-0F67-43EB-8A2F-DC7495DA9FE3}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Runtime.CompilerServices.VisualC.dll"/>
+    <ROW Component="System.Runtime.Extensions.dll" ComponentId="{857FA988-60BD-406F-8A47-1E8DBC1A6072}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Runtime.Extensions.dll"/>
+    <ROW Component="System.Runtime.Handles.dll" ComponentId="{50C3E3DF-ADBE-491F-B07A-A0DC740C281B}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Runtime.Handles.dll"/>
+    <ROW Component="System.Runtime.InteropServices.JavaScript.dll" ComponentId="{BE1E486D-F14B-4245-A3FE-B05A051603F0}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Runtime.InteropServices.JavaScript.dll"/>
+    <ROW Component="System.Runtime.InteropServices.RuntimeInformation.dll" ComponentId="{75B1DF6C-7790-4FF0-B147-F865F94B0668}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Runtime.InteropServices.RuntimeInformation.dll"/>
+    <ROW Component="System.Runtime.InteropServices.dll" ComponentId="{3F11C579-CAB3-4457-BF17-D4969F146217}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Runtime.InteropServices.dll"/>
+    <ROW Component="System.Runtime.Intrinsics.dll" ComponentId="{ECE9E27F-4680-455E-94FF-E05BCA877CF1}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Runtime.Intrinsics.dll"/>
+    <ROW Component="System.Runtime.Loader.dll" ComponentId="{D297F4A7-730D-43C5-A1C2-3F033D3E4951}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Runtime.Loader.dll"/>
+    <ROW Component="System.Runtime.Numerics.dll" ComponentId="{C2F58899-D1A5-4FD6-86E2-D44251022957}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Runtime.Numerics.dll"/>
+    <ROW Component="System.Runtime.Serialization.Formatters.dll" ComponentId="{22D9D323-3DDE-4539-8BD4-9F28DBA0FC7D}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Runtime.Serialization.Formatters.dll"/>
+    <ROW Component="System.Runtime.Serialization.Json.dll" ComponentId="{A5507DEF-6552-4A3D-986F-98FADD618440}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Runtime.Serialization.Json.dll"/>
+    <ROW Component="System.Runtime.Serialization.Primitives.dll" ComponentId="{5D2705C2-7946-45C2-BDC0-230610411BBC}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Runtime.Serialization.Primitives.dll"/>
+    <ROW Component="System.Runtime.Serialization.Xml.dll" ComponentId="{CAC4A9B7-13EE-4D0F-B968-EE386AAB390D}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Runtime.Serialization.Xml.dll"/>
+    <ROW Component="System.Runtime.Serialization.dll" ComponentId="{A72DB34F-C245-4724-9892-888BD4991FF8}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Runtime.Serialization.dll"/>
+    <ROW Component="System.Runtime.dll" ComponentId="{4E961D76-202B-49E8-9526-5A67AA2E8539}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Runtime.dll"/>
+    <ROW Component="System.Security.AccessControl.dll" ComponentId="{C5DECF91-0425-4E4A-AF42-F317BA99FD61}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Security.AccessControl.dll"/>
+    <ROW Component="System.Security.Claims.dll" ComponentId="{C817A8B9-527A-4E49-AB99-835708D64E65}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Security.Claims.dll"/>
+    <ROW Component="System.Security.Cryptography.Algorithms.dll" ComponentId="{CAD18249-3455-481D-9FDC-EEDC03CA2D71}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Security.Cryptography.Algorithms.dll"/>
+    <ROW Component="System.Security.Cryptography.Cng.dll" ComponentId="{516EC871-1C58-4ED4-9531-7D1A7100E4A9}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Security.Cryptography.Cng.dll"/>
+    <ROW Component="System.Security.Cryptography.Csp.dll" ComponentId="{497BCA01-9345-4B00-9739-70884714018E}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Security.Cryptography.Csp.dll"/>
+    <ROW Component="System.Security.Cryptography.Encoding.dll" ComponentId="{AC45AC61-7C4F-4E19-9631-4AF95FF735DF}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Security.Cryptography.Encoding.dll"/>
+    <ROW Component="System.Security.Cryptography.OpenSsl.dll" ComponentId="{E0992DF3-A579-4B7A-A111-9942CB95C6ED}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Security.Cryptography.OpenSsl.dll"/>
+    <ROW Component="System.Security.Cryptography.Primitives.dll" ComponentId="{B824BA22-B781-4A11-BA65-27001B10B3C4}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Security.Cryptography.Primitives.dll"/>
+    <ROW Component="System.Security.Cryptography.X509Certificates.dll" ComponentId="{096B1BC2-B20B-4903-A456-51AE018ADA17}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Security.Cryptography.X509Certificates.dll"/>
+    <ROW Component="System.Security.Cryptography.dll" ComponentId="{609D3EA1-28C3-4586-BA3A-4F013BEE6005}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Security.Cryptography.dll"/>
+    <ROW Component="System.Security.Principal.Windows.dll" ComponentId="{B5FF28B8-08F4-4975-9007-2EFE4216D063}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Security.Principal.Windows.dll"/>
+    <ROW Component="System.Security.Principal.dll" ComponentId="{AA288EF5-2B9A-4417-89CA-0DAA8E3743E2}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Security.Principal.dll"/>
+    <ROW Component="System.Security.SecureString.dll" ComponentId="{90DB9B98-A9EB-43FB-A995-79DD24FE0B65}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Security.SecureString.dll"/>
+    <ROW Component="System.Security.dll" ComponentId="{EF5819FF-DA3E-49D5-A874-7FE96D8F8EBF}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Security.dll"/>
+    <ROW Component="System.ServiceModel.Web.dll" ComponentId="{456384D7-AA29-49FC-A2C0-36537084F6EF}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.ServiceModel.Web.dll"/>
+    <ROW Component="System.ServiceProcess.dll" ComponentId="{00AA94FA-D5F2-4606-B4EF-B70B095EB8BD}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.ServiceProcess.dll"/>
+    <ROW Component="System.Text.Encoding.CodePages.dll" ComponentId="{DF06EC01-E9BA-4C2C-BE45-DC866DE98F40}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Text.Encoding.CodePages.dll"/>
+    <ROW Component="System.Text.Encoding.Extensions.dll" ComponentId="{F4E93D2C-4A97-4274-98D2-F931D3669607}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Text.Encoding.Extensions.dll"/>
+    <ROW Component="System.Text.Encoding.dll" ComponentId="{6111C80C-94C3-43A2-A8A1-F91B73E77701}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Text.Encoding.dll"/>
+    <ROW Component="System.Text.Encodings.Web.dll" ComponentId="{C88D49F3-E6CF-4344-A6CA-504959C803CF}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Text.Encodings.Web.dll"/>
+    <ROW Component="System.Text.Json.dll" ComponentId="{3ED38457-744D-46DB-B903-5A275818B528}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Text.Json.dll"/>
+    <ROW Component="System.Text.RegularExpressions.dll" ComponentId="{B1B75616-46B9-47E4-8158-7C8FD1315F25}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Text.RegularExpressions.dll"/>
+    <ROW Component="System.Threading.Channels.dll" ComponentId="{E458F347-A4C0-450B-A36D-9D6F4DDDE5A8}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Threading.Channels.dll"/>
+    <ROW Component="System.Threading.Overlapped.dll" ComponentId="{E9198568-3CDD-4039-96B4-8E546D602153}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Threading.Overlapped.dll"/>
+    <ROW Component="System.Threading.Tasks.Dataflow.dll" ComponentId="{A09399F0-E272-4954-8ADE-80FC770CDA48}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Threading.Tasks.Dataflow.dll"/>
+    <ROW Component="System.Threading.Tasks.Extensions.dll" ComponentId="{3CA79A7B-8C20-4431-8718-FC637E49A8F1}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Threading.Tasks.Extensions.dll"/>
+    <ROW Component="System.Threading.Tasks.Parallel.dll" ComponentId="{45492B42-4D96-4C72-938B-CF266D03FAE9}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Threading.Tasks.Parallel.dll"/>
+    <ROW Component="System.Threading.Tasks.dll" ComponentId="{1902D3F8-EB3D-441B-A222-DFF33F3E20B0}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Threading.Tasks.dll"/>
+    <ROW Component="System.Threading.Thread.dll" ComponentId="{C58B99F8-8ED9-46B7-9430-01600E33964C}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Threading.Thread.dll"/>
+    <ROW Component="System.Threading.ThreadPool.dll" ComponentId="{587C601F-14BC-4552-AAE5-C131246C5A45}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Threading.ThreadPool.dll"/>
+    <ROW Component="System.Threading.Timer.dll" ComponentId="{15578A0C-56E0-4E46-A983-8822F2090B77}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Threading.Timer.dll"/>
+    <ROW Component="System.Threading.dll" ComponentId="{4361FA46-1310-4B90-852E-182AC01A024A}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Threading.dll"/>
+    <ROW Component="System.Transactions.Local.dll" ComponentId="{08A3A832-0AE4-445A-BBC4-BC548A9441D1}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Transactions.Local.dll"/>
+    <ROW Component="System.Transactions.dll" ComponentId="{407889E6-5F8A-4A4D-A94F-4E99479E02BB}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Transactions.dll"/>
+    <ROW Component="System.ValueTuple.dll" ComponentId="{168D8789-5D0C-4279-869D-9B0A77249915}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.ValueTuple.dll"/>
+    <ROW Component="System.Web.HttpUtility.dll" ComponentId="{ABF19E57-5551-41AE-9C9E-AAA02F121F72}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Web.HttpUtility.dll"/>
+    <ROW Component="System.Web.dll" ComponentId="{E251B10D-AB40-489E-9C4B-F99790739A4D}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Web.dll"/>
+    <ROW Component="System.Windows.dll" ComponentId="{4412D52E-659B-46FF-ACA8-1F76DB1DB146}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Windows.dll"/>
+    <ROW Component="System.Xml.Linq.dll" ComponentId="{5EB90C08-5417-4EBB-81A7-0BD9DD4C5131}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Xml.Linq.dll"/>
+    <ROW Component="System.Xml.ReaderWriter.dll" ComponentId="{6B2F56A6-90AE-4A47-B3F0-1D6D0AE1CFBF}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Xml.ReaderWriter.dll"/>
+    <ROW Component="System.Xml.Serialization.dll" ComponentId="{A8927EA5-31EF-426D-B61E-0A8008D75656}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Xml.Serialization.dll"/>
+    <ROW Component="System.Xml.XDocument.dll" ComponentId="{EC815020-5BEF-4CD4-9305-A670AA7B290F}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Xml.XDocument.dll"/>
+    <ROW Component="System.Xml.XPath.XDocument.dll" ComponentId="{C7F3FCF3-05C2-4B59-87CE-E950213F51D2}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="System.Xml.XPath.XDocument.dll"/>
+    <ROW Component="System.Xml.XPath.dll" ComponentId="{0CECB456-B24E-4EA5-B7B2-D894D9087BA7}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Xml.XPath.dll"/>
+    <ROW Component="System.Xml.XmlDocument.dll" ComponentId="{02E7B9DE-5D3E-4822-98F6-83794AF0E281}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Xml.XmlDocument.dll"/>
+    <ROW Component="System.Xml.XmlSerializer.dll" ComponentId="{7B1945D2-0C04-4AC9-8FDB-650760C00171}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Xml.XmlSerializer.dll"/>
+    <ROW Component="System.Xml.dll" ComponentId="{4BE6450F-A7E2-48F7-A837-C217D5E20686}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.Xml.dll"/>
+    <ROW Component="System.dll" ComponentId="{6224A338-718C-4BC8-943B-B5DF52889A5F}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="System.dll"/>
+    <ROW Component="VideoToAscii.deps.json" ComponentId="{FB7484E6-FF4D-481D-9AB9-A4105047EEE3}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="VideoToAscii.deps.json" Type="0"/>
+    <ROW Component="VideoToAscii.dll" ComponentId="{18C58108-B965-43BF-B4CC-1D38DD4A5E9C}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="VideoToAscii.dll"/>
+    <ROW Component="VideoToAscii.exe" ComponentId="{3D6443AC-FE39-43D3-9D36-7A782810D2A3}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="VideoToAscii.exe"/>
+    <ROW Component="WindowsBase.dll" ComponentId="{311280C5-4905-44CB-AC6C-B3E796EE7DF3}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="WindowsBase.dll"/>
+    <ROW Component="clretwrc.dll" ComponentId="{140A6FA3-8A5C-4999-A141-3FDC163577E1}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="clretwrc.dll"/>
+    <ROW Component="clrgc.dll" ComponentId="{94FAE3DD-B7C7-4A08-9114-FB0DCFA8CCF4}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="clrgc.dll"/>
+    <ROW Component="clrgcexp.dll" ComponentId="{22DAC424-E9DF-4140-9864-675430F08249}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="clrgcexp.dll"/>
+    <ROW Component="clrjit.dll" ComponentId="{B4EBD806-8009-4F09-87E3-5F1FCB5B4DF4}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="clrjit.dll"/>
+    <ROW Component="coreclr.dll" ComponentId="{3CDDBF0E-B52A-441E-9727-E399D0DB85E3}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="coreclr.dll"/>
+    <ROW Component="createdump.exe" ComponentId="{74020F3B-3D21-4DE9-A8F7-BF0B229FC955}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="createdump.exe"/>
+    <ROW Component="hostfxr.dll" ComponentId="{8BCFB75D-3E71-4743-9894-E6CACCF9CF49}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="hostfxr.dll"/>
+    <ROW Component="hostpolicy.dll" ComponentId="{50ADEE3E-3A75-4EE8-ADD1-3034496BE31B}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="hostpolicy.dll"/>
+    <ROW Component="mscordaccore.dll" ComponentId="{BC28C847-7CDD-42BF-B106-2078B2CDA004}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="mscordaccore.dll"/>
+    <ROW Component="mscordaccore_amd64_amd64_9.0.525.21509.dll" ComponentId="{5E46B2F4-18D1-4C7A-AC52-8F5141F3966B}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="mscordaccore_amd64_amd64_9.0.525.21509.dll"/>
+    <ROW Component="mscordbi.dll" ComponentId="{08811C21-1283-4658-8B24-65727FF25B6E}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="mscordbi.dll"/>
+    <ROW Component="mscorlib.dll" ComponentId="{EED49172-7C08-47FE-AD92-E352FD2C1A48}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="mscorlib.dll"/>
+    <ROW Component="mscorrc.dll" ComponentId="{DA813FB7-B1E8-46A3-A75D-902B4EDF8E7E}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="mscorrc.dll"/>
+    <ROW Component="msquic.dll" ComponentId="{FE39731E-15B5-4B55-899E-87A28541F08A}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="msquic.dll"/>
+    <ROW Component="netstandard.dll" ComponentId="{28BB0D02-A9FC-4692-A42B-F1B6B6581ED1}" Directory_="VideoToAscii_Dir" Attributes="0" KeyPath="netstandard.dll"/>
+    <ROW Component="opencv_videoio_ffmpeg4110_64.dll" ComponentId="{F2652622-26FA-4578-90DD-E02FA3F18CA1}" Directory_="VideoToAscii_Dir" Attributes="256" KeyPath="opencv_videoio_ffmpeg4110_64.dll"/>
+    <ROW Component="test1.mp4" ComponentId="{F2600599-83D0-4BB2-94B0-8E22DD977BE2}" Directory_="Resources_Dir" Attributes="0" KeyPath="test1.mp4" Type="0"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatsComponent">
+    <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0"/>
+    <ATTRIBUTE name="CurrentFeature" value="MainFeature"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
+    <ROW File="clretwrc.dll" Component_="clretwrc.dll" FileName="clretwrc.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\clretwrc.dll" SelfReg="false"/>
+    <ROW File="clrgc.dll" Component_="clrgc.dll" FileName="clrgc.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\clrgc.dll" SelfReg="false"/>
+    <ROW File="clrgcexp.dll" Component_="clrgcexp.dll" FileName="clrgcexp.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\clrgcexp.dll" SelfReg="false"/>
+    <ROW File="clrjit.dll" Component_="clrjit.dll" FileName="clrjit.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\clrjit.dll" SelfReg="false"/>
+    <ROW File="coreclr.dll" Component_="coreclr.dll" FileName="coreclr.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\coreclr.dll" SelfReg="false"/>
+    <ROW File="createdump.exe" Component_="createdump.exe" FileName="CREATE~1.EXE|createdump.exe" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\createdump.exe" SelfReg="false"/>
+    <ROW File="System.CommandLine.resources.dll" Component_="System.CommandLine.resources.dll" FileName="SYSTEM~1.DLL|System.CommandLine.resources.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\cs\System.CommandLine.resources.dll" SelfReg="false"/>
+    <ROW File="System.CommandLine.resources.dll_1" Component_="System.CommandLine.resources.dll_1" FileName="SYSTEM~1.DLL|System.CommandLine.resources.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\de\System.CommandLine.resources.dll" SelfReg="false"/>
+    <ROW File="System.CommandLine.resources.dll_2" Component_="System.CommandLine.resources.dll_2" FileName="SYSTEM~1.DLL|System.CommandLine.resources.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\es\System.CommandLine.resources.dll" SelfReg="false"/>
+    <ROW File="FFMpegCore.dll" Component_="FFMpegCore.dll" FileName="FFMPEG~1.DLL|FFMpegCore.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\FFMpegCore.dll" SelfReg="false"/>
+    <ROW File="System.CommandLine.resources.dll_3" Component_="System.CommandLine.resources.dll_3" FileName="SYSTEM~1.DLL|System.CommandLine.resources.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\fr\System.CommandLine.resources.dll" SelfReg="false"/>
+    <ROW File="hostfxr.dll" Component_="hostfxr.dll" FileName="hostfxr.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\hostfxr.dll" SelfReg="false"/>
+    <ROW File="hostpolicy.dll" Component_="hostpolicy.dll" FileName="HOSTPO~1.DLL|hostpolicy.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\hostpolicy.dll" SelfReg="false"/>
+    <ROW File="Instances.dll" Component_="Instances.dll" FileName="INSTAN~1.DLL|Instances.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\Instances.dll" SelfReg="false"/>
+    <ROW File="Iso639.dll" Component_="Iso639.dll" FileName="Iso639.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\Iso639.dll" SelfReg="false"/>
+    <ROW File="System.CommandLine.resources.dll_4" Component_="System.CommandLine.resources.dll_4" FileName="SYSTEM~1.DLL|System.CommandLine.resources.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\it\System.CommandLine.resources.dll" SelfReg="false"/>
+    <ROW File="System.CommandLine.resources.dll_5" Component_="System.CommandLine.resources.dll_5" FileName="SYSTEM~1.DLL|System.CommandLine.resources.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\ja\System.CommandLine.resources.dll" SelfReg="false"/>
+    <ROW File="System.CommandLine.resources.dll_6" Component_="System.CommandLine.resources.dll_6" FileName="SYSTEM~1.DLL|System.CommandLine.resources.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\ko\System.CommandLine.resources.dll" SelfReg="false"/>
+    <ROW File="Microsoft.CSharp.dll" Component_="Microsoft.CSharp.dll" FileName="MICROS~1.DLL|Microsoft.CSharp.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\Microsoft.CSharp.dll" SelfReg="false"/>
+    <ROW File="Microsoft.DiaSymReader.Native.amd64.dll" Component_="Microsoft.DiaSymReader.Native.amd64.dll" FileName="MICROS~2.DLL|Microsoft.DiaSymReader.Native.amd64.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\Microsoft.DiaSymReader.Native.amd64.dll" SelfReg="false"/>
+    <ROW File="Microsoft.VisualBasic.Core.dll" Component_="Microsoft.VisualBasic.Core.dll" FileName="MICROS~3.DLL|Microsoft.VisualBasic.Core.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\Microsoft.VisualBasic.Core.dll" SelfReg="false"/>
+    <ROW File="Microsoft.VisualBasic.dll" Component_="Microsoft.VisualBasic.dll" FileName="MICROS~4.DLL|Microsoft.VisualBasic.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\Microsoft.VisualBasic.dll" SelfReg="false"/>
+    <ROW File="Microsoft.Win32.Primitives.dll" Component_="Microsoft.Win32.Primitives.dll" FileName="MICROS~5.DLL|Microsoft.Win32.Primitives.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\Microsoft.Win32.Primitives.dll" SelfReg="false"/>
+    <ROW File="Microsoft.Win32.Registry.dll" Component_="Microsoft.Win32.Registry.dll" FileName="MICROS~6.DLL|Microsoft.Win32.Registry.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\Microsoft.Win32.Registry.dll" SelfReg="false"/>
+    <ROW File="mscordaccore.dll" Component_="mscordaccore.dll" FileName="MSCORD~1.DLL|mscordaccore.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\mscordaccore.dll" SelfReg="false"/>
+    <ROW File="mscordaccore_amd64_amd64_9.0.525.21509.dll" Component_="mscordaccore_amd64_amd64_9.0.525.21509.dll" FileName="MSCORD~2.DLL|mscordaccore_amd64_amd64_9.0.525.21509.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\mscordaccore_amd64_amd64_9.0.525.21509.dll" SelfReg="false"/>
+    <ROW File="mscordbi.dll" Component_="mscordbi.dll" FileName="mscordbi.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\mscordbi.dll" SelfReg="false"/>
+    <ROW File="mscorlib.dll" Component_="mscorlib.dll" FileName="mscorlib.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\mscorlib.dll" SelfReg="false"/>
+    <ROW File="mscorrc.dll" Component_="mscorrc.dll" FileName="mscorrc.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\mscorrc.dll" SelfReg="false"/>
+    <ROW File="msquic.dll" Component_="msquic.dll" FileName="msquic.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\msquic.dll" SelfReg="false"/>
+    <ROW File="NAudio.Asio.dll" Component_="NAudio.Asio.dll" FileName="NAUDIO~1.DLL|NAudio.Asio.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\NAudio.Asio.dll" SelfReg="false"/>
+    <ROW File="NAudio.Core.dll" Component_="NAudio.Core.dll" FileName="NAUDIO~2.DLL|NAudio.Core.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\NAudio.Core.dll" SelfReg="false"/>
+    <ROW File="NAudio.dll" Component_="NAudio.dll" FileName="NAudio.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\NAudio.dll" SelfReg="false"/>
+    <ROW File="NAudio.Midi.dll" Component_="NAudio.Midi.dll" FileName="NAUDIO~3.DLL|NAudio.Midi.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\NAudio.Midi.dll" SelfReg="false"/>
+    <ROW File="NAudio.Wasapi.dll" Component_="NAudio.Wasapi.dll" FileName="NAUDIO~4.DLL|NAudio.Wasapi.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\NAudio.Wasapi.dll" SelfReg="false"/>
+    <ROW File="NAudio.WinMM.dll" Component_="NAudio.WinMM.dll" FileName="NAUDIO~5.DLL|NAudio.WinMM.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\NAudio.WinMM.dll" SelfReg="false"/>
+    <ROW File="netstandard.dll" Component_="netstandard.dll" FileName="NETSTA~1.DLL|netstandard.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\netstandard.dll" SelfReg="false"/>
+    <ROW File="OpenCvSharp.dll" Component_="OpenCvSharp.dll" FileName="OPENCV~1.DLL|OpenCvSharp.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\OpenCvSharp.dll" SelfReg="false"/>
+    <ROW File="OpenCvSharpExtern.dll" Component_="OpenCvSharpExtern.dll" FileName="OPENCV~2.DLL|OpenCvSharpExtern.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\OpenCvSharpExtern.dll" SelfReg="false"/>
+    <ROW File="opencv_videoio_ffmpeg4110_64.dll" Component_="opencv_videoio_ffmpeg4110_64.dll" FileName="OPENCV~3.DLL|opencv_videoio_ffmpeg4110_64.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\opencv_videoio_ffmpeg4110_64.dll" SelfReg="false"/>
+    <ROW File="System.CommandLine.resources.dll_7" Component_="System.CommandLine.resources.dll_7" FileName="SYSTEM~1.DLL|System.CommandLine.resources.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\pl\System.CommandLine.resources.dll" SelfReg="false"/>
+    <ROW File="System.CommandLine.resources.dll_8" Component_="System.CommandLine.resources.dll_8" FileName="SYSTEM~1.DLL|System.CommandLine.resources.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\pt-BR\System.CommandLine.resources.dll" SelfReg="false"/>
+    <ROW File="test1.mp4" Component_="test1.mp4" FileName="test1.mp4" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\Resources\test1.mp4" SelfReg="false"/>
+    <ROW File="test2.mp4" Component_="test1.mp4" FileName="test2.mp4" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\Resources\test2.mp4" SelfReg="false"/>
+    <ROW File="System.CommandLine.resources.dll_9" Component_="System.CommandLine.resources.dll_9" FileName="SYSTEM~1.DLL|System.CommandLine.resources.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\ru\System.CommandLine.resources.dll" SelfReg="false"/>
+    <ROW File="SoundTouch.Net.dll" Component_="SoundTouch.Net.dll" FileName="SOUNDT~1.DLL|SoundTouch.Net.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\SoundTouch.Net.dll" SelfReg="false"/>
+    <ROW File="SoundTouch.Net.NAudioSupport.dll" Component_="SoundTouch.Net.NAudioSupport.dll" FileName="SOUNDT~2.DLL|SoundTouch.Net.NAudioSupport.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\SoundTouch.Net.NAudioSupport.dll" SelfReg="false"/>
+    <ROW File="System.AppContext.dll" Component_="System.AppContext.dll" FileName="SYSTEM~1.DLL|System.AppContext.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.AppContext.dll" SelfReg="false"/>
+    <ROW File="System.Buffers.dll" Component_="System.Buffers.dll" FileName="SYSTEM~2.DLL|System.Buffers.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Buffers.dll" SelfReg="false"/>
+    <ROW File="System.Collections.Concurrent.dll" Component_="System.Collections.Concurrent.dll" FileName="SYSTEM~3.DLL|System.Collections.Concurrent.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Collections.Concurrent.dll" SelfReg="false"/>
+    <ROW File="System.Collections.dll" Component_="System.Collections.dll" FileName="SYSTEM~4.DLL|System.Collections.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Collections.dll" SelfReg="false"/>
+    <ROW File="System.Collections.Immutable.dll" Component_="System.Collections.Immutable.dll" FileName="SYSTEM~5.DLL|System.Collections.Immutable.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Collections.Immutable.dll" SelfReg="false"/>
+    <ROW File="System.Collections.NonGeneric.dll" Component_="System.Collections.NonGeneric.dll" FileName="SYSTEM~6.DLL|System.Collections.NonGeneric.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Collections.NonGeneric.dll" SelfReg="false"/>
+    <ROW File="System.Collections.Specialized.dll" Component_="System.Collections.Specialized.dll" FileName="SYSTEM~7.DLL|System.Collections.Specialized.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Collections.Specialized.dll" SelfReg="false"/>
+    <ROW File="System.CommandLine.dll" Component_="System.CommandLine.dll" FileName="SYSTEM~8.DLL|System.CommandLine.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.CommandLine.dll" SelfReg="false"/>
+    <ROW File="System.ComponentModel.Annotations.dll" Component_="System.ComponentModel.Annotations.dll" FileName="SYSTEM~9.DLL|System.ComponentModel.Annotations.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.ComponentModel.Annotations.dll" SelfReg="false"/>
+    <ROW File="System.ComponentModel.DataAnnotations.dll" Component_="System.ComponentModel.DataAnnotations.dll" FileName="SYSTE~10.DLL|System.ComponentModel.DataAnnotations.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.ComponentModel.DataAnnotations.dll" SelfReg="false"/>
+    <ROW File="System.ComponentModel.dll" Component_="System.ComponentModel.dll" FileName="SYSTE~11.DLL|System.ComponentModel.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.ComponentModel.dll" SelfReg="false"/>
+    <ROW File="System.ComponentModel.EventBasedAsync.dll" Component_="System.ComponentModel.EventBasedAsync.dll" FileName="SYSTE~12.DLL|System.ComponentModel.EventBasedAsync.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.ComponentModel.EventBasedAsync.dll" SelfReg="false"/>
+    <ROW File="System.ComponentModel.Primitives.dll" Component_="System.ComponentModel.Primitives.dll" FileName="SYSTE~13.DLL|System.ComponentModel.Primitives.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.ComponentModel.Primitives.dll" SelfReg="false"/>
+    <ROW File="System.ComponentModel.TypeConverter.dll" Component_="System.ComponentModel.TypeConverter.dll" FileName="SYSTE~14.DLL|System.ComponentModel.TypeConverter.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.ComponentModel.TypeConverter.dll" SelfReg="false"/>
+    <ROW File="System.Configuration.dll" Component_="System.Configuration.dll" FileName="SYSTE~15.DLL|System.Configuration.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Configuration.dll" SelfReg="false"/>
+    <ROW File="System.Console.dll" Component_="System.Console.dll" FileName="SYSTE~16.DLL|System.Console.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Console.dll" SelfReg="false"/>
+    <ROW File="System.Core.dll" Component_="System.Core.dll" FileName="SYSTE~17.DLL|System.Core.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Core.dll" SelfReg="false"/>
+    <ROW File="System.Data.Common.dll" Component_="System.Data.Common.dll" FileName="SYSTE~18.DLL|System.Data.Common.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Data.Common.dll" SelfReg="false"/>
+    <ROW File="System.Data.DataSetExtensions.dll" Component_="System.Data.DataSetExtensions.dll" FileName="SYSTE~19.DLL|System.Data.DataSetExtensions.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Data.DataSetExtensions.dll" SelfReg="false"/>
+    <ROW File="System.Data.dll" Component_="System.Data.dll" FileName="SYSTE~20.DLL|System.Data.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Data.dll" SelfReg="false"/>
+    <ROW File="System.Diagnostics.Contracts.dll" Component_="System.Diagnostics.Contracts.dll" FileName="SYSTE~21.DLL|System.Diagnostics.Contracts.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Diagnostics.Contracts.dll" SelfReg="false"/>
+    <ROW File="System.Diagnostics.Debug.dll" Component_="System.Diagnostics.Debug.dll" FileName="SYSTE~22.DLL|System.Diagnostics.Debug.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Diagnostics.Debug.dll" SelfReg="false"/>
+    <ROW File="System.Diagnostics.DiagnosticSource.dll" Component_="System.Diagnostics.DiagnosticSource.dll" FileName="SYSTE~23.DLL|System.Diagnostics.DiagnosticSource.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Diagnostics.DiagnosticSource.dll" SelfReg="false"/>
+    <ROW File="System.Diagnostics.FileVersionInfo.dll" Component_="System.Diagnostics.FileVersionInfo.dll" FileName="SYSTE~24.DLL|System.Diagnostics.FileVersionInfo.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Diagnostics.FileVersionInfo.dll" SelfReg="false"/>
+    <ROW File="System.Diagnostics.Process.dll" Component_="System.Diagnostics.Process.dll" FileName="SYSTE~25.DLL|System.Diagnostics.Process.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Diagnostics.Process.dll" SelfReg="false"/>
+    <ROW File="System.Diagnostics.StackTrace.dll" Component_="System.Diagnostics.StackTrace.dll" FileName="SYSTE~26.DLL|System.Diagnostics.StackTrace.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Diagnostics.StackTrace.dll" SelfReg="false"/>
+    <ROW File="System.Diagnostics.TextWriterTraceListener.dll" Component_="System.Diagnostics.TextWriterTraceListener.dll" FileName="SYSTE~27.DLL|System.Diagnostics.TextWriterTraceListener.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Diagnostics.TextWriterTraceListener.dll" SelfReg="false"/>
+    <ROW File="System.Diagnostics.Tools.dll" Component_="System.Diagnostics.Tools.dll" FileName="SYSTE~28.DLL|System.Diagnostics.Tools.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Diagnostics.Tools.dll" SelfReg="false"/>
+    <ROW File="System.Diagnostics.TraceSource.dll" Component_="System.Diagnostics.TraceSource.dll" FileName="SYSTE~29.DLL|System.Diagnostics.TraceSource.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Diagnostics.TraceSource.dll" SelfReg="false"/>
+    <ROW File="System.Diagnostics.Tracing.dll" Component_="System.Diagnostics.Tracing.dll" FileName="SYSTE~30.DLL|System.Diagnostics.Tracing.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Diagnostics.Tracing.dll" SelfReg="false"/>
+    <ROW File="System.dll" Component_="System.dll" FileName="System.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.dll" SelfReg="false"/>
+    <ROW File="System.Drawing.dll" Component_="System.Drawing.dll" FileName="SYSTE~31.DLL|System.Drawing.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Drawing.dll" SelfReg="false"/>
+    <ROW File="System.Drawing.Primitives.dll" Component_="System.Drawing.Primitives.dll" FileName="SYSTE~32.DLL|System.Drawing.Primitives.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Drawing.Primitives.dll" SelfReg="false"/>
+    <ROW File="System.Dynamic.Runtime.dll" Component_="System.Dynamic.Runtime.dll" FileName="SYSTE~33.DLL|System.Dynamic.Runtime.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Dynamic.Runtime.dll" SelfReg="false"/>
+    <ROW File="System.Formats.Asn1.dll" Component_="System.Formats.Asn1.dll" FileName="SYSTE~34.DLL|System.Formats.Asn1.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Formats.Asn1.dll" SelfReg="false"/>
+    <ROW File="System.Formats.Tar.dll" Component_="System.Formats.Tar.dll" FileName="SYSTE~35.DLL|System.Formats.Tar.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Formats.Tar.dll" SelfReg="false"/>
+    <ROW File="System.Globalization.Calendars.dll" Component_="System.Globalization.Calendars.dll" FileName="SYSTE~36.DLL|System.Globalization.Calendars.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Globalization.Calendars.dll" SelfReg="false"/>
+    <ROW File="System.Globalization.dll" Component_="System.Globalization.dll" FileName="SYSTE~37.DLL|System.Globalization.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Globalization.dll" SelfReg="false"/>
+    <ROW File="System.Globalization.Extensions.dll" Component_="System.Globalization.Extensions.dll" FileName="SYSTE~38.DLL|System.Globalization.Extensions.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Globalization.Extensions.dll" SelfReg="false"/>
+    <ROW File="System.IO.Compression.Brotli.dll" Component_="System.IO.Compression.Brotli.dll" FileName="SYSTE~39.DLL|System.IO.Compression.Brotli.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.IO.Compression.Brotli.dll" SelfReg="false"/>
+    <ROW File="System.IO.Compression.dll" Component_="System.IO.Compression.dll" FileName="SYSTE~40.DLL|System.IO.Compression.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.IO.Compression.dll" SelfReg="false"/>
+    <ROW File="System.IO.Compression.FileSystem.dll" Component_="System.IO.Compression.FileSystem.dll" FileName="SYSTE~41.DLL|System.IO.Compression.FileSystem.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.IO.Compression.FileSystem.dll" SelfReg="false"/>
+    <ROW File="System.IO.Compression.Native.dll" Component_="System.IO.Compression.Native.dll" FileName="SYSTE~42.DLL|System.IO.Compression.Native.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.IO.Compression.Native.dll" SelfReg="false"/>
+    <ROW File="System.IO.Compression.ZipFile.dll" Component_="System.IO.Compression.ZipFile.dll" FileName="SYSTE~43.DLL|System.IO.Compression.ZipFile.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.IO.Compression.ZipFile.dll" SelfReg="false"/>
+    <ROW File="System.IO.dll" Component_="System.IO.dll" FileName="SYSTE~44.DLL|System.IO.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.IO.dll" SelfReg="false"/>
+    <ROW File="System.IO.FileSystem.AccessControl.dll" Component_="System.IO.FileSystem.AccessControl.dll" FileName="SYSTE~45.DLL|System.IO.FileSystem.AccessControl.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.IO.FileSystem.AccessControl.dll" SelfReg="false"/>
+    <ROW File="System.IO.FileSystem.dll" Component_="System.IO.FileSystem.dll" FileName="SYSTE~46.DLL|System.IO.FileSystem.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.IO.FileSystem.dll" SelfReg="false"/>
+    <ROW File="System.IO.FileSystem.DriveInfo.dll" Component_="System.IO.FileSystem.DriveInfo.dll" FileName="SYSTE~47.DLL|System.IO.FileSystem.DriveInfo.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.IO.FileSystem.DriveInfo.dll" SelfReg="false"/>
+    <ROW File="System.IO.FileSystem.Primitives.dll" Component_="System.IO.FileSystem.Primitives.dll" FileName="SYSTE~48.DLL|System.IO.FileSystem.Primitives.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.IO.FileSystem.Primitives.dll" SelfReg="false"/>
+    <ROW File="System.IO.FileSystem.Watcher.dll" Component_="System.IO.FileSystem.Watcher.dll" FileName="SYSTE~49.DLL|System.IO.FileSystem.Watcher.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.IO.FileSystem.Watcher.dll" SelfReg="false"/>
+    <ROW File="System.IO.IsolatedStorage.dll" Component_="System.IO.IsolatedStorage.dll" FileName="SYSTE~50.DLL|System.IO.IsolatedStorage.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.IO.IsolatedStorage.dll" SelfReg="false"/>
+    <ROW File="System.IO.MemoryMappedFiles.dll" Component_="System.IO.MemoryMappedFiles.dll" FileName="SYSTE~51.DLL|System.IO.MemoryMappedFiles.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.IO.MemoryMappedFiles.dll" SelfReg="false"/>
+    <ROW File="System.IO.Pipelines.dll" Component_="System.IO.Pipelines.dll" FileName="SYSTE~52.DLL|System.IO.Pipelines.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.IO.Pipelines.dll" SelfReg="false"/>
+    <ROW File="System.IO.Pipes.AccessControl.dll" Component_="System.IO.Pipes.AccessControl.dll" FileName="SYSTE~53.DLL|System.IO.Pipes.AccessControl.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.IO.Pipes.AccessControl.dll" SelfReg="false"/>
+    <ROW File="System.IO.Pipes.dll" Component_="System.IO.Pipes.dll" FileName="SYSTE~54.DLL|System.IO.Pipes.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.IO.Pipes.dll" SelfReg="false"/>
+    <ROW File="System.IO.UnmanagedMemoryStream.dll" Component_="System.IO.UnmanagedMemoryStream.dll" FileName="SYSTE~55.DLL|System.IO.UnmanagedMemoryStream.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.IO.UnmanagedMemoryStream.dll" SelfReg="false"/>
+    <ROW File="System.Linq.dll" Component_="System.Linq.dll" FileName="SYSTE~56.DLL|System.Linq.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Linq.dll" SelfReg="false"/>
+    <ROW File="System.Linq.Expressions.dll" Component_="System.Linq.Expressions.dll" FileName="SYSTE~57.DLL|System.Linq.Expressions.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Linq.Expressions.dll" SelfReg="false"/>
+    <ROW File="System.Linq.Parallel.dll" Component_="System.Linq.Parallel.dll" FileName="SYSTE~58.DLL|System.Linq.Parallel.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Linq.Parallel.dll" SelfReg="false"/>
+    <ROW File="System.Linq.Queryable.dll" Component_="System.Linq.Queryable.dll" FileName="SYSTE~59.DLL|System.Linq.Queryable.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Linq.Queryable.dll" SelfReg="false"/>
+    <ROW File="System.Memory.dll" Component_="System.Memory.dll" FileName="SYSTE~60.DLL|System.Memory.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Memory.dll" SelfReg="false"/>
+    <ROW File="System.Net.dll" Component_="System.Net.dll" FileName="SYSTE~61.DLL|System.Net.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Net.dll" SelfReg="false"/>
+    <ROW File="System.Net.Http.dll" Component_="System.Net.Http.dll" FileName="SYSTE~62.DLL|System.Net.Http.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Net.Http.dll" SelfReg="false"/>
+    <ROW File="System.Net.Http.Json.dll" Component_="System.Net.Http.Json.dll" FileName="SYSTE~63.DLL|System.Net.Http.Json.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Net.Http.Json.dll" SelfReg="false"/>
+    <ROW File="System.Net.HttpListener.dll" Component_="System.Net.HttpListener.dll" FileName="SYSTE~64.DLL|System.Net.HttpListener.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Net.HttpListener.dll" SelfReg="false"/>
+    <ROW File="System.Net.Mail.dll" Component_="System.Net.Mail.dll" FileName="SYSTE~65.DLL|System.Net.Mail.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Net.Mail.dll" SelfReg="false"/>
+    <ROW File="System.Net.NameResolution.dll" Component_="System.Net.NameResolution.dll" FileName="SYSTE~66.DLL|System.Net.NameResolution.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Net.NameResolution.dll" SelfReg="false"/>
+    <ROW File="System.Net.NetworkInformation.dll" Component_="System.Net.NetworkInformation.dll" FileName="SYSTE~67.DLL|System.Net.NetworkInformation.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Net.NetworkInformation.dll" SelfReg="false"/>
+    <ROW File="System.Net.Ping.dll" Component_="System.Net.Ping.dll" FileName="SYSTE~68.DLL|System.Net.Ping.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Net.Ping.dll" SelfReg="false"/>
+    <ROW File="System.Net.Primitives.dll" Component_="System.Net.Primitives.dll" FileName="SYSTE~69.DLL|System.Net.Primitives.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Net.Primitives.dll" SelfReg="false"/>
+    <ROW File="System.Net.Quic.dll" Component_="System.Net.Quic.dll" FileName="SYSTE~70.DLL|System.Net.Quic.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Net.Quic.dll" SelfReg="false"/>
+    <ROW File="System.Net.Requests.dll" Component_="System.Net.Requests.dll" FileName="SYSTE~71.DLL|System.Net.Requests.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Net.Requests.dll" SelfReg="false"/>
+    <ROW File="System.Net.Security.dll" Component_="System.Net.Security.dll" FileName="SYSTE~72.DLL|System.Net.Security.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Net.Security.dll" SelfReg="false"/>
+    <ROW File="System.Net.ServicePoint.dll" Component_="System.Net.ServicePoint.dll" FileName="SYSTE~73.DLL|System.Net.ServicePoint.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Net.ServicePoint.dll" SelfReg="false"/>
+    <ROW File="System.Net.Sockets.dll" Component_="System.Net.Sockets.dll" FileName="SYSTE~74.DLL|System.Net.Sockets.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Net.Sockets.dll" SelfReg="false"/>
+    <ROW File="System.Net.WebClient.dll" Component_="System.Net.WebClient.dll" FileName="SYSTE~75.DLL|System.Net.WebClient.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Net.WebClient.dll" SelfReg="false"/>
+    <ROW File="System.Net.WebHeaderCollection.dll" Component_="System.Net.WebHeaderCollection.dll" FileName="SYSTE~76.DLL|System.Net.WebHeaderCollection.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Net.WebHeaderCollection.dll" SelfReg="false"/>
+    <ROW File="System.Net.WebProxy.dll" Component_="System.Net.WebProxy.dll" FileName="SYSTE~77.DLL|System.Net.WebProxy.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Net.WebProxy.dll" SelfReg="false"/>
+    <ROW File="System.Net.WebSockets.Client.dll" Component_="System.Net.WebSockets.Client.dll" FileName="SYSTE~78.DLL|System.Net.WebSockets.Client.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Net.WebSockets.Client.dll" SelfReg="false"/>
+    <ROW File="System.Net.WebSockets.dll" Component_="System.Net.WebSockets.dll" FileName="SYSTE~79.DLL|System.Net.WebSockets.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Net.WebSockets.dll" SelfReg="false"/>
+    <ROW File="System.Numerics.dll" Component_="System.Numerics.dll" FileName="SYSTE~80.DLL|System.Numerics.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Numerics.dll" SelfReg="false"/>
+    <ROW File="System.Numerics.Vectors.dll" Component_="System.Numerics.Vectors.dll" FileName="SYSTE~81.DLL|System.Numerics.Vectors.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Numerics.Vectors.dll" SelfReg="false"/>
+    <ROW File="System.ObjectModel.dll" Component_="System.ObjectModel.dll" FileName="SYSTE~82.DLL|System.ObjectModel.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.ObjectModel.dll" SelfReg="false"/>
+    <ROW File="System.Private.CoreLib.dll" Component_="System.Private.CoreLib.dll" FileName="SYSTE~83.DLL|System.Private.CoreLib.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Private.CoreLib.dll" SelfReg="false"/>
+    <ROW File="System.Private.DataContractSerialization.dll" Component_="System.Private.DataContractSerialization.dll" FileName="SYSTE~84.DLL|System.Private.DataContractSerialization.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Private.DataContractSerialization.dll" SelfReg="false"/>
+    <ROW File="System.Private.Uri.dll" Component_="System.Private.Uri.dll" FileName="SYSTE~85.DLL|System.Private.Uri.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Private.Uri.dll" SelfReg="false"/>
+    <ROW File="System.Private.Xml.dll" Component_="System.Private.Xml.dll" FileName="SYSTE~86.DLL|System.Private.Xml.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Private.Xml.dll" SelfReg="false"/>
+    <ROW File="System.Private.Xml.Linq.dll" Component_="System.Private.Xml.Linq.dll" FileName="SYSTE~87.DLL|System.Private.Xml.Linq.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Private.Xml.Linq.dll" SelfReg="false"/>
+    <ROW File="System.Reflection.DispatchProxy.dll" Component_="System.Reflection.DispatchProxy.dll" FileName="SYSTE~88.DLL|System.Reflection.DispatchProxy.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Reflection.DispatchProxy.dll" SelfReg="false"/>
+    <ROW File="System.Reflection.dll" Component_="System.Reflection.dll" FileName="SYSTE~89.DLL|System.Reflection.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Reflection.dll" SelfReg="false"/>
+    <ROW File="System.Reflection.Emit.dll" Component_="System.Reflection.Emit.dll" FileName="SYSTE~90.DLL|System.Reflection.Emit.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Reflection.Emit.dll" SelfReg="false"/>
+    <ROW File="System.Reflection.Emit.ILGeneration.dll" Component_="System.Reflection.Emit.ILGeneration.dll" FileName="SYSTE~91.DLL|System.Reflection.Emit.ILGeneration.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Reflection.Emit.ILGeneration.dll" SelfReg="false"/>
+    <ROW File="System.Reflection.Emit.Lightweight.dll" Component_="System.Reflection.Emit.Lightweight.dll" FileName="SYSTE~92.DLL|System.Reflection.Emit.Lightweight.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Reflection.Emit.Lightweight.dll" SelfReg="false"/>
+    <ROW File="System.Reflection.Extensions.dll" Component_="System.Reflection.Extensions.dll" FileName="SYSTE~93.DLL|System.Reflection.Extensions.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Reflection.Extensions.dll" SelfReg="false"/>
+    <ROW File="System.Reflection.Metadata.dll" Component_="System.Reflection.Metadata.dll" FileName="SYSTE~94.DLL|System.Reflection.Metadata.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Reflection.Metadata.dll" SelfReg="false"/>
+    <ROW File="System.Reflection.Primitives.dll" Component_="System.Reflection.Primitives.dll" FileName="SYSTE~95.DLL|System.Reflection.Primitives.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Reflection.Primitives.dll" SelfReg="false"/>
+    <ROW File="System.Reflection.TypeExtensions.dll" Component_="System.Reflection.TypeExtensions.dll" FileName="SYSTE~96.DLL|System.Reflection.TypeExtensions.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Reflection.TypeExtensions.dll" SelfReg="false"/>
+    <ROW File="System.Resources.Reader.dll" Component_="System.Resources.Reader.dll" FileName="SYSTE~97.DLL|System.Resources.Reader.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Resources.Reader.dll" SelfReg="false"/>
+    <ROW File="System.Resources.ResourceManager.dll" Component_="System.Resources.ResourceManager.dll" FileName="SYSTE~98.DLL|System.Resources.ResourceManager.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Resources.ResourceManager.dll" SelfReg="false"/>
+    <ROW File="System.Resources.Writer.dll" Component_="System.Resources.Writer.dll" FileName="SYSTE~99.DLL|System.Resources.Writer.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Resources.Writer.dll" SelfReg="false"/>
+    <ROW File="System.Runtime.CompilerServices.Unsafe.dll" Component_="System.Runtime.CompilerServices.Unsafe.dll" FileName="SYST~100.DLL|System.Runtime.CompilerServices.Unsafe.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Runtime.CompilerServices.Unsafe.dll" SelfReg="false"/>
+    <ROW File="System.Runtime.CompilerServices.VisualC.dll" Component_="System.Runtime.CompilerServices.VisualC.dll" FileName="SYST~101.DLL|System.Runtime.CompilerServices.VisualC.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Runtime.CompilerServices.VisualC.dll" SelfReg="false"/>
+    <ROW File="System.Runtime.dll" Component_="System.Runtime.dll" FileName="SYST~102.DLL|System.Runtime.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Runtime.dll" SelfReg="false"/>
+    <ROW File="System.Runtime.Extensions.dll" Component_="System.Runtime.Extensions.dll" FileName="SYST~103.DLL|System.Runtime.Extensions.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Runtime.Extensions.dll" SelfReg="false"/>
+    <ROW File="System.Runtime.Handles.dll" Component_="System.Runtime.Handles.dll" FileName="SYST~104.DLL|System.Runtime.Handles.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Runtime.Handles.dll" SelfReg="false"/>
+    <ROW File="System.Runtime.InteropServices.dll" Component_="System.Runtime.InteropServices.dll" FileName="SYST~105.DLL|System.Runtime.InteropServices.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Runtime.InteropServices.dll" SelfReg="false"/>
+    <ROW File="System.Runtime.InteropServices.JavaScript.dll" Component_="System.Runtime.InteropServices.JavaScript.dll" FileName="SYST~106.DLL|System.Runtime.InteropServices.JavaScript.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Runtime.InteropServices.JavaScript.dll" SelfReg="false"/>
+    <ROW File="System.Runtime.InteropServices.RuntimeInformation.dll" Component_="System.Runtime.InteropServices.RuntimeInformation.dll" FileName="SYST~107.DLL|System.Runtime.InteropServices.RuntimeInformation.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Runtime.InteropServices.RuntimeInformation.dll" SelfReg="false"/>
+    <ROW File="System.Runtime.Intrinsics.dll" Component_="System.Runtime.Intrinsics.dll" FileName="SYST~108.DLL|System.Runtime.Intrinsics.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Runtime.Intrinsics.dll" SelfReg="false"/>
+    <ROW File="System.Runtime.Loader.dll" Component_="System.Runtime.Loader.dll" FileName="SYST~109.DLL|System.Runtime.Loader.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Runtime.Loader.dll" SelfReg="false"/>
+    <ROW File="System.Runtime.Numerics.dll" Component_="System.Runtime.Numerics.dll" FileName="SYST~110.DLL|System.Runtime.Numerics.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Runtime.Numerics.dll" SelfReg="false"/>
+    <ROW File="System.Runtime.Serialization.dll" Component_="System.Runtime.Serialization.dll" FileName="SYST~111.DLL|System.Runtime.Serialization.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Runtime.Serialization.dll" SelfReg="false"/>
+    <ROW File="System.Runtime.Serialization.Formatters.dll" Component_="System.Runtime.Serialization.Formatters.dll" FileName="SYST~112.DLL|System.Runtime.Serialization.Formatters.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Runtime.Serialization.Formatters.dll" SelfReg="false"/>
+    <ROW File="System.Runtime.Serialization.Json.dll" Component_="System.Runtime.Serialization.Json.dll" FileName="SYST~113.DLL|System.Runtime.Serialization.Json.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Runtime.Serialization.Json.dll" SelfReg="false"/>
+    <ROW File="System.Runtime.Serialization.Primitives.dll" Component_="System.Runtime.Serialization.Primitives.dll" FileName="SYST~114.DLL|System.Runtime.Serialization.Primitives.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Runtime.Serialization.Primitives.dll" SelfReg="false"/>
+    <ROW File="System.Runtime.Serialization.Xml.dll" Component_="System.Runtime.Serialization.Xml.dll" FileName="SYST~115.DLL|System.Runtime.Serialization.Xml.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Runtime.Serialization.Xml.dll" SelfReg="false"/>
+    <ROW File="System.Security.AccessControl.dll" Component_="System.Security.AccessControl.dll" FileName="SYST~116.DLL|System.Security.AccessControl.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Security.AccessControl.dll" SelfReg="false"/>
+    <ROW File="System.Security.Claims.dll" Component_="System.Security.Claims.dll" FileName="SYST~117.DLL|System.Security.Claims.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Security.Claims.dll" SelfReg="false"/>
+    <ROW File="System.Security.Cryptography.Algorithms.dll" Component_="System.Security.Cryptography.Algorithms.dll" FileName="SYST~118.DLL|System.Security.Cryptography.Algorithms.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Security.Cryptography.Algorithms.dll" SelfReg="false"/>
+    <ROW File="System.Security.Cryptography.Cng.dll" Component_="System.Security.Cryptography.Cng.dll" FileName="SYST~119.DLL|System.Security.Cryptography.Cng.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Security.Cryptography.Cng.dll" SelfReg="false"/>
+    <ROW File="System.Security.Cryptography.Csp.dll" Component_="System.Security.Cryptography.Csp.dll" FileName="SYST~120.DLL|System.Security.Cryptography.Csp.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Security.Cryptography.Csp.dll" SelfReg="false"/>
+    <ROW File="System.Security.Cryptography.dll" Component_="System.Security.Cryptography.dll" FileName="SYST~121.DLL|System.Security.Cryptography.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Security.Cryptography.dll" SelfReg="false"/>
+    <ROW File="System.Security.Cryptography.Encoding.dll" Component_="System.Security.Cryptography.Encoding.dll" FileName="SYST~122.DLL|System.Security.Cryptography.Encoding.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Security.Cryptography.Encoding.dll" SelfReg="false"/>
+    <ROW File="System.Security.Cryptography.OpenSsl.dll" Component_="System.Security.Cryptography.OpenSsl.dll" FileName="SYST~123.DLL|System.Security.Cryptography.OpenSsl.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Security.Cryptography.OpenSsl.dll" SelfReg="false"/>
+    <ROW File="System.Security.Cryptography.Primitives.dll" Component_="System.Security.Cryptography.Primitives.dll" FileName="SYST~124.DLL|System.Security.Cryptography.Primitives.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Security.Cryptography.Primitives.dll" SelfReg="false"/>
+    <ROW File="System.Security.Cryptography.X509Certificates.dll" Component_="System.Security.Cryptography.X509Certificates.dll" FileName="SYST~125.DLL|System.Security.Cryptography.X509Certificates.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Security.Cryptography.X509Certificates.dll" SelfReg="false"/>
+    <ROW File="System.Security.dll" Component_="System.Security.dll" FileName="SYST~126.DLL|System.Security.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Security.dll" SelfReg="false"/>
+    <ROW File="System.Security.Principal.dll" Component_="System.Security.Principal.dll" FileName="SYST~127.DLL|System.Security.Principal.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Security.Principal.dll" SelfReg="false"/>
+    <ROW File="System.Security.Principal.Windows.dll" Component_="System.Security.Principal.Windows.dll" FileName="SYST~128.DLL|System.Security.Principal.Windows.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Security.Principal.Windows.dll" SelfReg="false"/>
+    <ROW File="System.Security.SecureString.dll" Component_="System.Security.SecureString.dll" FileName="SYST~129.DLL|System.Security.SecureString.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Security.SecureString.dll" SelfReg="false"/>
+    <ROW File="System.ServiceModel.Web.dll" Component_="System.ServiceModel.Web.dll" FileName="SYST~130.DLL|System.ServiceModel.Web.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.ServiceModel.Web.dll" SelfReg="false"/>
+    <ROW File="System.ServiceProcess.dll" Component_="System.ServiceProcess.dll" FileName="SYST~131.DLL|System.ServiceProcess.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.ServiceProcess.dll" SelfReg="false"/>
+    <ROW File="System.Text.Encoding.CodePages.dll" Component_="System.Text.Encoding.CodePages.dll" FileName="SYST~132.DLL|System.Text.Encoding.CodePages.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Text.Encoding.CodePages.dll" SelfReg="false"/>
+    <ROW File="System.Text.Encoding.dll" Component_="System.Text.Encoding.dll" FileName="SYST~133.DLL|System.Text.Encoding.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Text.Encoding.dll" SelfReg="false"/>
+    <ROW File="System.Text.Encoding.Extensions.dll" Component_="System.Text.Encoding.Extensions.dll" FileName="SYST~134.DLL|System.Text.Encoding.Extensions.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Text.Encoding.Extensions.dll" SelfReg="false"/>
+    <ROW File="System.Text.Encodings.Web.dll" Component_="System.Text.Encodings.Web.dll" FileName="SYST~135.DLL|System.Text.Encodings.Web.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Text.Encodings.Web.dll" SelfReg="false"/>
+    <ROW File="System.Text.Json.dll" Component_="System.Text.Json.dll" FileName="SYST~136.DLL|System.Text.Json.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Text.Json.dll" SelfReg="false"/>
+    <ROW File="System.Text.RegularExpressions.dll" Component_="System.Text.RegularExpressions.dll" FileName="SYST~137.DLL|System.Text.RegularExpressions.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Text.RegularExpressions.dll" SelfReg="false"/>
+    <ROW File="System.Threading.Channels.dll" Component_="System.Threading.Channels.dll" FileName="SYST~138.DLL|System.Threading.Channels.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Threading.Channels.dll" SelfReg="false"/>
+    <ROW File="System.Threading.dll" Component_="System.Threading.dll" FileName="SYST~139.DLL|System.Threading.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Threading.dll" SelfReg="false"/>
+    <ROW File="System.Threading.Overlapped.dll" Component_="System.Threading.Overlapped.dll" FileName="SYST~140.DLL|System.Threading.Overlapped.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Threading.Overlapped.dll" SelfReg="false"/>
+    <ROW File="System.Threading.Tasks.Dataflow.dll" Component_="System.Threading.Tasks.Dataflow.dll" FileName="SYST~141.DLL|System.Threading.Tasks.Dataflow.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Threading.Tasks.Dataflow.dll" SelfReg="false"/>
+    <ROW File="System.Threading.Tasks.dll" Component_="System.Threading.Tasks.dll" FileName="SYST~142.DLL|System.Threading.Tasks.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Threading.Tasks.dll" SelfReg="false"/>
+    <ROW File="System.Threading.Tasks.Extensions.dll" Component_="System.Threading.Tasks.Extensions.dll" FileName="SYST~143.DLL|System.Threading.Tasks.Extensions.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Threading.Tasks.Extensions.dll" SelfReg="false"/>
+    <ROW File="System.Threading.Tasks.Parallel.dll" Component_="System.Threading.Tasks.Parallel.dll" FileName="SYST~144.DLL|System.Threading.Tasks.Parallel.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Threading.Tasks.Parallel.dll" SelfReg="false"/>
+    <ROW File="System.Threading.Thread.dll" Component_="System.Threading.Thread.dll" FileName="SYST~145.DLL|System.Threading.Thread.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Threading.Thread.dll" SelfReg="false"/>
+    <ROW File="System.Threading.ThreadPool.dll" Component_="System.Threading.ThreadPool.dll" FileName="SYST~146.DLL|System.Threading.ThreadPool.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Threading.ThreadPool.dll" SelfReg="false"/>
+    <ROW File="System.Threading.Timer.dll" Component_="System.Threading.Timer.dll" FileName="SYST~147.DLL|System.Threading.Timer.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Threading.Timer.dll" SelfReg="false"/>
+    <ROW File="System.Transactions.dll" Component_="System.Transactions.dll" FileName="SYST~148.DLL|System.Transactions.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Transactions.dll" SelfReg="false"/>
+    <ROW File="System.Transactions.Local.dll" Component_="System.Transactions.Local.dll" FileName="SYST~149.DLL|System.Transactions.Local.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Transactions.Local.dll" SelfReg="false"/>
+    <ROW File="System.ValueTuple.dll" Component_="System.ValueTuple.dll" FileName="SYST~150.DLL|System.ValueTuple.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.ValueTuple.dll" SelfReg="false"/>
+    <ROW File="System.Web.dll" Component_="System.Web.dll" FileName="SYST~151.DLL|System.Web.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Web.dll" SelfReg="false"/>
+    <ROW File="System.Web.HttpUtility.dll" Component_="System.Web.HttpUtility.dll" FileName="SYST~152.DLL|System.Web.HttpUtility.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Web.HttpUtility.dll" SelfReg="false"/>
+    <ROW File="System.Windows.dll" Component_="System.Windows.dll" FileName="SYST~153.DLL|System.Windows.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Windows.dll" SelfReg="false"/>
+    <ROW File="System.Xml.dll" Component_="System.Xml.dll" FileName="SYST~154.DLL|System.Xml.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Xml.dll" SelfReg="false"/>
+    <ROW File="System.Xml.Linq.dll" Component_="System.Xml.Linq.dll" FileName="SYST~155.DLL|System.Xml.Linq.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Xml.Linq.dll" SelfReg="false"/>
+    <ROW File="System.Xml.ReaderWriter.dll" Component_="System.Xml.ReaderWriter.dll" FileName="SYST~156.DLL|System.Xml.ReaderWriter.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Xml.ReaderWriter.dll" SelfReg="false"/>
+    <ROW File="System.Xml.Serialization.dll" Component_="System.Xml.Serialization.dll" FileName="SYST~157.DLL|System.Xml.Serialization.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Xml.Serialization.dll" SelfReg="false"/>
+    <ROW File="System.Xml.XDocument.dll" Component_="System.Xml.XDocument.dll" FileName="SYST~158.DLL|System.Xml.XDocument.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Xml.XDocument.dll" SelfReg="false"/>
+    <ROW File="System.Xml.XmlDocument.dll" Component_="System.Xml.XmlDocument.dll" FileName="SYST~159.DLL|System.Xml.XmlDocument.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Xml.XmlDocument.dll" SelfReg="false"/>
+    <ROW File="System.Xml.XmlSerializer.dll" Component_="System.Xml.XmlSerializer.dll" FileName="SYST~160.DLL|System.Xml.XmlSerializer.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Xml.XmlSerializer.dll" SelfReg="false"/>
+    <ROW File="System.Xml.XPath.dll" Component_="System.Xml.XPath.dll" FileName="SYST~161.DLL|System.Xml.XPath.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Xml.XPath.dll" SelfReg="false"/>
+    <ROW File="System.Xml.XPath.XDocument.dll" Component_="System.Xml.XPath.XDocument.dll" FileName="SYST~162.DLL|System.Xml.XPath.XDocument.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\System.Xml.XPath.XDocument.dll" SelfReg="false"/>
+    <ROW File="System.CommandLine.resources.dll_10" Component_="System.CommandLine.resources.dll_10" FileName="SYSTEM~1.DLL|System.CommandLine.resources.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\tr\System.CommandLine.resources.dll" SelfReg="false"/>
+    <ROW File="VideoToAscii.deps.json" Component_="VideoToAscii.deps.json" FileName="VIDEOT~1.JSO|VideoToAscii.deps.json" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\VideoToAscii.deps.json" SelfReg="false"/>
+    <ROW File="VideoToAscii.dll" Component_="VideoToAscii.dll" FileName="VIDEOT~1.DLL|VideoToAscii.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\VideoToAscii.dll" SelfReg="false"/>
+    <ROW File="VideoToAscii.exe" Component_="VideoToAscii.exe" FileName="VIDEOT~1.EXE|VideoToAscii.exe" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\VideoToAscii.exe" SelfReg="false" DigSign="true"/>
+    <ROW File="VideoToAscii.pdb" Component_="VideoToAscii.exe" FileName="VIDEOT~1.PDB|VideoToAscii.pdb" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\VideoToAscii.pdb" SelfReg="false"/>
+    <ROW File="VideoToAscii.runtimeconfig.json" Component_="VideoToAscii.deps.json" FileName="VIDEOT~2.JSO|VideoToAscii.runtimeconfig.json" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\VideoToAscii.runtimeconfig.json" SelfReg="false"/>
+    <ROW File="WindowsBase.dll" Component_="WindowsBase.dll" FileName="WINDOW~1.DLL|WindowsBase.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\WindowsBase.dll" SelfReg="false"/>
+    <ROW File="System.CommandLine.resources.dll_11" Component_="System.CommandLine.resources.dll_11" FileName="SYSTEM~1.DLL|System.CommandLine.resources.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\zh-Hans\System.CommandLine.resources.dll" SelfReg="false"/>
+    <ROW File="System.CommandLine.resources.dll_12" Component_="System.CommandLine.resources.dll_12" FileName="SYSTEM~1.DLL|System.CommandLine.resources.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\VideoToAscii\bin\Publish\VideoToAscii\zh-Hant\System.CommandLine.resources.dll" SelfReg="false"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">
+    <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="0" PackageFolder="." PackageFileName="[|ProductName]-v[|ProductVersion]" Languages="de" InstallationType="4" SummInfoMetadata="Page Count:450" UseLargeSchema="true" MsiPackageType="x64"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.CacheComponent">
+    <ATTRIBUTE name="Enable" value="false"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.DictionaryComponent">
+    <ROW Path="&lt;AI_DICTS&gt;ui.ail"/>
+    <ROW Path="&lt;AI_DICTS&gt;ui_de.ail"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.FragmentComponent">
+    <ROW Fragment="CommonUI.aip" Path="&lt;AI_FRAGS&gt;CommonUI.aip"/>
+    <ROW Fragment="FolderDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\FolderDlg.aip"/>
+    <ROW Fragment="MaintenanceTypeDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\MaintenanceTypeDlg.aip"/>
+    <ROW Fragment="MaintenanceWelcomeDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\MaintenanceWelcomeDlg.aip"/>
+    <ROW Fragment="SequenceDialogs.aip" Path="&lt;AI_THEMES&gt;classic\fragments\SequenceDialogs.aip"/>
+    <ROW Fragment="Sequences.aip" Path="&lt;AI_FRAGS&gt;Sequences.aip"/>
+    <ROW Fragment="StaticUIStrings.aip" Path="&lt;AI_FRAGS&gt;StaticUIStrings.aip"/>
+    <ROW Fragment="Themes.aip" Path="&lt;AI_FRAGS&gt;Themes.aip"/>
+    <ROW Fragment="UI.aip" Path="&lt;AI_THEMES&gt;classic\fragments\UI.aip"/>
+    <ROW Fragment="Validation.aip" Path="&lt;AI_FRAGS&gt;Validation.aip"/>
+    <ROW Fragment="VerifyRemoveDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\VerifyRemoveDlg.aip"/>
+    <ROW Fragment="VerifyRepairDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\VerifyRepairDlg.aip"/>
+    <ROW Fragment="WelcomeDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\WelcomeDlg.aip"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiBinaryComponent">
+    <ROW Name="aicustact.dll" SourcePath="&lt;AI_CUSTACTS&gt;aicustact.dll"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiControlEventComponent">
+    <ROW Dialog_="WelcomeDlg" Control_="Next" Event="NewDialog" Argument="FolderDlg" Condition="AI_INSTALL" Ordering="1"/>
+    <ROW Dialog_="FolderDlg" Control_="Next" Event="NewDialog" Argument="VerifyReadyDlg" Condition="AI_INSTALL" Ordering="201"/>
+    <ROW Dialog_="FolderDlg" Control_="Back" Event="NewDialog" Argument="WelcomeDlg" Condition="AI_INSTALL" Ordering="1"/>
+    <ROW Dialog_="MaintenanceWelcomeDlg" Control_="Next" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT" Ordering="99"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_MAINT" Ordering="198"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Back" Event="NewDialog" Argument="CustomizeDlg" Condition="AI_MAINT" Ordering="202"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_INSTALL" Ordering="197"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Back" Event="NewDialog" Argument="FolderDlg" Condition="AI_INSTALL" Ordering="201"/>
+    <ROW Dialog_="CustomizeDlg" Control_="Next" Event="NewDialog" Argument="VerifyReadyDlg" Condition="AI_MAINT" Ordering="101"/>
+    <ROW Dialog_="CustomizeDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT" Ordering="1"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="ChangeButton" Event="NewDialog" Argument="CustomizeDlg" Condition="AI_MAINT" Ordering="501"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceWelcomeDlg" Condition="AI_MAINT" Ordering="1"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="RemoveButton" Event="NewDialog" Argument="VerifyRemoveDlg" Condition="AI_MAINT AND InstallMode=&quot;Remove&quot;" Ordering="601"/>
+    <ROW Dialog_="VerifyRemoveDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT AND InstallMode=&quot;Remove&quot;" Ordering="1"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="RepairButton" Event="NewDialog" Argument="VerifyRepairDlg" Condition="AI_MAINT AND InstallMode=&quot;Repair&quot;" Ordering="601"/>
+    <ROW Dialog_="VerifyRepairDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT AND InstallMode=&quot;Repair&quot;" Ordering="1"/>
+    <ROW Dialog_="VerifyRepairDlg" Control_="Repair" Event="EndDialog" Argument="Return" Condition="AI_MAINT AND InstallMode=&quot;Repair&quot;" Ordering="399" Options="1"/>
+    <ROW Dialog_="VerifyRemoveDlg" Control_="Remove" Event="EndDialog" Argument="Return" Condition="AI_MAINT AND InstallMode=&quot;Remove&quot;" Ordering="299" Options="1"/>
+    <ROW Dialog_="PatchWelcomeDlg" Control_="Next" Event="NewDialog" Argument="VerifyReadyDlg" Condition="AI_PATCH" Ordering="201"/>
+    <ROW Dialog_="ResumeDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_RESUME" Ordering="299"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_PATCH" Ordering="199"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Back" Event="NewDialog" Argument="PatchWelcomeDlg" Condition="AI_PATCH" Ordering="203"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiCreateFolderComponent">
+    <ROW Directory_="APPDIR" Component_="APPDIR" ManualDelete="true"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiCustActComponent">
+    <ROW Action="AI_DOWNGRADE" Type="19" Target="4010"/>
+    <ROW Action="AI_DpiContentScale" Type="1" Source="aicustact.dll" Target="DpiContentScale"/>
+    <ROW Action="AI_EnableDebugLog" Type="321" Source="aicustact.dll" Target="EnableDebugLog"/>
+    <ROW Action="AI_InstallModeCheck" Type="1" Source="aicustact.dll" Target="UpdateInstallMode" WithoutSeq="true"/>
+    <ROW Action="AI_PREPARE_UPGRADE" Type="65" Source="aicustact.dll" Target="PrepareUpgrade"/>
+    <ROW Action="AI_PRESERVE_INSTALL_TYPE" Type="65" Source="aicustact.dll" Target="PreserveInstallType"/>
+    <ROW Action="AI_RESTORE_LOCATION" Type="65" Source="aicustact.dll" Target="RestoreLocation"/>
+    <ROW Action="AI_ResolveKnownFolders" Type="1" Source="aicustact.dll" Target="AI_ResolveKnownFolders"/>
+    <ROW Action="AI_SHOW_LOG" Type="65" Source="aicustact.dll" Target="LaunchLogFile" WithoutSeq="true"/>
+    <ROW Action="AI_STORE_LOCATION" Type="51" Source="ARPINSTALLLOCATION" Target="[APPDIR]"/>
+    <ROW Action="SET_APPDIR" Type="307" Source="APPDIR" Target="[ProgramFilesFolder][Manufacturer]\[ProductName]" MultiBuildTarget="DefaultBuild:[ProgramFiles64Folder][ProductName]"/>
+    <ROW Action="SET_SHORTCUTDIR" Type="307" Source="SHORTCUTDIR" Target="[ProgramMenuFolder][ProductName]"/>
+    <ROW Action="SET_TARGETDIR_TO_APPDIR" Type="51" Source="TARGETDIR" Target="[APPDIR]"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatCompsComponent">
+    <ROW Feature_="MainFeature" Component_="APPDIR"/>
+    <ROW Feature_="MainFeature" Component_="ProductInformation"/>
+    <ROW Feature_="MainFeature" Component_="clretwrc.dll"/>
+    <ROW Feature_="MainFeature" Component_="clrgc.dll"/>
+    <ROW Feature_="MainFeature" Component_="clrgcexp.dll"/>
+    <ROW Feature_="MainFeature" Component_="clrjit.dll"/>
+    <ROW Feature_="MainFeature" Component_="coreclr.dll"/>
+    <ROW Feature_="MainFeature" Component_="createdump.exe"/>
+    <ROW Feature_="MainFeature" Component_="System.CommandLine.resources.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.CommandLine.resources.dll_1"/>
+    <ROW Feature_="MainFeature" Component_="System.CommandLine.resources.dll_2"/>
+    <ROW Feature_="MainFeature" Component_="FFMpegCore.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.CommandLine.resources.dll_3"/>
+    <ROW Feature_="MainFeature" Component_="hostfxr.dll"/>
+    <ROW Feature_="MainFeature" Component_="hostpolicy.dll"/>
+    <ROW Feature_="MainFeature" Component_="Instances.dll"/>
+    <ROW Feature_="MainFeature" Component_="Iso639.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.CommandLine.resources.dll_4"/>
+    <ROW Feature_="MainFeature" Component_="System.CommandLine.resources.dll_5"/>
+    <ROW Feature_="MainFeature" Component_="System.CommandLine.resources.dll_6"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.CSharp.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.DiaSymReader.Native.amd64.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.VisualBasic.Core.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.VisualBasic.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.Win32.Primitives.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.Win32.Registry.dll"/>
+    <ROW Feature_="MainFeature" Component_="mscordaccore.dll"/>
+    <ROW Feature_="MainFeature" Component_="mscordaccore_amd64_amd64_9.0.525.21509.dll"/>
+    <ROW Feature_="MainFeature" Component_="mscordbi.dll"/>
+    <ROW Feature_="MainFeature" Component_="mscorlib.dll"/>
+    <ROW Feature_="MainFeature" Component_="mscorrc.dll"/>
+    <ROW Feature_="MainFeature" Component_="msquic.dll"/>
+    <ROW Feature_="MainFeature" Component_="NAudio.Asio.dll"/>
+    <ROW Feature_="MainFeature" Component_="NAudio.Core.dll"/>
+    <ROW Feature_="MainFeature" Component_="NAudio.dll"/>
+    <ROW Feature_="MainFeature" Component_="NAudio.Midi.dll"/>
+    <ROW Feature_="MainFeature" Component_="NAudio.Wasapi.dll"/>
+    <ROW Feature_="MainFeature" Component_="NAudio.WinMM.dll"/>
+    <ROW Feature_="MainFeature" Component_="netstandard.dll"/>
+    <ROW Feature_="MainFeature" Component_="OpenCvSharp.dll"/>
+    <ROW Feature_="MainFeature" Component_="OpenCvSharpExtern.dll"/>
+    <ROW Feature_="MainFeature" Component_="opencv_videoio_ffmpeg4110_64.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.CommandLine.resources.dll_7"/>
+    <ROW Feature_="MainFeature" Component_="System.CommandLine.resources.dll_8"/>
+    <ROW Feature_="MainFeature" Component_="test1.mp4"/>
+    <ROW Feature_="MainFeature" Component_="System.CommandLine.resources.dll_9"/>
+    <ROW Feature_="MainFeature" Component_="SoundTouch.Net.dll"/>
+    <ROW Feature_="MainFeature" Component_="SoundTouch.Net.NAudioSupport.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.AppContext.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Buffers.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Collections.Concurrent.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Collections.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Collections.Immutable.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Collections.NonGeneric.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Collections.Specialized.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.CommandLine.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.ComponentModel.Annotations.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.ComponentModel.DataAnnotations.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.ComponentModel.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.ComponentModel.EventBasedAsync.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.ComponentModel.Primitives.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.ComponentModel.TypeConverter.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Configuration.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Console.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Core.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Data.Common.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Data.DataSetExtensions.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Data.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Diagnostics.Contracts.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Diagnostics.Debug.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Diagnostics.DiagnosticSource.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Diagnostics.FileVersionInfo.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Diagnostics.Process.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Diagnostics.StackTrace.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Diagnostics.TextWriterTraceListener.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Diagnostics.Tools.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Diagnostics.TraceSource.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Diagnostics.Tracing.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Drawing.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Drawing.Primitives.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Dynamic.Runtime.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Formats.Asn1.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Formats.Tar.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Globalization.Calendars.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Globalization.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Globalization.Extensions.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.IO.Compression.Brotli.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.IO.Compression.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.IO.Compression.FileSystem.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.IO.Compression.Native.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.IO.Compression.ZipFile.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.IO.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.IO.FileSystem.AccessControl.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.IO.FileSystem.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.IO.FileSystem.DriveInfo.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.IO.FileSystem.Primitives.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.IO.FileSystem.Watcher.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.IO.IsolatedStorage.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.IO.MemoryMappedFiles.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.IO.Pipelines.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.IO.Pipes.AccessControl.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.IO.Pipes.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.IO.UnmanagedMemoryStream.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Linq.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Linq.Expressions.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Linq.Parallel.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Linq.Queryable.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Memory.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Net.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Net.Http.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Net.Http.Json.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Net.HttpListener.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Net.Mail.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Net.NameResolution.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Net.NetworkInformation.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Net.Ping.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Net.Primitives.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Net.Quic.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Net.Requests.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Net.Security.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Net.ServicePoint.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Net.Sockets.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Net.WebClient.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Net.WebHeaderCollection.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Net.WebProxy.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Net.WebSockets.Client.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Net.WebSockets.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Numerics.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Numerics.Vectors.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.ObjectModel.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Private.CoreLib.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Private.DataContractSerialization.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Private.Uri.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Private.Xml.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Private.Xml.Linq.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Reflection.DispatchProxy.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Reflection.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Reflection.Emit.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Reflection.Emit.ILGeneration.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Reflection.Emit.Lightweight.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Reflection.Extensions.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Reflection.Metadata.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Reflection.Primitives.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Reflection.TypeExtensions.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Resources.Reader.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Resources.ResourceManager.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Resources.Writer.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Runtime.CompilerServices.Unsafe.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Runtime.CompilerServices.VisualC.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Runtime.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Runtime.Extensions.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Runtime.Handles.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Runtime.InteropServices.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Runtime.InteropServices.JavaScript.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Runtime.InteropServices.RuntimeInformation.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Runtime.Intrinsics.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Runtime.Loader.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Runtime.Numerics.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Runtime.Serialization.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Runtime.Serialization.Formatters.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Runtime.Serialization.Json.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Runtime.Serialization.Primitives.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Runtime.Serialization.Xml.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Security.AccessControl.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Security.Claims.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Security.Cryptography.Algorithms.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Security.Cryptography.Cng.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Security.Cryptography.Csp.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Security.Cryptography.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Security.Cryptography.Encoding.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Security.Cryptography.OpenSsl.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Security.Cryptography.Primitives.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Security.Cryptography.X509Certificates.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Security.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Security.Principal.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Security.Principal.Windows.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Security.SecureString.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.ServiceModel.Web.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.ServiceProcess.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Text.Encoding.CodePages.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Text.Encoding.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Text.Encoding.Extensions.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Text.Encodings.Web.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Text.Json.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Text.RegularExpressions.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Threading.Channels.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Threading.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Threading.Overlapped.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Threading.Tasks.Dataflow.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Threading.Tasks.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Threading.Tasks.Extensions.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Threading.Tasks.Parallel.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Threading.Thread.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Threading.ThreadPool.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Threading.Timer.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Transactions.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Transactions.Local.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.ValueTuple.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Web.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Web.HttpUtility.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Windows.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Xml.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Xml.Linq.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Xml.ReaderWriter.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Xml.Serialization.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Xml.XDocument.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Xml.XmlDocument.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Xml.XmlSerializer.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Xml.XPath.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Xml.XPath.XDocument.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.CommandLine.resources.dll_10"/>
+    <ROW Feature_="MainFeature" Component_="VideoToAscii.deps.json"/>
+    <ROW Feature_="MainFeature" Component_="VideoToAscii.dll"/>
+    <ROW Feature_="MainFeature" Component_="VideoToAscii.exe"/>
+    <ROW Feature_="MainFeature" Component_="WindowsBase.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.CommandLine.resources.dll_11"/>
+    <ROW Feature_="MainFeature" Component_="System.CommandLine.resources.dll_12"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
+    <ROW Name="icon.exe" SourcePath="..\VideoToAscii\Resources\icon.ico" Index="0"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiInstExSeqComponent">
+    <ROW Action="AI_DOWNGRADE" Condition="AI_NEWERPRODUCTFOUND AND (UILevel &lt;&gt; 5)" Sequence="210"/>
+    <ROW Action="AI_RESTORE_LOCATION" Condition="APPDIR=&quot;&quot;" Sequence="749"/>
+    <ROW Action="AI_STORE_LOCATION" Condition="(Not Installed) OR REINSTALL" Sequence="1501"/>
+    <ROW Action="AI_PREPARE_UPGRADE" Condition="AI_UPGRADE=&quot;No&quot; AND (Not Installed)" Sequence="1399"/>
+    <ROW Action="AI_ResolveKnownFolders" Sequence="52"/>
+    <ROW Action="AI_EnableDebugLog" Sequence="51"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiInstallUISequenceComponent">
+    <ROW Action="AI_PRESERVE_INSTALL_TYPE" Sequence="199"/>
+    <ROW Action="AI_RESTORE_LOCATION" Condition="APPDIR=&quot;&quot;" Sequence="749"/>
+    <ROW Action="AI_ResolveKnownFolders" Sequence="53"/>
+    <ROW Action="AI_DpiContentScale" Sequence="52"/>
+    <ROW Action="AI_EnableDebugLog" Sequence="51"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiLaunchConditionsComponent">
+    <ROW Condition="((VersionNT &lt;&gt; 501) AND (VersionNT &lt;&gt; 502))" Description="[ProductName] kann nicht auf [WindowsTypeNT5XDisplay] installiert werden." DescriptionLocId="AI.LaunchCondition.NoNT5X" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="(VersionNT &lt;&gt; 400)" Description="[ProductName] kann nicht auf [WindowsTypeNT40Display] installiert werden." DescriptionLocId="AI.LaunchCondition.NoNT40" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="(VersionNT &lt;&gt; 500)" Description="[ProductName] kann nicht auf [WindowsTypeNT50Display] installiert werden." DescriptionLocId="AI.LaunchCondition.NoNT50" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="(VersionNT &lt;&gt; 600)" Description="[ProductName] kann nicht auf [WindowsTypeNT60Display] installiert werden." DescriptionLocId="AI.LaunchCondition.NoNT60" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="VersionNT" Description="[ProductName] kann nicht auf [WindowsType9XDisplay] installiert werden." DescriptionLocId="AI.LaunchCondition.No9X" IsPredefined="true" Builds="DefaultBuild"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiRegsComponent">
+    <ROW Registry="Manufacturer" Root="-1" Key="Software\[Manufacturer]" Name="\"/>
+    <ROW Registry="Path" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Path" Value="[APPDIR]" Component_="ProductInformation"/>
+    <ROW Registry="ProductName" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="\"/>
+    <ROW Registry="Software" Root="-1" Key="Software" Name="\"/>
+    <ROW Registry="Version" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Version" Value="[ProductVersion]" Component_="ProductInformation"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiThemeComponent">
+    <ATTRIBUTE name="UsedTheme" value="classic"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiUpgradeComponent">
+    <ROW UpgradeCode="[|UpgradeCode]" VersionMin="0.0.1" VersionMax="[|ProductVersion]" Attributes="257" ActionProperty="OLDPRODUCTS"/>
+    <ROW UpgradeCode="[|UpgradeCode]" VersionMin="[|ProductVersion]" Attributes="2" ActionProperty="AI_NEWERPRODUCTFOUND"/>
+  </COMPONENT>
+</DOCUMENT>

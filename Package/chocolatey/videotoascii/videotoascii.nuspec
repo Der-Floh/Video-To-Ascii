@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>videotoascii</id>
+        <version>{{VERSION}}</version>
+        <title>VideoToAscii</title>
+        <authors>Der_Floh</authors>
+        <owners>Der_Floh</owners>
+        <projectUrl>https://github.com/Der-Floh/Video-To-Ascii</projectUrl>
+        <iconUrl>https://raw.githubusercontent.com/Der-Floh/Video-To-Ascii/main/Resources/icon.png</iconUrl>
+        <licenseUrl>https://github.com/Der-Floh/Video-To-Ascii/blob/main/LICENSE</licenseUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>A .NET console application that converts and plays videos as ASCII art in the terminal. Supports multiple conversion strategies and audio playback.</description>
+        <tags>dotnet console video ascii-art media-player terminal conversion</tags>
+    </metadata>
+    <files>
+        <file src="tools\**" target="tools" />
+    </files>
+</package>

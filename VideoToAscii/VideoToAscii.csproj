@@ -5,18 +5,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Title>VideoToAscii</Title>
-    <Description>A .NET console application that converts and plays videos as ASCII art in the terminal. Supports multiple conversion strategies and audio playback.</Description>
-    <PackageIcon>icon.png</PackageIcon>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageProjectUrl>https://github.com/Der-Floh/Video-To-Ascii</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/Der-Floh/Video-To-Ascii</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageTags>dotnet console video ascii-art media-player terminal conversion</PackageTags>
-    <PackAsTool>True</PackAsTool>
-    <Copyright>MIT</Copyright>
-    <PackageOutputPath>bin\nuget</PackageOutputPath>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>

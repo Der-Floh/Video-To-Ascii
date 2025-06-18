@@ -366,4 +366,11 @@ FodyWeavers.xsd
 .vscode/
 .windsurf/
 TestVideos/
+*-cache/
 launchSettings.json
+
+# Packaging artefacts created during CI or local tests
+*.msi
+*.nupkg
+winget/*.yaml            # finished manifests that CI emits
+scoop/*.json             # finished hash-filled manifests, if you keep a template

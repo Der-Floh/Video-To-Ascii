@@ -1,0 +1,29 @@
+{
+    "version": "{{VERSION}}",
+    "description": "A .NET console application that converts and plays videos as ASCII art in the terminal. Supports multiple conversion strategies and audio playback.",
+    "homepage": "https://github.com/Der-Floh/Video-To-Ascii",
+    "license": "MIT",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/Der-Floh/Video-To-Ascii/releases/download/v{{VERSION}}/VideoToAscii-v{{VERSION}}.msi",
+            "hash": "{{SHA256}}"
+        }
+    },
+    "installer": {
+        "script": "Start-Process -Wait msiexec -ArgumentList '/i \"$dir\\\\VideoToAscii-v$version.msi\" /qn'"
+    },
+    "bin": "VideoToAscii.exe",
+    "checkver": {
+        "github": "https://github.com/Der-Floh/Video-To-Ascii"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/Der-Floh/Video-To-Ascii/releases/download/v$version/VideoToAscii-v$version.msi"
+            }
+        },
+        "hash": {
+            "url": "$url.sha256"
+        }
+    }
+}
