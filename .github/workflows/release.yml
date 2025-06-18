@@ -43,7 +43,7 @@ jobs:
       with:
         aip-path: ./Package/VideoToAscii.aip
         aip-commands: |
-          SetPathVariable BUILD_OUTPUT "$env:PUBLISH_DIR"
+          UpdatePathVariable -name BUILD_OUTPUT -value "$env:PUBLISH_DIR" -valuetype Folder
           Build
 
     # 6. Upload the MSI to GitHub Release
