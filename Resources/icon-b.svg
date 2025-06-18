@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="96" height="96" version="1.1" xmlns="http://www.w3.org/2000/svg">
+ <path transform="matrix(1.2865 0 0 1.2743 20.562 42.132)" d="m50.895 10.652-51.44 29.699a6.5192 6.5192 30 0 1-9.7789-5.6458v-29.844-31.055a5.82 5.82 150 0 1 8.7301-5.0403l52.489 30.304a6.6871 6.6871 90 0 1 0 11.582z" fill="#fff" stroke-width="0" style="paint-order:markers stroke fill"/>
+ <g transform="translate(-.0039106)" fill="#082828" font-family="'Segoe UI'" stroke="#000">
+  <g stroke-width="2.1">
+   <text x="148.96745" y="15.544431" style="paint-order:markers stroke fill" xml:space="preserve"><tspan x="148.96745" y="15.544431"/></text>
+   <text x="162.56883" y="18.566959" font-weight="300" style="paint-order:markers stroke fill" xml:space="preserve"><tspan x="162.56883" y="18.566959"/></text>
+   <text x="159.54631" y="15.760325" font-size="5.3333px" font-weight="300" style="paint-order:markers stroke fill" xml:space="preserve"><tspan x="159.54631" y="15.760325"/></text>
+  </g>
+  <text transform="translate(-110.55 .91124)" x="120.90113" y="11.226533" font-size="8px" letter-spacing="0px" stroke-width=".7" style="inline-size:107.26;line-height:1.2;paint-order:markers stroke fill;white-space:pre" xml:space="preserve"><tspan x="120.90113" y="11.226533" fill="#000000" font-family="'Myriad Pro'"><tspan>AS</tspan><tspan>⹁</tspan><tspan>
+</tspan></tspan><tspan x="120.90113" y="20.91914" fill="#000000" font-family="'Myriad Pro'"><tspan>CIIASC</tspan><tspan>⹁</tspan><tspan>
+</tspan></tspan><tspan x="120.90113" y="30.611748" fill="#000000" font-family="'Myriad Pro'"><tspan>IIASCIIASC</tspan><tspan>⹁</tspan><tspan>
+</tspan></tspan><tspan x="120.90113" y="40.304354" fill="#000000" font-family="'Myriad Pro'"><tspan>IIASCIIASCIIA</tspan><tspan>⹁</tspan><tspan>
+</tspan></tspan><tspan x="120.90113" y="49.996962"><tspan fill="#000000" font-family="'Myriad Pro'">CIIASCIIASCIIAS&gt;
+</tspan></tspan><tspan x="120.90113" y="59.68957"><tspan fill="#000000" font-family="'Myriad Pro'">IIASCIIASCIIA′
+</tspan></tspan><tspan x="120.90113" y="69.382178"><tspan fill="#000000" font-family="'Myriad Pro'">IIASCIIASC′
+</tspan></tspan><tspan x="120.90113" y="79.074786"><tspan fill="#000000" font-family="'Myriad Pro'">CIIASC′
+</tspan></tspan><tspan x="120.90113" y="88.76739"><tspan fill="#000000" font-family="'Myriad Pro'">AS′</tspan></tspan></text>
+ </g>
+</svg>

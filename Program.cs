@@ -8,14 +8,12 @@ internal class Program
 {
     static async Task<int> Main(string[] args)
     {
-        await FFmpegUtils.DownloadFFmpegZip();
-
         var fileOption = new Option<FileInfo>(
              aliases: ["-f", "--file"],
              description: "Input video file")
         {
             IsRequired = true
-        };
+        }.LegalFilePathsOnly();
 
         var strategyOption = new Option<string>(
             aliases: ["-s", "--strategy", "--strat"],
@@ -26,9 +24,10 @@ internal class Program
         {
             var value = result.GetValueOrDefault<string>()?.ToLower();
             if (value is not "ascii-color" and not "just-ascii" and not "filled-ascii")
-            {
                 result.ErrorMessage = "Strategy must be one of: ascii-color, just-ascii, filled-ascii";
-            }
+
+            if (value is "filled-ascii" or "ascii-color")
+                AnsiiUtils.EnableAnsiSupport();
         });
 
         var outputOption = new Option<FileInfo>(
@@ -37,16 +36,15 @@ internal class Program
 
         var withAudioOption = new Option<bool>(
             aliases: ["-a", "--with-audio", "--audio"],
-            getDefaultValue: () => false,
             description: "Play audio track");
 
         var rootCommand = new RootCommand
-            {
-                fileOption,
-                strategyOption,
-                outputOption,
-                withAudioOption
-            };
+        {
+            fileOption,
+            strategyOption,
+            outputOption,
+            withAudioOption
+        };
 
         rootCommand.Description = "A simple C# application to play videos in the terminal using colored characters as pixels";
 
