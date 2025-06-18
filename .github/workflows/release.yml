@@ -82,14 +82,14 @@ jobs:
     # 9. ───── WinGet  ────────────────────────────────────────────────
     - name: Install wingetcreate
       run: winget install --id=Microsoft.WingetCreate -e --accept-package-agreements --disable-interactivity
-    - name: Submit WinGet manifest
-      shell: pwsh
-      run: |
-        wingetcreate update `
-          --manifest Package\winget\Der_Floh.VideoToAscii.yaml `
-          --submit `
-          --replace `
-          --token ${{ secrets.WINGET_TOKEN }}
+    #- name: Submit WinGet manifest
+    #  shell: pwsh
+    #  run: |
+    #    wingetcreate update `
+    #      --manifest Package\winget\Der_Floh.VideoToAscii.yaml `
+    #      --submit `
+    #      --replace `
+    #      --token ${{ secrets.WINGET_TOKEN }}
 
     # 10. ──── Chocolatey  ────────────────────────────────────────────
     - name: Pack & push Chocolatey package
@@ -97,10 +97,9 @@ jobs:
       run: |
         cd Package\chocolatey
         choco pack videotoascii.nuspec
-        
-    #choco push videotoascii.${{ env.GITHUB_ENV }}.nupkg `
-    #--source "https://push.chocolatey.org/" `
-    #--api-key ${{ secrets.CHOCO_API_KEY }}
+    #    choco push videotoascii.${{ env.GITHUB_ENV }}.nupkg `
+    #      --source "https://push.chocolatey.org/" `
+    #      --api-key ${{ secrets.CHOCO_API_KEY }}
 
     # 11. ──── Scoop  ────────────────────────────────────────────────
     #- name: Update Scoop bucket
