@@ -21,15 +21,23 @@ jobs:
     - uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '9.0.x'
+    
+    # 3. Compute CLEAN_VERSION
+    - name: Compute numeric version
+      id: vars
+      shell: pwsh
+      run: |
+        $clean = "$env:VERSION".TrimStart('v')
+        echo "CLEAN_VERSION=$clean" >> $env:GITHUB_ENV
+        echo "clean=$clean"         >> $env:GITHUB_OUTPUT
 
-    # 3. Build & publish
+    # 4. Build & publish
     - name: Build .NET app
       shell: pwsh
       run: |
-        echo "CLEAN_VERSION=$($env:VERSION.TrimStart('v'))" >> $env:GITHUB_ENV
         dotnet publish VideoToAscii/VideoToAscii.csproj -c Release -o "$env:PUBLISH_DIR" -p:Version=$env:CLEAN_VERSION
 
-    # 4. Build the MSI
+    # 5. Build the MSI
     - name: Build MSI with Advanced Installer
       uses: caphyon/advinst-github-action@main
       with:
@@ -38,13 +46,13 @@ jobs:
           SetPathVariable BUILD_OUTPUT "$env:PUBLISH_DIR"
           Build
 
-    # 5. Upload the MSI to GitHub Release
+    # 6. Upload the MSI to GitHub Release
     - uses: softprops/action-gh-release@v2
       with:
         files: |
           **/VideoToAscii-*.msi
 
-    # 6. Calculate SHA-256
+    # 7. Calculate SHA-256
     - name: Compute MSI hash
       id: hash
       shell: pwsh
@@ -54,7 +62,7 @@ jobs:
         echo "sha=$sha" >> $env:GITHUB_OUTPUT
         echo "msipath=$($msi.FullName)" >> $env:GITHUB_OUTPUT
 
-    # 7. Render package-manager templates
+    # 8. Render package-manager templates
     - name: Render packaging templates
       shell: pwsh
       run: |
@@ -69,7 +77,7 @@ jobs:
           $content | Set-Content $dest
         }
 
-    # 8. ───── WinGet  ────────────────────────────────────────────────
+    # 9. ───── WinGet  ────────────────────────────────────────────────
     - name: Install wingetcreate
       run: winget install --id=Microsoft.WingetCreate -e --accept-package-agreements --disable-interactivity
     - name: Submit WinGet manifest
@@ -81,7 +89,7 @@ jobs:
           --replace `
           --token ${{ secrets.WINGET_TOKEN }}
 
-    # 9. ───── Chocolatey  ────────────────────────────────────────────
+    # 10. ──── Chocolatey  ────────────────────────────────────────────
     - name: Pack & push Chocolatey package
       shell: pwsh
       run: |
@@ -91,7 +99,7 @@ jobs:
           --source "https://push.chocolatey.org/" `
           --api-key ${{ secrets.CHOCO_API_KEY }}
 
-    # 10. ───── Scoop  ────────────────────────────────────────────────
+    # 11. ──── Scoop  ────────────────────────────────────────────────
     #- name: Update Scoop bucket
     #  shell: pwsh
     #  run: |
