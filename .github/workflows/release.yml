@@ -35,7 +35,7 @@ jobs:
     - name: Build .NET app
       shell: pwsh
       run: |
-        dotnet publish VideoToAscii/VideoToAscii.csproj -c Release -o "$env:PUBLISH_DIR" -p:Version=$env:CLEAN_VERSION
+        dotnet publish VideoToAscii/VideoToAscii.csproj -c Release -o "$env:PUBLISH_DIR" -r win-x64 --self-contained true -p:Version=$env:CLEAN_VERSION
 
     # 5. Build the MSI
     - name: Build MSI with Advanced Installer
