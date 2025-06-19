@@ -8,7 +8,7 @@
         <owners>Der_Floh</owners>
         <projectUrl>https://github.com/Der-Floh/Video-To-Ascii</projectUrl>
         <iconUrl>https://raw.githubusercontent.com/Der-Floh/Video-To-Ascii/main/Resources/icon.png</iconUrl>
-        <licenseUrl>https://github.com/Der-Floh/Video-To-Ascii/blob/main/LICENSE</licenseUrl>
+        <licenseUrl>https://github.com/Der-Floh/Video-To-Ascii/blob/main/LICENSE.txt</licenseUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>A .NET console application that converts and plays videos as ASCII art in the terminal. Supports multiple conversion strategies and audio playback.</description>
         <tags>dotnet console video ascii-art media-player terminal conversion</tags>
