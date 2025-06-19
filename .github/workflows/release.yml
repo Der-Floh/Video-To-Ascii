@@ -112,3 +112,4 @@ jobs:
         files: |
           **/VideoToAscii-*.msi
           **/videotoascii.*.nupkg
+
