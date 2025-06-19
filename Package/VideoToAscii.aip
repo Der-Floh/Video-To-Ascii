@@ -6,10 +6,10 @@
     <ROW Property="ARPPRODUCTICON" Value="icon.exe" Type="8"/>
     <ROW Property="ARPURLINFOABOUT" Value="https://github.com/Der-Floh/Video-To-Ascii"/>
     <ROW Property="Manufacturer" Value="Der_Floh"/>
-    <ROW Property="ProductCode" Value="1031:{EAA0B670-4DF3-49FE-8B12-9E7616F661E6} " Type="16"/>
+    <ROW Property="ProductCode" Value="1031:{F6175CC9-EA99-464D-971F-000BE02B43C7} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="VideoToAscii"/>
-    <ROW Property="ProductVersion" Value="1.0.26" Options="32"/>
+    <ROW Property="ProductVersion" Value="1.0.0" Options="32"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{1C942D37-731F-447C-90DB-87BC35901376}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>

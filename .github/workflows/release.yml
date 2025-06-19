@@ -17,10 +17,12 @@ jobs:
     steps:
 
     # 1. Checkout source ------------------------------------------------
-    - uses: actions/checkout@v4
+    - name: Checkout Source
+      uses: actions/checkout@v4
 
     # 2. .NET SDK -------------------------------------------------------
-    - uses: actions/setup-dotnet@v4
+    - name: Install .NET
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '9.0.x'
     
@@ -42,7 +44,9 @@ jobs:
           -o "$env:PUBLISH_DIR" `
           -r win-x64 `
           --self-contained true `
-          -p:Version=$env:CLEAN_VERSION
+          -p:Version=$env:CLEAN_VERSION `
+          -p:InformationalVersion=$env:CLEAN_VERSION `
+          -p:IncludeSourceRevisionInInformationalVersion=false
 
     # 5. Build the MSI --------------------------------------------------
     - name: Build MSI with Advanced Installer
@@ -50,6 +54,7 @@ jobs:
       with:
         aip-path: ./Package/VideoToAscii.aip
         aip-commands: |
+          SetVersion ${{ steps.vars.outputs.clean }}
           Build
 
     # 6. Locate the MSI and expose its path -----------------------------
@@ -102,24 +107,24 @@ jobs:
         $pkg = Get-ChildItem *.nupkg | Select-Object -First 1
         echo "nupkg_path=$($pkg.FullName)" >> $Env:GITHUB_OUTPUT
 
-    # 12. Upload .nupkg to the same release -----------------------------
-    - name: Upload Chocolatey package
+    # 11. Upload .nupkg to the same release -----------------------------
+    - name: Add Chocolatey package to Release
       uses: softprops/action-gh-release@v2
       with:
         files: ${{ steps.choco.outputs.nupkg_path }}
 
-    # 13. ──── Chocolatey push (optional) ───────────────────────────────
-    #- name: Push Chocolatey package
+    # 12. ──── Chocolatey Release ───────────────────────────────────────
+    #- name: Release Chocolatey package
     #  shell: pwsh
     #  run: |
     #    choco push '${{ steps.choco.outputs.nupkg_path }}' `
     #      --source "https://push.chocolatey.org/" `
     #      --api-key ${{ secrets.CHOCO_API_KEY }}
 
-    # 13. ───── WinGet (optional) ───────────────────────────────────────
+    # 13. ───── WinGet Release ──────────────────────────────────────────
     #- name: Install wingetcreate
     #  run: choco install wingetcreate -y --no-progress
-    #- name: Submit WinGet manifest
+    #- name: Release WinGet package
     #  shell: pwsh
     #  run: |
     #    wingetcreate update `
@@ -128,8 +133,8 @@ jobs:
     #      --replace `
     #      --token ${{ secrets.WINGET_TOKEN }}
 
-    # 15. ──── Scoop bucket (optional) ─────────────────────────────────-
-    #- name: Update Scoop bucket
+    # 14. ──── Scoop Release ────────────────────────────────────────────
+    #- name: Release Scoop package
     #  shell: pwsh
     #  run: |
     #    git clone https://github.com/Der-Floh/videotoascii-bucket.git bucket
