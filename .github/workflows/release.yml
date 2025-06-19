@@ -47,14 +47,6 @@ jobs:
         aip-commands: |
           Build
 
-    - name: Copy MSI to package dirs
-      shell: pwsh
-      run: |
-        $msi = Get-ChildItem -Filter "VideoToAscii-*.msi" -Recurse | Select-Object -First 1
-        Copy-Item $msi.FullName -Destination "$env:GITHUB_WORKSPACE\Package\chocolatey\videotoascii\tools" -Force
-        Copy-Item $msi.FullName -Destination "$env:GITHUB_WORKSPACE\Package\scoop" -Force
-        Copy-Item $msi.FullName -Destination "$env:GITHUB_WORKSPACE\Package\winget" -Force
-
     # 7. Calculate SHA-256
     - name: Compute MSI hash
       id: hash
@@ -73,11 +65,10 @@ jobs:
           '\{\{VERSION\}\}'  = "${{ env.CLEAN_VERSION }}"
           '\{\{SHA256\}\}'   = "${{ steps.hash.outputs.sha }}"
         }
-        Get-ChildItem Package -Recurse -Filter *.template | ForEach-Object {
+        Get-ChildItem -Path Package -Recurse -File | ForEach-Object {
           $content = Get-Content $_ -Raw
           foreach ($k in $replacements.Keys) { $content = $content -replace $k, $replacements[$k] }
-          $dest = $_.FullName -replace '\.template$',''
-          $content | Set-Content $dest
+          $content | Set-Content $_.FullName
         }
 
     # 9. ───── WinGet  ────────────────────────────────────────────────
