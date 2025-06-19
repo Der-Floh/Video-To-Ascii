@@ -71,6 +71,15 @@ jobs:
           $content | Set-Content $_.FullName
         }
 
+    - name: List built MSI files
+      shell: pwsh
+      run: |
+        Write-Host "🔍 Searching for *.msi inside $Env:GITHUB_WORKSPACE ..."
+        Get-ChildItem -Path $Env:GITHUB_WORKSPACE -Filter *.msi -Recurse |
+        ForEach-Object {
+          Write-Host "• $($_.FullName)"
+        }
+
     # 9. ───── WinGet  ────────────────────────────────────────────────
     - name: Install wingetcreate
       run: choco install wingetcreate -y --no-progress
