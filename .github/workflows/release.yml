@@ -12,34 +12,39 @@ jobs:
     runs-on: windows-latest
     env:
       VERSION: ${{ github.ref_name }}
-      GITHUB_ENV: ${{ github.ref_name }}
       PUBLISH_DIR: ${{ github.workspace }}\VideoToAscii\bin\Publish\VideoToAscii
 
     steps:
-    # 1. Checkout source
+
+    # 1. Checkout source ------------------------------------------------
     - uses: actions/checkout@v4
 
-    # 2. Install .NET 9 SDK
+    # 2. .NET SDK -------------------------------------------------------
     - uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '9.0.x'
     
-    # 3. Compute CLEAN_VERSION
+    # 3. Compute CLEAN_VERSION ------------------------------------------
     - name: Compute numeric version
       id: vars
       shell: pwsh
       run: |
-        $clean = "$env:VERSION".TrimStart('v')
-        echo "CLEAN_VERSION=$clean" >> $env:GITHUB_ENV
-        echo "clean=$clean"         >> $env:GITHUB_OUTPUT
+        $clean = "${env:VERSION}".TrimStart('v')
+        echo "CLEAN_VERSION=$clean" >> $Env:GITHUB_ENV
+        echo "clean=$clean"         >> $Env:GITHUB_OUTPUT
 
-    # 4. Build & publish
+    # 4. Build & publish .NET app ---------------------------------------
     - name: Build .NET app
       shell: pwsh
       run: |
-        dotnet publish VideoToAscii/VideoToAscii.csproj -c Release -o "$env:PUBLISH_DIR" -r win-x64 --self-contained true -p:Version=$env:CLEAN_VERSION
+        dotnet publish VideoToAscii/VideoToAscii.csproj `
+          -c Release `
+          -o "$env:PUBLISH_DIR" `
+          -r win-x64 `
+          --self-contained true `
+          -p:Version=$env:CLEAN_VERSION
 
-    # 5. Build the MSI
+    # 5. Build the MSI --------------------------------------------------
     - name: Build MSI with Advanced Installer
       uses: caphyon/advinst-github-action@v2.0
       with:
@@ -47,46 +52,73 @@ jobs:
         aip-commands: |
           Build
 
-    # 6. Locate the MSI
+    # 6. Locate the MSI and expose its path -----------------------------
     - name: Locate MSI
       id: msi
       shell: pwsh
       run: |
-        $msi = Get-ChildItem -Path $Env:GITHUB_WORKSPACE -Filter "VideoToAscii-*.msi" -Recurse | Select-Object -First 1
+        $msi = Get-ChildItem -Path $Env:GITHUB_WORKSPACE -Filter "VideoToAscii-*.msi" -Recurse |
+               Select-Object -First 1
         Write-Host "Found MSI: $($msi.FullName)"
-        echo "msipath=$($msi.FullName)" >> $Env:GITHUB_OUTPUT
+        echo "path=$($msi.FullName)" >> $Env:GITHUB_OUTPUT
     
-    # 6. Upload the Release
+    # 7. Upload MSI to the GitHub Release -------------------------------
     - uses: softprops/action-gh-release@v2
       with:
-        files: ${{ steps.msi.outputs.msipath }}
+        files: ${{ steps.msi.outputs.path }}
 
-    # 7. Calculate SHA-256
+     # 8. Compute SHA-256 of the same MSI --------------------------------
     - name: Compute MSI hash
       id: hash
       shell: pwsh
       run: |
-        $sha = (Get-FileHash '${{ steps.msi.outputs.msipath }}' -Algorithm SHA256).Hash
-        Write-Host "MSI Hash: $($sha)"
+        $sha = (Get-FileHash '${{ steps.msi.outputs.path }}' -Algorithm SHA256).Hash
+        Write-Host "MSI SHA-256: $sha"
         echo "sha=$sha" >> $Env:GITHUB_OUTPUT
 
-    # 8. Render package-manager templates
+    # 9. Render package-manager templates -------------------------------
     - name: Render packaging templates
       shell: pwsh
       run: |
         $replacements = @{
-          '\{\{VERSION\}\}'  = "${{ env.CLEAN_VERSION }}"
-          '\{\{SHA256\}\}'   = "${{ steps.hash.outputs.sha }}"
+          '\{\{VERSION\}\}' = '${{ steps.vars.outputs.clean }}'
+          '\{\{SHA256\}\}'  = '${{ steps.hash.outputs.sha }}'
         }
-        Get-ChildItem -Path Package -Recurse -File | Where-Object { $_.Extension -ne '.aip' } | ForEach-Object {
-          $content = Get-Content $_ -Raw
-          foreach ($k in $replacements.Keys) { $content = $content -replace $k, $replacements[$k] }
-          $content | Set-Content $_.FullName
-        }
+        Get-ChildItem -Path Package -Recurse -File |
+          Where-Object { $_.Extension -ne '.aip' } |
+          ForEach-Object {
+            $text = Get-Content $_ -Raw
+            foreach ($k in $replacements.Keys) { $text = $text -replace $k, $replacements[$k] }
+            $text | Set-Content $_
+          }
 
-    # 9. ───── WinGet  ────────────────────────────────────────────────
-    - name: Install wingetcreate
-      run: choco install wingetcreate -y --no-progress
+    # 10. Pack Chocolatey package and expose nupkg_path -----------------
+    - name: Pack Chocolatey package
+      id: choco
+      shell: pwsh
+      run: |
+        cd Package\chocolatey\videotoascii
+        choco pack videotoascii.nuspec
+        $pkg = Get-ChildItem *.nupkg | Select-Object -First 1
+        echo "nupkg_path=$($pkg.FullName)" >> $Env:GITHUB_OUTPUT
+
+    # 12. Upload .nupkg to the same release -----------------------------
+    - name: Upload Chocolatey package
+      uses: softprops/action-gh-release@v2
+      with:
+        files: ${{ steps.choco.outputs.nupkg_path }}
+
+    # 13. ──── Chocolatey push (optional) ───────────────────────────────
+    #- name: Push Chocolatey package
+    #  shell: pwsh
+    #  run: |
+    #    choco push '${{ steps.choco.outputs.nupkg_path }}' `
+    #      --source "https://push.chocolatey.org/" `
+    #      --api-key ${{ secrets.CHOCO_API_KEY }}
+
+    # 13. ───── WinGet (optional) ───────────────────────────────────────
+    #- name: Install wingetcreate
+    #  run: choco install wingetcreate -y --no-progress
     #- name: Submit WinGet manifest
     #  shell: pwsh
     #  run: |
@@ -96,17 +128,7 @@ jobs:
     #      --replace `
     #      --token ${{ secrets.WINGET_TOKEN }}
 
-    # 10. ──── Chocolatey  ────────────────────────────────────────────
-    - name: Pack & push Chocolatey package
-      shell: pwsh
-      run: |
-        cd Package\chocolatey\videotoascii
-        choco pack videotoascii.nuspec
-    #    choco push videotoascii.${{ env.GITHUB_ENV }}.nupkg `
-    #      --source "https://push.chocolatey.org/" `
-    #      --api-key ${{ secrets.CHOCO_API_KEY }}
-
-    # 11. ──── Scoop  ────────────────────────────────────────────────
+    # 15. ──── Scoop bucket (optional) ─────────────────────────────────-
     #- name: Update Scoop bucket
     #  shell: pwsh
     #  run: |
@@ -116,5 +138,5 @@ jobs:
     #    git config user.name  "github-actions"
     #    git config user.email "action@github.com"
     #    git add bucket/videotoascii.json
-    #    git commit -m "VideoToAscii ${{ env.GITHUB_ENV }}"
+    #    git commit -m "VideoToAscii ${{ steps.vars.outputs.clean }}"
     #    git push https://${{ secrets.SCOOP_PAT }}@github.com/Der-Floh/videotoascii-bucket.git HEAD:main
