@@ -47,15 +47,28 @@ jobs:
         aip-commands: |
           Build
 
+    # 6. Locate the MSI
+    - name: Locate MSI
+      id: msi
+      shell: pwsh
+      run: |
+        $msi = Get-ChildItem -Path $Env:GITHUB_WORKSPACE -Filter "VideoToAscii-*.msi" -Recurse | Select-Object -First 1
+        Write-Host "Found MSI: $($msi.FullName)"
+        echo "msipath=$($msi.FullName)" >> $Env:GITHUB_OUTPUT
+    
+    # 6. Upload the Release
+    - uses: softprops/action-gh-release@v2
+      with:
+        files: ${{ steps.msi.outputs.msipath }}
+
     # 7. Calculate SHA-256
     - name: Compute MSI hash
       id: hash
       shell: pwsh
       run: |
-        $msi = Get-ChildItem -Filter "VideoToAscii-*.msi" -Recurse | Select-Object -First 1
-        $sha = (Get-FileHash $msi.FullName -Algorithm SHA256).Hash
-        echo "sha=$sha" >> $env:GITHUB_OUTPUT
-        echo "msipath=$($msi.FullName)" >> $env:GITHUB_OUTPUT
+        $sha = (Get-FileHash '${{ steps.msi.outputs.path }}' -Algorithm SHA256).Hash
+        Write-Host "MSI Hash: $($sha)"
+        echo "sha=$sha" >> $Env:GITHUB_OUTPUT
 
     # 8. Render package-manager templates
     - name: Render packaging templates
@@ -69,15 +82,6 @@ jobs:
           $content = Get-Content $_ -Raw
           foreach ($k in $replacements.Keys) { $content = $content -replace $k, $replacements[$k] }
           $content | Set-Content $_.FullName
-        }
-
-    - name: List built MSI files
-      shell: pwsh
-      run: |
-        Write-Host "🔍 Searching for *.msi inside $Env:GITHUB_WORKSPACE ..."
-        Get-ChildItem -Path $Env:GITHUB_WORKSPACE -Filter *.msi -Recurse |
-        ForEach-Object {
-          Write-Host "• $($_.FullName)"
         }
 
     # 9. ───── WinGet  ────────────────────────────────────────────────
@@ -114,11 +118,3 @@ jobs:
     #    git add bucket/videotoascii.json
     #    git commit -m "VideoToAscii ${{ env.GITHUB_ENV }}"
     #    git push https://${{ secrets.SCOOP_PAT }}@github.com/Der-Floh/videotoascii-bucket.git HEAD:main
-
-    # 12. Upload the Release
-    - uses: softprops/action-gh-release@v2
-      with:
-        files: |
-          **/VideoToAscii-*.msi
-          **/videotoascii.*.nupkg
-
