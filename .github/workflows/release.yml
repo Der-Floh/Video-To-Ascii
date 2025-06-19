@@ -81,7 +81,7 @@ jobs:
 
     # 9. ───── WinGet  ────────────────────────────────────────────────
     - name: Install wingetcreate
-      run: winget install --id=Microsoft.WingetCreate -e --accept-package-agreements --disable-interactivity
+      run: choco install wingetcreate -y --no-progress
     #- name: Submit WinGet manifest
     #  shell: pwsh
     #  run: |
