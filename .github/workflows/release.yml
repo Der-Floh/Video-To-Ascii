@@ -65,7 +65,7 @@ jobs:
           '\{\{VERSION\}\}'  = "${{ env.CLEAN_VERSION }}"
           '\{\{SHA256\}\}'   = "${{ steps.hash.outputs.sha }}"
         }
-        Get-ChildItem -Path Package -Recurse -File | ForEach-Object {
+        Get-ChildItem -Path Package -Recurse -File | Where-Object { $_.Extension -ne '.aip' } | ForEach-Object {
           $content = Get-Content $_ -Raw
           foreach ($k in $replacements.Keys) { $content = $content -replace $k, $replacements[$k] }
           $content | Set-Content $_.FullName
