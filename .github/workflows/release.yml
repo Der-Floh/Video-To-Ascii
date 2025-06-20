@@ -13,6 +13,7 @@ jobs:
     env:
       VERSION: ${{ github.ref_name }}
       PUBLISH_DIR: ${{ github.workspace }}\VideoToAscii\bin\Publish\VideoToAscii
+      WINGET_TOKEN: ${{ secrets.WINGET_TOKEN }}
 
     steps:
 
@@ -68,11 +69,12 @@ jobs:
         echo "path=$($msi.FullName)" >> $Env:GITHUB_OUTPUT
     
     # 7. Upload MSI to the GitHub Release -------------------------------
-    - uses: softprops/action-gh-release@v2
+    - name: Release MSI to Github
+      uses: softprops/action-gh-release@v2
       with:
         files: ${{ steps.msi.outputs.path }}
 
-     # 8. Compute SHA-256 of the same MSI --------------------------------
+    # 8. Compute SHA-256 of the same MSI --------------------------------
     - name: Compute MSI hash
       id: hash
       shell: pwsh
@@ -81,13 +83,31 @@ jobs:
         Write-Host "MSI SHA-256: $sha"
         echo "sha=$sha" >> $Env:GITHUB_OUTPUT
 
-    # 9. Render package-manager templates -------------------------------
+    # 9. Extract MSI Productcode ----------------------------------------
+    - name: Extract MSI ProductCode
+      id: msi_code
+      shell: pwsh
+      run: |
+        $msiPath = '${{ steps.msi.outputs.path }}'
+
+        $wi   = New-Object -ComObject WindowsInstaller.Installer
+        $db   = $wi.GetType().InvokeMember('OpenDatabase','InvokeMethod',$null,$wi,@($msiPath,0))
+        $view = $db.OpenView("SELECT `Value` FROM `Property` WHERE `Property`='ProductCode'")
+        $view.Execute()
+        $rec  = $view.Fetch()
+        $code = $rec.StringData(1)
+
+        Write-Host "ProductCode: $code"
+        echo "code=$code" >> $Env:GITHUB_OUTPUT
+
+    # 10. Render package-manager templates ------------------------------
     - name: Render packaging templates
       shell: pwsh
       run: |
         $replacements = @{
-          '\{\{VERSION\}\}' = '${{ steps.vars.outputs.clean }}'
-          '\{\{SHA256\}\}'  = '${{ steps.hash.outputs.sha }}'
+          '\{\{VERSION\}\}'         = '${{ steps.vars.outputs.clean }}'
+          '\{\{SHA256\}\}'          = '${{ steps.hash.outputs.sha }}'
+          '\{\{MSI_PRODUCTCODE\}\}' = '${{ steps.msi_code.outputs.code }}'
         }
         Get-ChildItem -Path Package -Recurse -File |
           Where-Object { $_.Extension -ne '.aip' } |
@@ -97,7 +117,7 @@ jobs:
             $text | Set-Content $_
           }
 
-    # 10. Pack Chocolatey package and expose nupkg_path -----------------
+    # 11. Pack Chocolatey package and expose nupkg_path -----------------
     - name: Pack Chocolatey package
       id: choco
       shell: pwsh
@@ -107,13 +127,13 @@ jobs:
         $pkg = Get-ChildItem *.nupkg | Select-Object -First 1
         echo "nupkg_path=$($pkg.FullName)" >> $Env:GITHUB_OUTPUT
 
-    # 11. Upload .nupkg to the same release -----------------------------
-    - name: Add Chocolatey package to Release
+    # 12. Upload .nupkg to the same release -----------------------------
+    - name: Add Chocolatey package to Github Release
       uses: softprops/action-gh-release@v2
       with:
         files: ${{ steps.choco.outputs.nupkg_path }}
 
-    # 12. ──── Chocolatey Release ───────────────────────────────────────
+    # 13. ──── Chocolatey Release ───────────────────────────────────────
     #- name: Release Chocolatey package
     #  shell: pwsh
     #  run: |
@@ -121,19 +141,21 @@ jobs:
     #      --source "https://push.chocolatey.org/" `
     #      --api-key ${{ secrets.CHOCO_API_KEY }}
 
-    # 13. ───── WinGet Release ──────────────────────────────────────────
+    # 14. ───── WinGet Release ──────────────────────────────────────────
     #- name: Install wingetcreate
     #  run: choco install wingetcreate -y --no-progress
     #- name: Release WinGet package
     #  shell: pwsh
     #  run: |
     #    wingetcreate update `
-    #      --manifest Package\winget\Der_Floh.VideoToAscii.yaml `
+    #      --urls "https://github.com/Der-Floh/Video-To-Ascii/releases/download/v${{ steps.vars.outputs.clean }}/VideoToAscii-v${{ steps.vars.outputs.clean }}.msi" `
+    #      --version "${{ steps.vars.outputs.clean }}" `
     #      --submit `
-    #      --replace `
-    #      --token ${{ secrets.WINGET_TOKEN }}
+    #      --silent `
+    #      --token "$env:WINGET_TOKEN"
+    #      Der_Floh.VideoToAscii
 
-    # 14. ──── Scoop Release ────────────────────────────────────────────
+    # 15. ──── Scoop Release ────────────────────────────────────────────
     #- name: Release Scoop package
     #  shell: pwsh
     #  run: |

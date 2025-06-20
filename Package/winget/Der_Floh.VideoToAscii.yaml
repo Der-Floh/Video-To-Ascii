@@ -1,44 +1,35 @@
-# █████████████████████████████████████████████████████████████████████
-# VideoToAscii – Windows Package Manager (WinGet) manifest
-# Docs: https://learn.microsoft.com/windows/package-manager/package/manifest
-# █████████████████████████████████████████████████████████████████████
-PackageIdentifier: Der-Floh.VideoToAscii
-PackageVersion: "{{VERSION}}"
+# Created with YamlCreate.ps1 v2.4.6 $debug=NVS1.CRLF.5-1-26100-4202.Win32NT
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.defaultLocale.1.10.0.schema.json
+
+PackageIdentifier: Der_Floh.VideoToAscii
+PackageVersion: 1.0.27
 PackageLocale: en-US
 Publisher: Der_Floh
 PublisherUrl: https://github.com/Der-Floh
 PublisherSupportUrl: https://github.com/Der-Floh/Video-To-Ascii/issues
+# PrivacyUrl:
+Author: Der_Floh
 PackageName: VideoToAscii
-Moniker: videotoascii
+PackageUrl: https://github.com/Der-Floh/Video-To-Ascii
 License: MIT
-LicenseUrl: https://github.com/Der-Floh/Video-To-Ascii/blob/main/LICENSE
+LicenseUrl: https://github.com/Der-Floh/Video-To-Ascii/blob/main/LICENSE.txt
+# Copyright:
+# CopyrightUrl:
 ShortDescription: A .NET console tool that converts and plays videos as ASCII art in the terminal.
-Description: |
-  VideoToAscii converts and streams any video file or webcam input
-  as colourful ASCII characters directly in your terminal.  
-  • Multiple conversion strategies  
-  • Optional audio playback  
-  • .NET 9 single-file build – no runtime needed
+Description: VideoToAscii converts and streams any video file or webcam input as colourful ASCII characters directly in your terminal. Supports multiple conversion strategies, optional audio playback and output files.
+Moniker: videotoascii
 Tags:
-  - dotnet
-  - console
-  - video
-  - ascii-art
-  - media-player
-  - terminal
-  - conversion
-Homepage: https://github.com/Der-Floh/Video-To-Ascii
-# --- Installer block -------------------------------------------------
-Installers:
-  - Architecture: x64
-    InstallerType: msi
-    InstallerUrl: https://github.com/Der-Floh/Video-To-Ascii/releases/download/v{{VERSION}}/VideoToAscii-v{{VERSION}}.msi
-    InstallerSha256: "{{SHA256}}"
-    Scope: machine
-    InstallerSwitches:
-      Silent: /quiet
-    AppsAndFeaturesEntries:
-      - DisplayName: VideoToAscii ({{VERSION}})
-        Publisher: Der_Floh
-        ProductCode: "{{MSI_PRODUCTCODE}}"  # fill in after first build
-ManifestVersion: 1.5.0
+- ascii-art
+- console-app
+- converter
+- dotnet
+- media-player
+- terminal
+- video-processing
+ReleaseNotes: First Release
+ReleaseNotesUrl: https://github.com/Der-Floh/Video-To-Ascii/releases/tag/v1.0.27
+# PurchaseUrl:
+# InstallationNotes:
+# Documentations:
+ManifestType: defaultLocale
+ManifestVersion: 1.10.0
