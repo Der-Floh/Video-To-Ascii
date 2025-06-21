@@ -13,7 +13,7 @@
         <description>A .NET console application that converts and plays videos as ASCII art in the terminal. Supports multiple conversion strategies and audio playback.</description>
         <tags>dotnet console video ascii-art media-player terminal conversion</tags>
         <dependencies>
-            <dependency id="dotnet-runtime" version="[9.0.0,)" />
+            <dependency id="dotnet-9.0-runtime" />
         </dependencies>
     </metadata>
     <files>
