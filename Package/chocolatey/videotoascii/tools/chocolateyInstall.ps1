@@ -2,19 +2,17 @@ Import-Module "$env:ChocolateyInstall\helpers\chocolateyInstaller.psm1"
 
 $packageName = 'videotoascii'
 $version = '{{VERSION}}'
-$checksum = '{{SHA256}}'
-$url = "https://github.com/Der-Floh/Video-To-Ascii/releases/download/v$version/VideoToAscii-v$version.msi"
+$expectedSha = '{{SHA256}}'
 
-$packageArgs = @{
-  packageName    = $env:ChocolateyPackageName
-  unzipLocation  = $toolsDir
-  fileType       = 'MSI'
-  url            = $url
-  softwareName   = $packageName
-  checksum       = $checksum
-  checksumType   = 'sha256'
-  silentArgs     = "/qn /norestart /l*v `"$($env:TEMP)\$($packageName).$($env:chocolateyPackageVersion).MsiInstall.log`""
-  validExitCodes = @(0, 3010, 1641)
+$zipFile = Join-Path $PSScriptRoot "VideoToAscii-$version.zip"
+$installDir = Join-Path $env:ChocolateyInstall 'lib' $packageName
+
+# Verify the embedded ZIP's SHA-256
+Get-FileHash $zipFile -Algorithm SHA256 | ForEach-Object {
+    if ($_.Hash -ne $expectedSha) {
+        throw "Checksum mismatch for $zipFile. Expected $expectedSha, got $($_.Hash)."
+    }
 }
 
-Install-ChocolateyPackage @packageArgs
+Get-ChocolateyUnzip -FileFullPath $zipFile -Destination $installDir
+Install-ChocolateyPath $installDir 'User'
