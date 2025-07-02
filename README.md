@@ -45,17 +45,25 @@ Options:
   --help                   Display help information
 ```
 
+#### Supported Output types
+These are the current supported output file types:
+- `.txt`
+- `.json`
+- `.bat`
+- `.ps1`
+- `.sh`
+
 ### Examples
 
 ```bash
 # Basic playback with default settings
-VideoToAscii.exe -f video.mp4
+videotoascii -f video.mp4
 
-# Just-ascii conversion without audio
-VideoToAscii.exe -f video.mp4 -s just-ascii
+# Just-ascii conversion with audio
+videotoascii -f video.mp4 -s just-ascii -a
 
 # Output to file
-VideoToAscii.exe -f video.mp4 -o output.ps1
+videotoascii -f video.mp4 -o output.ps1
 ```
 
 ## Acknowledgments
