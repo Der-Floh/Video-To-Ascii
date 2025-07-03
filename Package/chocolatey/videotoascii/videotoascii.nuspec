@@ -1,19 +1,78 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
+        <!-- == PACKAGE SPECIFIC SECTION == -->
         <id>videotoascii</id>
         <version>{{VERSION}}</version>
+        <packageSourceUrl>https://github.com/Der-Floh/Video-To-Ascii/tree/main/Package/chocolatey/videotoascii</packageSourceUrl>
+        <owners>Der_Floh</owners>
+
+        <!-- == SOFTWARE SPECIFIC SECTION == -->
         <title>VideoToAscii</title>
         <authors>Der_Floh</authors>
-        <owners>Der_Floh</owners>
         <projectUrl>https://github.com/Der-Floh/Video-To-Ascii</projectUrl>
-        <iconUrl>https://raw.githubusercontent.com/Der-Floh/Video-To-Ascii/main/Resources/icon.png</iconUrl>
+        <iconUrl>https://cdn.jsdelivr.net/gh/Der-Floh/Video-To-Ascii/VideoToAscii/Resources/icon.png</iconUrl>
         <licenseUrl>https://github.com/Der-Floh/Video-To-Ascii/blob/main/LICENSE.txt</licenseUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>A .NET console application that converts and plays videos as ASCII art in the terminal. Supports multiple conversion strategies and audio playback.</description>
-        <tags>dotnet console video ascii-art media-player terminal conversion</tags>
+        <projectSourceUrl>https://github.com/Der-Floh/Video-To-Ascii</projectSourceUrl>
+        <docsUrl>https://github.com/Der-Floh/Video-To-Ascii/blob/main/README.md</docsUrl>
+        <!--<mailingListUrl></mailingListUrl>-->
+        <bugTrackerUrl>https://github.com/Der-Floh/Video-To-Ascii/issues</bugTrackerUrl>
+        <tags>ascii ascii-art console-app converter dotnet media-player terminal video video-processing</tags>
+        <summary>A .NET console tool that converts and plays videos as ASCII art in the terminal.</summary>
+        <description><![CDATA[
+A modern **.NET 9 console application** that converts videos to animated ASCII art, optionally with synchronised audio.
+
+## Key Features
+* Real-time rendering of video files directly in the console  
+* Three rendering strategies: `filled-ascii`, `ascii-color`, `just-ascii`
+* Optional audio playback for a complete viewing experience
+* Supports common video formats via FFmpeg
+* Write results to `.txt`, `.json`, `.bat`, `.ps1`, or `.sh` files
+
+## Requirements
+* .NET 9 Runtime (installed automatically by this package)  
+* [FFmpeg](https://ffmpeg.org/) in `%PATH%` for audio support  
+* Console/terminal capable of displaying Unicode
+
+## Usage
+
+### Options
+
+```
+Options:
+  -f, --file [path]        Path to the video file (required)
+  -s, --strategy [name]    Conversion strategy (default: filled-ascii)
+                           Available: filled-ascii, ascii-color, just-ascii
+  -a, --audio [bool]       Enable/disable audio (default: false)
+  -o, --output [path]      Output file path (default: none)
+  --help                   Display help information
+```
+
+#### Supported Output types
+These are the current supported output file types:
+- `.txt`
+- `.json`
+- `.bat`
+- `.ps1`
+- `.sh`
+
+### Examples
+
+```bash
+# Basic playback with default settings
+videotoascii -f video.mp4
+
+# Just-ascii conversion with audio
+videotoascii -f video.mp4 -s just-ascii -a
+
+# Output to file
+videotoascii -f video.mp4 -o output.ps1
+```
+]]></description>
+        <releaseNotes>First Release</releaseNotes>
         <dependencies>
-            <dependency id="dotnet-9.0-runtime" />
+            <dependency id="dotnet-9.0-runtime" version="[9.0.0,10.0.0)" />
         </dependencies>
     </metadata>
     <files>

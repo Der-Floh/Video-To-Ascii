@@ -2,7 +2,7 @@
 # yaml-language-server: $schema=https://aka.ms/winget-manifest.defaultLocale.1.10.0.schema.json
 
 PackageIdentifier: Der_Floh.VideoToAscii
-PackageVersion: 1.1.2
+PackageVersion: {{VERSION}}
 PackageLocale: en-US
 Publisher: Der_Floh
 PublisherUrl: https://github.com/Der-Floh

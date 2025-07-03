@@ -1,18 +1,24 @@
-Import-Module "$env:ChocolateyInstall\helpers\chocolateyInstaller.psm1"
+# ─── Chocolatey install script for VideoToAscii ────────────────────────────────
+# This script downloads the version-specific ZIP published on GitHub,
+# verifies its SHA-256 checksum and unpacks it into the package’s tools folder.
+# Any *.exe* (or *.cmd*, *.ps1*) contained directly in the ZIP root is
+# automatically shimmed by Chocolatey, so no extra work is required.
 
-$packageName = 'videotoascii'
-$version = '{{VERSION}}'
-$expectedSha = '{{SHA256}}'
+$ErrorActionPreference = 'Stop'
 
-$zipFile = Join-Path $PSScriptRoot "VideoToAscii-$version.zip"
-$installDir = Join-Path $env:ChocolateyInstall 'lib' $packageName
+$packageName = $env:ChocolateyPackageName
+$version     = $env:ChocolateyPackageVersion
+$toolsDir    = Split-Path -Parent $MyInvocation.MyCommand.Definition
 
-# Verify the embedded ZIP's SHA-256
-Get-FileHash $zipFile -Algorithm SHA256 | ForEach-Object {
-    if ($_.Hash -ne $expectedSha) {
-        throw "Checksum mismatch for $zipFile. Expected $expectedSha, got $($_.Hash)."
-    }
+$url = "https://github.com/Der-Floh/Video-To-Ascii/releases/download/v$version/VideoToAscii-$version.zip"
+$checksum     = '{{SHA256}}'
+
+$packageArgs = @{
+    packageName   = $packageName
+    unzipLocation = $toolsDir
+    url           = $url
+    checksum      = $checksum
+    checksumType  = 'sha256'
 }
 
-Get-ChocolateyUnzip -FileFullPath $zipFile -Destination $installDir
-Install-ChocolateyPath $installDir 'User'
+Install-ChocolateyZipPackage @packageArgs

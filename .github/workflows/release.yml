@@ -59,8 +59,8 @@ jobs:
       with:
         files: ${{ steps.artifact.outputs.path }}
 
-    # 8. Compute SHA-256 of the same MSI --------------------------------
-    - name: Compute MSI hash
+    # 8. Compute SHA-256 of the same ZIP --------------------------------
+    - name: Compute ZIP hash
       id: hash
       shell: pwsh
       run: |
@@ -89,10 +89,6 @@ jobs:
       id: choco
       shell: pwsh
       run: |
-        $tools = "$env:GITHUB_WORKSPACE\Package\chocolatey\videotoascii\tools"
-        New-Item -ItemType Directory -Force -Path $tools | Out-Null
-        Copy-Item '${{ steps.artifact.outputs.path }}' $tools -Force
-
         cd Package\chocolatey\videotoascii
         choco pack videotoascii.nuspec
         $pkg = Get-ChildItem *.nupkg | Select-Object -First 1
