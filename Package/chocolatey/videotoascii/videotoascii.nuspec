@@ -19,7 +19,7 @@
         <!--<mailingListUrl></mailingListUrl>-->
         <bugTrackerUrl>https://github.com/Der-Floh/Video-To-Ascii/issues</bugTrackerUrl>
         <tags>ascii ascii-art console-app converter dotnet media-player terminal video video-processing</tags>
-        <summary>A .NET console tool that converts and plays videos as ASCII art in the terminal.</summary>
+        <summary>Convert and play videos as animated ASCII art in the console.</summary>
         <description><![CDATA[
 A modern **.NET 9 console application** that converts videos to animated ASCII art, optionally with synchronised audio.
 

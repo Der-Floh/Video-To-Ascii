@@ -1,0 +1,103 @@
+name: Publish to Winget
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  winget:
+    runs-on: windows-latest
+
+    defaults:
+      run:
+        shell: pwsh
+
+    env:
+      FORK_REPO: Der-Floh/winget-pkgs
+      UPSTREAM_REPO: microsoft/winget-pkgs
+
+    steps:
+      # 1. Basic tooling -------------------------------------------------
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      
+      - name: Install dependencies
+        run: |
+          choco install gh -y --no-progress
+          git config --global user.name  "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      # 2. Collect release data -----------------------------------------
+      - name: Extract version info from release
+        id: ver
+        run: |
+          $tag = '${{ github.event.release.tag_name }}'
+          $ver = $tag.TrimStart('v')
+          echo "tag=$tag"  >> $Env:GITHUB_OUTPUT
+          echo "ver=$ver"  >> $Env:GITHUB_OUTPUT
+
+      - name: Download portable ZIP from release
+        run: |
+          $url = "https://github.com/${{ github.repository }}/releases/download/${{ steps.ver.outputs.tag }}/VideoToAscii-${{ steps.ver.outputs.ver }}.zip"
+          Invoke-WebRequest $url -OutFile app.zip
+
+      - name: Compute SHA-256
+        id: sha
+        run: |
+          $sha = (Get-FileHash app.zip -Algorithm SHA256).Hash
+          echo "sha=$sha" >> $Env:GITHUB_OUTPUT
+
+      # 3. Prepare manifest ---------------------------------------------
+      - name: Clone fork of winget-pkgs
+        env:
+          WINGET_TOKEN: ${{ secrets.WINGET_TOKEN }}
+        run: |
+          git clone https://github.com/$Env:FORK_REPO.git winget
+          cd winget
+          git remote set-url origin https://x-access-token:$Env:WINGET_TOKEN@github.com/$Env:FORK_REPO.git
+          cd ..
+
+      - name: Rewrite placeholders in winget templates
+        run: |
+          $dest = "winget/manifests/d/Der_Floh/VideoToAscii/$version"
+          New-Item -ItemType Directory -Path $dest -Force | Out-Null
+
+          Get-ChildItem -Path 'Package/winget' -Recurse -File | ForEach-Object {
+            (Get-Content $_.FullName) `
+              -replace '{{VERSION}}', '${{ steps.ver.outputs.ver }}' `
+              -replace '{{SHA256}}', '${{ steps.sha.outputs.sha }}' `
+            | Set-Content $dest/$_.FullName
+          }
+      
+      # 4. Commit & push branch ----------------------------------------
+      - name: Commit and push
+        run: |
+          cd winget
+          git checkout -b videotoascii-${{ steps.ver.outputs.ver }} origin/master
+          git add --all
+          git commit -m "VideoToAscii ${{ steps.ver.outputs.ver }}"
+          git push origin HEAD --force
+
+      # 5. Open PR to microsoft/winget-pkgs ----------------------------
+      - name: Create / update pull request
+        env:
+          GH_TOKEN: ${{ secrets.WINGET_TOKEN }}
+        run: |
+          $body = @"
+          Automated WinGet manifest update.
+
+          ${{ github.event.release.body }}
+          "@
+          $file = New-TemporaryFile
+          Set-Content $file $body
+
+          gh pr create `
+            --repo $Env:UPSTREAM_REPO `
+            --head "$Env:FORK_REPO:videotoascii-${{ steps.ver.outputs.ver }}" `
+            --title "VideoToAscii ${{ steps.ver.outputs.ver }}" `
+            --body-file $file `
+            --base main

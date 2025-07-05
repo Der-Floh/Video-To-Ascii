@@ -1,0 +1,74 @@
+name: Publish to Chocolatey
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  choco:
+    runs-on: windows-latest
+
+    defaults:
+      run:
+        shell: pwsh
+
+    steps:
+      # 1. Basic tooling -------------------------------------------------
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      
+      - name: Install dependencies
+        run: |
+          choco install gh -y --no-progress
+          git config --global user.name  "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      # 2. Collect release data -----------------------------------------
+      - name: Extract version info from release
+        id: ver
+        run: |
+          $tag = '${{ github.event.release.tag_name }}'
+          $ver = $tag.TrimStart('v')
+          echo "tag=$tag"  >> $Env:GITHUB_OUTPUT
+          echo "ver=$ver"  >> $Env:GITHUB_OUTPUT
+
+      - name: Download portable ZIP from release
+        run: |
+          $url = "https://github.com/${{ github.repository }}/releases/download/${{ steps.ver.outputs.tag }}/VideoToAscii-${{ steps.ver.outputs.ver }}.zip"
+          Invoke-WebRequest $url -OutFile app.zip
+
+      - name: Compute SHA-256
+        id: sha
+        run: |
+          $sha = (Get-FileHash app.zip -Algorithm SHA256).Hash
+          echo "sha=$sha" >> $Env:GITHUB_OUTPUT
+
+      # 3. Prepare manifest ---------------------------------------------
+      - name: Rewrite placeholders in Chocolatey template
+        run: |
+          Get-ChildItem -Path 'Package/chocolatey' -Recurse -File | ForEach-Object {
+            (Get-Content $_.FullName) `
+              -replace '{{VERSION}}', '${{ steps.ver.outputs.ver }}' `
+              -replace '{{SHA256}}', '${{ steps.sha.outputs.sha }}' `
+            | Set-Content $_.FullName
+          }
+      
+      # 4. Pack .nupkg --------------------------------------------------
+      - name: choco pack
+        run: |
+          cd Package/chocolatey/videotoascii
+          choco pack videotoascii.nuspec --outputdirectory "$Env:RUNNER_TEMP"
+          $pkg = Get-ChildItem "$Env:RUNNER_TEMP/*.nupkg" | Select-Object -First 1
+          echo "NUPKG=$($pkg.FullName)" >> $Env:GITHUB_ENV
+          Write-Host "Packed $pkg"
+
+      # 5. Push to Chocolatey community ---------------------------------
+      - name: Push package to chocolatey.org
+        env:
+          CHOCO_API_KEY: ${{ secrets.CHOCO_API_KEY }}
+        run: |
+          choco push "$Env:NUPKG" --source "https://push.chocolatey.org/" --api-key $Env:CHOCO_API_KEY

@@ -1,0 +1,99 @@
+name: Update Scoop manifest
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  scoop:
+    runs-on: windows-latest
+
+    defaults:
+      run:
+        shell: pwsh
+
+    env:
+      FORK_REPO: Der-Floh/Extras
+      UPSTREAM_REPO: ScoopInstaller/Extras
+      
+    steps:
+      # 1. Basic tooling -------------------------------------------------
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Install dependencies
+        run: |
+          choco install gh -y --no-progress
+          git config --global user.name  "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      # 2. Collect release data -----------------------------------------
+      - name: Extract version info from release
+        id: ver
+        run: |
+          $tag = '${{ github.event.release.tag_name }}'
+          $ver = $tag.TrimStart('v')
+          echo "tag=$tag"  >> $Env:GITHUB_OUTPUT
+          echo "ver=$ver"  >> $Env:GITHUB_OUTPUT
+
+      - name: Download portable ZIP from release
+        run: |
+          $url = "https://github.com/${{ github.repository }}/releases/download/${{ steps.ver.outputs.tag }}/VideoToAscii-${{ steps.ver.outputs.ver }}.zip"
+          Invoke-WebRequest $url -OutFile app.zip
+
+      - name: Compute SHA-256
+        id: sha
+        run: |
+          $sha = (Get-FileHash app.zip -Algorithm SHA256).Hash
+          echo "sha=$sha" >> $Env:GITHUB_OUTPUT
+
+      # 3. Prepare manifest ---------------------------------------------
+      - name: Clone fork of ScoopInstaller/Extras
+        run: |
+          git clone https://github.com/$Env:FORK_REPO.git extras
+          cd extras
+          git remote set-url origin https://x-access-token:$Env:GITHUB_TOKEN@github.com/$Env:FORK_REPO.git
+          cd ..
+
+      - name: Rewrite placeholders in Scoop template
+        run: |
+          Copy-Item Package/scoop/videotoascii.json extras/bucket/videotoascii.json -Force
+
+          (Get-Content extras/bucket/videotoascii.json -Raw) `
+            -replace '{{VERSION}}', '${{ steps.ver.outputs.ver }}' `
+            -replace '{{SHA256}}',  '${{ steps.sha.outputs.sha }}' `
+          | Set-Content extras/bucket/videotoascii.json
+
+      # 4. Commit & push branch -----------------------------------------
+      - name: Commit and push
+        run: |
+          cd extras
+          git checkout -b videotoascii-${{ steps.ver.outputs.ver }} origin/master
+          git add bucket/videotoascii.json
+          git commit -m "videotoascii@${{ steps.ver.outputs.ver }}"
+          git push origin HEAD --force
+
+      # 5. Open or update PR --------------------------------------------
+      - name: Create / update pull-request
+        env:
+          GH_TOKEN: ${{ secrets.SCOOP_TOKEN }}
+        run: |
+          $body = @"
+          Automated manifest update.
+
+          ${{ github.event.release.body }}
+          "@
+          $file = New-TemporaryFile
+          Set-Content $file $body
+
+          gh pr create `
+            --repo $Env:UPSTREAM_REPO `
+            --head "$Env:FORK_REPO:videotoascii-${{ steps.ver.outputs.ver }}" `
+            --title "videotoascii@${{ steps.ver.outputs.ver }}: Bump to v${{ steps.ver.outputs.ver }}" `
+            --body-file $file `
+            --base master

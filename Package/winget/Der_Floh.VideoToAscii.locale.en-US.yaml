@@ -15,7 +15,7 @@ License: MIT
 LicenseUrl: https://github.com/Der-Floh/Video-To-Ascii/blob/main/LICENSE.txt
 # Copyright:
 # CopyrightUrl:
-ShortDescription: A .NET console tool that converts and plays videos as ASCII art in the terminal.
+ShortDescription: Convert and play videos as animated ASCII art in the console.
 Description: VideoToAscii converts and streams any video file or webcam input as colourful ASCII characters directly in your terminal. Supports multiple conversion strategies, optional audio playback and output files.
 Moniker: videotoascii
 Tags:

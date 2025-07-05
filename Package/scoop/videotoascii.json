@@ -1,30 +1,27 @@
 {
     "version": "{{VERSION}}",
-    "description": "A .NET console application that converts and plays videos as colourful ASCII art in the terminal.",
+    "description": "Convert and play videos as animated ASCII art in the console.",
     "homepage": "https://github.com/Der-Floh/Video-To-Ascii",
     "license": "MIT",
+    "depends": "dotnet-sdk",
+    "suggest": {
+        "ffmpeg": "ffmpeg"
+    },
     "architecture": {
         "64bit": {
             "url": "https://github.com/Der-Floh/Video-To-Ascii/releases/download/v{{VERSION}}/VideoToAscii-{{VERSION}}.zip",
-            "hash": "{{SHA256}}"
+            "hash": "sha256:{{SHA256}}"
         },
         "32bit": {
             "url": "https://github.com/Der-Floh/Video-To-Ascii/releases/download/v{{VERSION}}/VideoToAscii-{{VERSION}}.zip",
-            "hash": "{{SHA256}}"
+            "hash": "sha256:{{SHA256}}"
         }
     },
     "bin": "VideoToAscii.exe",
-    "depends": [
-        "versions/dotnet-runtime-9"
-    ],
     "checkver": {
-        "github": "https://github.com/Der-Floh/Video-To-Ascii",
-        "regex": "v([\\d.]+)"
+        "github": "https://github.com/Der-Floh/Video-To-Ascii"
     },
     "autoupdate": {
-        "url": "https://github.com/Der-Floh/Video-To-Ascii/releases/download/v$version/VideoToAscii-$version.zip",
-        "hash": {
-            "url": "$url.sha256"
-        }
+        "url": "https://github.com/Der-Floh/Video-To-Ascii/releases/download/v{{VERSION}}/VideoToAscii-{{VERSION}}.zip"
     }
 }
