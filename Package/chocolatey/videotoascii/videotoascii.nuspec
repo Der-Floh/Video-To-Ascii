@@ -31,8 +31,8 @@ A modern **.NET 9 console application** that converts videos to animated ASCII a
 * Write results to `.txt`, `.json`, `.bat`, `.ps1`, or `.sh` files
 
 ## Requirements
-* .NET 9 Runtime (installed automatically by this package)  
-* [FFmpeg](https://ffmpeg.org/) in `%PATH%` for audio support  
+* .NET 9 Runtime (installed by this package)  
+* [FFmpeg](https://ffmpeg.org/) in `%PATH%` for audio support (installed by this package)
 * Console/terminal capable of displaying Unicode
 
 ## Usage
@@ -73,6 +73,7 @@ videotoascii -f video.mp4 -o output.ps1
         <releaseNotes>First Release</releaseNotes>
         <dependencies>
             <dependency id="dotnet-9.0-runtime" version="[9.0.0,10.0.0)" />
+            <dependency id="ffmpeg" version="3.3.1" />
         </dependencies>
     </metadata>
     <files>
