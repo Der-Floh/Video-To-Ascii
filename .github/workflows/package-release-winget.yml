@@ -70,32 +70,33 @@ jobs:
             (Get-Content $_.FullName) `
               -replace '{{VERSION}}', '${{ steps.ver.outputs.ver }}' `
               -replace '{{SHA256}}', '${{ steps.sha.outputs.sha }}' `
-            | Set-Content $dest/$_.FullName
+            | Set-Content (Join-Path $dest $_.Name)
           }
       
       # 4. Commit & push branch ----------------------------------------
       - name: Commit and push
         run: |
           cd winget
-          git checkout -b videotoascii-${{ steps.ver.outputs.ver }} origin/master
+          git checkout master
+          git pull origin master
           git add --all
           git commit -m "VideoToAscii ${{ steps.ver.outputs.ver }}"
           git push origin HEAD --force
 
       # 5. Open PR to microsoft/winget-pkgs ----------------------------
-      #- name: Create / update pull request
-      #  run: |
-      #    $body = @"
-      #    Automated WinGet manifest update.
-      #
-      #    ${{ github.event.release.body }}
-      #    "@
-      #    $file = New-TemporaryFile
-      #    Set-Content $file $body
-      #
-      #    gh pr create `
-      #      --repo $Env:UPSTREAM_REPO `
-      #      --head "$Env:FORK_REPO:videotoascii-${{ steps.ver.outputs.ver }}" `
-      #      --title "VideoToAscii ${{ steps.ver.outputs.ver }}" `
-      #      --body-file $file `
-      #      --base main
+      - name: Create / update pull request
+        run: |
+          $body = @"
+          Automated WinGet manifest update.
+      
+          ${{ github.event.release.body }}
+          "@
+          $file = New-TemporaryFile
+          Set-Content $file $body
+      
+          gh pr create `
+            --repo $Env:UPSTREAM_REPO `
+            --head "Der-Floh:master" `
+            --title "VideoToAscii ${{ steps.ver.outputs.ver }}" `
+            --body-file $file `
+            --base master

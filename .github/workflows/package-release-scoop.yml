@@ -74,7 +74,8 @@ jobs:
       - name: Commit and push
         run: |
           cd scoop-bucket
-          git checkout -b videotoascii-${{ steps.ver.outputs.ver }} origin/master
+          git checkout master
+          git pull origin master
           git add bucket/videotoascii.json
           git commit -m "videotoascii@${{ steps.ver.outputs.ver }}"
           git push origin HEAD --force
