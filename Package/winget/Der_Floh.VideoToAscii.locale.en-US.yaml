@@ -1,7 +1,7 @@
 # Created with YamlCreate.ps1 v2.4.6 $debug=NVS0.CRLF.5-1-26100-4484.Win32NT
 # yaml-language-server: $schema=https://aka.ms/winget-manifest.defaultLocale.1.10.0.schema.json
 
-PackageIdentifier: Der_Floh.VideoToAscii
+PackageIdentifier: der_floh.videotoascii
 PackageVersion: {{VERSION}}
 PackageLocale: en-US
 Publisher: Der_Floh
@@ -28,8 +28,7 @@ Tags:
 - terminal
 - video
 - video-processing
-# ReleaseNotes:
-# ReleaseNotesUrl:
+ReleaseNotesUrl: https://github.com/Der-Floh/Video-To-Ascii/releases/tag/v{{VERSION}}
 # PurchaseUrl:
 # InstallationNotes:
 # Documentations:

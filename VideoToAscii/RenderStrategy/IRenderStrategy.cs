@@ -12,5 +12,5 @@ public interface IRenderStrategy
     /// <param name="outputFormat">Output format if saving to file</param>
     /// <param name="withAudio">Whether to play audio</param>
     /// <param name="audioFilePath">Path to the audio file to play alongside video</param>
-    void Render(VideoCapture capture, string? output = null, string? outputFormat = null, bool withAudio = false, string? audioFilePath = null);
+    Task Render(VideoCapture capture, string? output = null, string? outputFormat = null, bool withAudio = false, string? audioFilePath = null);
 }

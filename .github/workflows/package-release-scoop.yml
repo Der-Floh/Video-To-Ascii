@@ -18,7 +18,6 @@ jobs:
 
     env:
       FORK_REPO: Der-Floh/Extras
-      UPSTREAM_REPO: ScoopInstaller/Extras
       
     steps:
       # 1. Basic tooling -------------------------------------------------
@@ -53,47 +52,29 @@ jobs:
           echo "sha=$sha" >> $Env:GITHUB_OUTPUT
 
       # 3. Prepare manifest ---------------------------------------------
-      - name: Clone fork of ScoopInstaller/Extras
+      - name: Clone Scoop bucket
+        env:
+          SCOOP_TOKEN: ${{ secrets.SCOOP_TOKEN }}
         run: |
-          git clone https://github.com/$Env:FORK_REPO.git extras
-          cd extras
-          git remote set-url origin https://x-access-token:$Env:GITHUB_TOKEN@github.com/$Env:FORK_REPO.git
+          git clone https://github.com/$Env:FORK_REPO.git scoop-bucket
+          cd scoop-bucket
+          git remote set-url origin https://x-access-token:$Env:SCOOP_TOKEN@github.com/$Env:FORK_REPO.git
           cd ..
 
       - name: Rewrite placeholders in Scoop template
         run: |
-          Copy-Item Package/scoop/videotoascii.json extras/bucket/videotoascii.json -Force
+          Copy-Item Package/scoop/videotoascii.json scoop-bucket/bucket/videotoascii.json -Force
 
-          (Get-Content extras/bucket/videotoascii.json -Raw) `
+          (Get-Content scoop-bucket/bucket/videotoascii.json -Raw) `
             -replace '{{VERSION}}', '${{ steps.ver.outputs.ver }}' `
             -replace '{{SHA256}}',  '${{ steps.sha.outputs.sha }}' `
-          | Set-Content extras/bucket/videotoascii.json
+          | Set-Content scoop-bucket/bucket/videotoascii.json
 
       # 4. Commit & push branch -----------------------------------------
       - name: Commit and push
         run: |
-          cd extras
+          cd scoop-bucket
           git checkout -b videotoascii-${{ steps.ver.outputs.ver }} origin/master
           git add bucket/videotoascii.json
           git commit -m "videotoascii@${{ steps.ver.outputs.ver }}"
           git push origin HEAD --force
-
-      # 5. Open or update PR --------------------------------------------
-      - name: Create / update pull-request
-        env:
-          GH_TOKEN: ${{ secrets.SCOOP_TOKEN }}
-        run: |
-          $body = @"
-          Automated manifest update.
-
-          ${{ github.event.release.body }}
-          "@
-          $file = New-TemporaryFile
-          Set-Content $file $body
-
-          gh pr create `
-            --repo $Env:UPSTREAM_REPO `
-            --head "$Env:FORK_REPO:videotoascii-${{ steps.ver.outputs.ver }}" `
-            --title "videotoascii@${{ steps.ver.outputs.ver }}: Bump to v${{ steps.ver.outputs.ver }}" `
-            --body-file $file `
-            --base master

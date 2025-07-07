@@ -84,8 +84,6 @@ jobs:
 
       # 5. Open PR to microsoft/winget-pkgs ----------------------------
       - name: Create / update pull request
-        env:
-          GH_TOKEN: ${{ secrets.WINGET_TOKEN }}
         run: |
           $body = @"
           Automated WinGet manifest update.

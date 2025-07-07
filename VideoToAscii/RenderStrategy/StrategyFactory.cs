@@ -4,7 +4,7 @@ public static class StrategyFactory
 {
     private static readonly Dictionary<string, IRenderStrategy> Strategies = new Dictionary<string, IRenderStrategy>
     {
-        { "default", new AsciiColorStrategy() },
+        { "default", new AsciiColorFilledStrategy() },
         { "ascii-color", new AsciiColorStrategy() },
         { "just-ascii", new AsciiBWStrategy() },
         { "filled-ascii", new AsciiColorFilledStrategy() }

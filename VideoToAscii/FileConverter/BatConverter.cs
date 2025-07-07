@@ -4,6 +4,8 @@ namespace VideoToAscii.FileConverter;
 
 public sealed class BatConverter : FileConverterBase
 {
+    public override string FileExtension => ".bat";
+
     public BatConverter(string filePath, double frameRate) : base(filePath, frameRate) { }
 
     protected override void BeginFile()

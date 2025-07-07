@@ -7,6 +7,8 @@ namespace VideoToAscii.FileConverter;
 
 public sealed class JsonConverter : FileConverterBase
 {
+    public override string FileExtension => ".json";
+
     private bool _isFirstFrame = true;
 
     public JsonConverter(string filePath) : base(filePath) { }

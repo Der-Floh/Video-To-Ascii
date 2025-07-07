@@ -2,6 +2,8 @@
 
 public sealed class ShConverter : FileConverterBase
 {
+    public override string FileExtension => ".sh";
+
     public ShConverter(string filePath, double frameRate) : base(filePath, frameRate) { }
 
     protected override void BeginFile()

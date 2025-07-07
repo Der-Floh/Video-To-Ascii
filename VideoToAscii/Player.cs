@@ -25,7 +25,7 @@ public sealed class Player
     /// <param name="output">Output file path if exporting</param>
     /// <param name="playAudio">Whether to play audio</param>
     /// <param name="debug">Enable debug mode with timing logs</param>
-    public void Play()
+    public async Task Play()
     {
         var engine = new VideoEngine();
         engine.LoadVideoFromFile(VideoFilePath);
@@ -49,7 +49,7 @@ public sealed class Player
         try
         {
             var outputFormat = OutputFilePath is null ? null : Path.GetExtension(OutputFilePath);
-            engine.Play(OutputFilePath, outputFormat);
+            await engine.Play(OutputFilePath, outputFormat);
         }
         finally
         {

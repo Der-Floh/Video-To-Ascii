@@ -62,7 +62,7 @@ internal class Program
                 OutputFilePath = output?.FullName,
                 PlayAudio = withAudio
             };
-            player.Play();
+            player.Play().GetAwaiter().GetResult();
         }
         catch (Exception ex)
         {

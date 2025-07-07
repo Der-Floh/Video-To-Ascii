@@ -11,8 +11,7 @@ public static class FFmpegUtils
         try
         {
             FFMpegHelper.VerifyFFMpegExists(new FFOptions());
-            var path = GlobalFFOptions.GetFFMpegBinaryPath();
-            return File.Exists(path);
+            return true;
         }
         catch (FFMpegException)
         {

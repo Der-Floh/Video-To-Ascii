@@ -4,6 +4,8 @@ namespace VideoToAscii.FileConverter;
 
 public abstract class FileConverterBase : IFileConverter
 {
+    public abstract string FileExtension { get; }
+
     protected const string ESC = "\u001b";
     protected TextWriter OutputWriter { get; }
     protected double FrameRate { get; }
@@ -27,6 +29,5 @@ public abstract class FileConverterBase : IFileConverter
     {
         EndFile();
         OutputWriter.Dispose();
-        GC.SuppressFinalize(this);
     }
 }

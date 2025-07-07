@@ -7,14 +7,13 @@ namespace VideoToAscii;
 public sealed class VideoEngine
 {
     private IRenderStrategy _renderStrategy;
-    private VideoCapture? _readBuffer;
+    private VideoCapture? _videoCapture;
     public bool WithAudio { get; set; }
     public string? AudioFilePath { get; set; }
 
     public VideoEngine(string strategy = "default")
     {
         _renderStrategy = StrategyFactory.GetStrategy(strategy);
-        WithAudio = false;
     }
 
     /// <summary>
@@ -30,8 +29,8 @@ public sealed class VideoEngine
     /// </summary>
     public void LoadVideoFromFile(string filename)
     {
-        _readBuffer = new VideoCapture(filename);
-        if (!_readBuffer.IsOpened())
+        _videoCapture = new VideoCapture(filename);
+        if (!_videoCapture.IsOpened())
         {
             throw new Exception($"Could not open video file: {filename}");
         }
@@ -40,10 +39,10 @@ public sealed class VideoEngine
     /// <summary>
     /// Play the video captured using an specific render strategy
     /// </summary>
-    public void Play(string? output = null, string? outputFormat = null)
+    public async Task Play(string? output = null, string? outputFormat = null)
     {
         Console.CursorVisible = false;
-        _renderStrategy.Render(_readBuffer!, output, outputFormat, WithAudio, AudioFilePath);
+        await _renderStrategy.Render(_videoCapture!, output, outputFormat, WithAudio, AudioFilePath);
         Console.CursorVisible = true;
     }
 }

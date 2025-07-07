@@ -4,6 +4,8 @@ namespace VideoToAscii.FileConverter;
 
 public sealed class Ps1Converter : FileConverterBase
 {
+    public override string FileExtension => ".ps1";
+
     public Ps1Converter(string filePath, double frameRate) : base(filePath, frameRate) { }
 
     protected override void BeginFile()

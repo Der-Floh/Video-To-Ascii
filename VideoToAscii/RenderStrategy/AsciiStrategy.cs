@@ -1,10 +1,6 @@
-using System.Diagnostics;
 using System.Text;
 
 using OpenCvSharp;
-
-using VideoToAscii.FileConverter;
-using VideoToAscii.Utils;
 
 namespace VideoToAscii.RenderStrategy;
 
@@ -92,177 +88,15 @@ public class AsciiStrategy : IRenderStrategy
     /// <summary>
     /// Render the video using the ASCII strategy
     /// </summary>
-    public virtual void Render(VideoCapture cap, string? output = null, string? outputFormat = null, bool withAudio = false, string? audioFilePath = null)
+    public virtual async Task Render(VideoCapture cap, string? output = null, string? outputFormat = null, bool withAudio = false, string? audioFilePath = null)
     {
-        double length = cap.FrameCount;
-        var fps = cap.Fps;
-        if (fps <= 0)
-            fps = 30;
-
-        const int MaxFrameSkip = 10;        // <- avoid "black-hole" skipping
-        var frameDurationMs = 1000.0 / fps; // <- target budget
-
-        IFileConverter? fileConverter = null;
-        if (!string.IsNullOrEmpty(output))
+        var videoRenderer = new VideoRenderer(this, cap)
         {
-            fileConverter = outputFormat switch
-            {
-                ".sh" => new ShConverter(output, fps),
-                ".bat" => new BatConverter(output, fps),
-                ".ps1" => new Ps1Converter(output, fps),
-                ".json" => new JsonConverter(output),
-                _ => new TxtConverter(output),
-            };
-        }
-
-        var counter = 0;
-        var timeDelta = 1.0 / fps;
-
-        (var cols, var rows) = GetConsoleSize();
-
-        /* ---------- AUDIO SETUP ---------- */
-        AudioPlayer? audioPlayer = null;
-        if (withAudio && string.IsNullOrEmpty(output) &&
-            !string.IsNullOrEmpty(audioFilePath) && File.Exists(audioFilePath))
-        {
-            try
-            {
-                audioPlayer = new AudioPlayer();
-                Console.WriteLine("Starting audio playback...");
-                _ = Task.Run(() => audioPlayer.PlayAsync(audioFilePath));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Audio playback error: {ex.Message}");
-                audioPlayer?.Dispose();
-                audioPlayer = null;
-            }
-        }
-
-        try
-        {
-            using var frame = new Mat();
-            var sb = new StringBuilder();
-            var writer = Console.Out;
-            int prevCols = 0, prevRows = 0;
-            while (true)
-            {
-                /* ---------- START of a frame ---------- */
-                var frameStopwatch = Stopwatch.StartNew();
-
-                // Always re-query terminal size
-                (cols, rows) = GetConsoleSize();
-                if (prevCols != cols || prevRows != rows)
-                    Console.Clear();
-                prevCols = cols;
-                prevRows = rows;
-
-                if (!cap.Read(frame))
-                    break;         // end of stream
-
-                /* ---------- LIVE TERMINAL RENDER ---------- */
-                if (string.IsNullOrEmpty(output))
-                {
-                    sb.Append("\u001b[0;0H");      // cursor to (0,0)
-
-                    using var resized = ResizeFrame(frame, (cols, rows));
-                    var asciiFrame = ConvertFramePixelsToAscii(resized, (cols, rows));
-                    sb.Append(asciiFrame);
-
-                    /* sync audio every 10 frames */
-                    if (withAudio && audioPlayer is not null && counter % 10 == 0)
-                    {
-                        var videoPos = counter / fps;
-                        audioPlayer.SyncWithVideo(videoPos);
-                    }
-
-                    //Console.Write(sb);
-                    writer.Write(sb);
-
-                    /* ---------- MEASURE + FRAME SKIP ---------- */
-                    var processingMs = frameStopwatch.Elapsed.TotalMilliseconds;
-
-                    if (processingMs > frameDurationMs)
-                    {
-                        // how many *additional* frames does this delay amount to?
-                        var framesBehind = (int)(processingMs / frameDurationMs) - 1;
-                        var framesToSkip = Math.Min(framesBehind, MaxFrameSkip);
-
-                        for (var s = 0; s < framesToSkip && cap.Grab(); s++)
-                        {
-                            counter++;  // keep counter consistent
-                        }
-                    }
-                    else if (processingMs < frameDurationMs)   // finished early → small sleep
-                    {
-                        Thread.Sleep((int)(frameDurationMs - processingMs));
-                    }
-                }
-                /* ---------- FILE OUTPUT ---------- */
-                else
-                {
-                    ConsoleUtils.DisplayProgress(counter, (int)length);
-                    using var resized = ResizeFrame(frame);
-                    var asciiFrame = ConvertFramePixelsToAscii(resized, (cols, rows), true);
-                    fileConverter?.WriteFrame(asciiFrame);
-                }
-
-                counter++;
-                sb.Clear();
-            }
-        }
-        finally
-        {
-            /* ---------- cleanup ---------- */
-            if (audioPlayer is not null)
-            {
-                try
-                {
-                    audioPlayer.Dispose();
-                }
-                catch { /* ignore */ }
-            }
-            fileConverter?.Dispose();
-            Console.Clear();
-        }
+            Output = output,
+            OutputFormat = outputFormat,
+            WithAudio = withAudio,
+            AudioFilePath = audioFilePath
+        };
+        await videoRenderer.Render();
     }
-
-    /// <summary>
-    /// Resize a frame to meet the terminal dimensions
-    /// </summary>
-    protected static Mat ResizeFrame(Mat frame, (int cols, int rows)? dimensions = null)
-    {
-        // Cache terminal size to avoid frequent recalculations
-        var terminalSize = dimensions ?? GetConsoleSize();
-
-        var height = frame.Height;
-        var width = frame.Width;
-        var cols = terminalSize.cols;
-        var rows = terminalSize.rows;
-
-        // Consider both width and height constraints
-        // Each ASCII character takes 2 spaces horizontally for proper aspect ratio
-        var widthReductionFactor = cols / 2.0 / width;
-        var heightReductionFactor = rows / (double)height;
-
-        // Use the smaller reduction factor to ensure the image fits in both dimensions
-        var reductionFactor = Math.Min(widthReductionFactor, heightReductionFactor);
-
-        var reducedWidth = (int)(width * reductionFactor);
-        var reducedHeight = (int)(height * reductionFactor);
-
-        // Ensure we have at least one pixel in each dimension
-        reducedWidth = Math.Max(1, reducedWidth);
-        reducedHeight = Math.Max(1, reducedHeight);
-
-        // Create a new Mat buffer and use faster interpolation for better performance
-        var resized = new Mat();
-        Cv2.Resize(frame, resized, new Size(reducedWidth, reducedHeight), 0, 0, InterpolationFlags.Nearest);
-        return resized;
-    }
-
-    /// <summary>
-    /// Get console size
-    /// </summary>
-    private static (int cols, int rows) GetConsoleSize() => (Console.WindowWidth, Console.WindowHeight);
 }

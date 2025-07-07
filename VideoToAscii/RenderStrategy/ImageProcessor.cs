@@ -1,6 +1,7 @@
 using System.Collections.Concurrent;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+
 using OpenCvSharp;
 
 namespace VideoToAscii.RenderStrategy;
@@ -18,29 +19,29 @@ public sealed class ImageProcessor
     // Brightness to ASCII lookup tables for each density level
     private readonly char[][] _brightnessLookupTables;
     private const int BRIGHTNESS_LEVELS = 256; // 0-255
-    
+
     // Cache for color to ASCII mappings to avoid redundant calculations
     // Using tuple as key: (R, G, B, colored, density)
     private readonly ConcurrentDictionary<(byte R, byte G, byte B, bool Colored, int Density), string> _colorCache = new();
 
     // ANSI color code cache for frequent colors
     private readonly ConcurrentDictionary<(byte R, byte G, byte B), string> _ansiColorCache = new();
-    
+
     public ImageProcessor()
     {
         // Initialize brightness lookup tables for quick access
         _brightnessLookupTables = new char[DensityChars.Length][];
-        
-        for (int densityIndex = 0; densityIndex < DensityChars.Length; densityIndex++)
+
+        for (var densityIndex = 0; densityIndex < DensityChars.Length; densityIndex++)
         {
             _brightnessLookupTables[densityIndex] = new char[BRIGHTNESS_LEVELS];
             var chars = DensityChars[densityIndex];
             var maxIndex = chars.Length - 1;
-            
+
             // Pre-compute ASCII character for each brightness level (0-255)
-            for (int brightness = 0; brightness < BRIGHTNESS_LEVELS; brightness++)
+            for (var brightness = 0; brightness < BRIGHTNESS_LEVELS; brightness++)
             {
-                int index = (int)(maxIndex * brightness / 255.0);
+                var index = (int)(maxIndex * brightness / 255.0);
                 _brightnessLookupTables[densityIndex][brightness] = chars[index];
             }
         }
@@ -58,7 +59,7 @@ public sealed class ImageProcessor
         // Clamp values to valid ranges for safety
         brightness = Math.Clamp(brightness, 0, BRIGHTNESS_LEVELS - 1);
         density = Math.Clamp(density, 0, _brightnessLookupTables.Length - 1);
-        
+
         // Direct lookup from pre-computed table
         return _brightnessLookupTables[density][brightness];
     }
@@ -75,11 +76,12 @@ public sealed class ImageProcessor
         var b = pixel.Item0;
         var g = pixel.Item1;
         var r = pixel.Item2;
-        
+
         // Use cache to avoid redundant calculations and string allocations
-        return _colorCache.GetOrAdd((r, g, b, colored, density), key => {
+        return _colorCache.GetOrAdd((r, g, b, colored, density), key =>
+        {
             var (r1, g1, b1, isColored, d) = key;
-            
+
             if (isColored)
             {
                 var brightness = RgbToBrightness(r1, g1, b1);
@@ -226,7 +228,7 @@ public sealed class ImageProcessor
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private string GetAnsiColorCode(byte r, byte g, byte b)
     {
-        return _ansiColorCache.GetOrAdd((r, g, b), rgb => 
+        return _ansiColorCache.GetOrAdd((r, g, b), rgb =>
         {
             // Using 24-bit true color ANSI escape sequence
             return $"\u001b[38;2;{rgb.R};{rgb.G};{rgb.B}m";
