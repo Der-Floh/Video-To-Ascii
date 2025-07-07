@@ -56,14 +56,14 @@ jobs:
         env:
           WINGET_TOKEN: ${{ secrets.WINGET_TOKEN }}
         run: |
-          git clone https://github.com/$Env:FORK_REPO.git winget
-          cd winget
+          git clone https://github.com/$Env:FORK_REPO.git winget-pkgs
+          cd winget-pkgs
           git remote set-url origin https://x-access-token:$Env:WINGET_TOKEN@github.com/$Env:FORK_REPO.git
           cd ..
 
       - name: Rewrite placeholders in winget templates
         run: |
-          $dest = "winget/manifests/d/Der_Floh/VideoToAscii/$version"
+          $dest = "winget-pkgs/manifests/d/der_floh/videotoascii/$version"
           New-Item -ItemType Directory -Path $dest -Force | Out-Null
 
           Get-ChildItem -Path 'Package/winget' -Recurse -File | ForEach-Object {
@@ -83,19 +83,19 @@ jobs:
           git push origin HEAD --force
 
       # 5. Open PR to microsoft/winget-pkgs ----------------------------
-      - name: Create / update pull request
-        run: |
-          $body = @"
-          Automated WinGet manifest update.
-
-          ${{ github.event.release.body }}
-          "@
-          $file = New-TemporaryFile
-          Set-Content $file $body
-
-          gh pr create `
-            --repo $Env:UPSTREAM_REPO `
-            --head "$Env:FORK_REPO:videotoascii-${{ steps.ver.outputs.ver }}" `
-            --title "VideoToAscii ${{ steps.ver.outputs.ver }}" `
-            --body-file $file `
-            --base main
+      #- name: Create / update pull request
+      #  run: |
+      #    $body = @"
+      #    Automated WinGet manifest update.
+      #
+      #    ${{ github.event.release.body }}
+      #    "@
+      #    $file = New-TemporaryFile
+      #    Set-Content $file $body
+      #
+      #    gh pr create `
+      #      --repo $Env:UPSTREAM_REPO `
+      #      --head "$Env:FORK_REPO:videotoascii-${{ steps.ver.outputs.ver }}" `
+      #      --title "VideoToAscii ${{ steps.ver.outputs.ver }}" `
+      #      --body-file $file `
+      #      --base main

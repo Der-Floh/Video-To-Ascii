@@ -3,7 +3,7 @@
     "description": "Convert and play videos as animated ASCII art in the console.",
     "homepage": "https://github.com/Der-Floh/Video-To-Ascii",
     "license": "MIT",
-    "depends": "dotnet-sdk",
+    "depends": "dotnet-sdk-lts",
     "suggest": {
         "ffmpeg": "ffmpeg"
     },

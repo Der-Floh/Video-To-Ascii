@@ -36,6 +36,12 @@ jobs:
           echo "tag=$tag"  >> $Env:GITHUB_OUTPUT
           echo "ver=$ver"  >> $Env:GITHUB_OUTPUT
 
+      - name: Extract Release notes
+        id: notes
+        run: |
+          $raw = '${{ github.event.release.body }}'
+          echo "releasenotes=$raw" >> $Env:GITHUB_OUTPUT
+
       - name: Download portable ZIP from release
         run: |
           $url = "https://github.com/${{ github.repository }}/releases/download/${{ steps.ver.outputs.tag }}/VideoToAscii-${{ steps.ver.outputs.ver }}.zip"
@@ -54,6 +60,7 @@ jobs:
             (Get-Content $_.FullName) `
               -replace '{{VERSION}}', '${{ steps.ver.outputs.ver }}' `
               -replace '{{SHA256}}', '${{ steps.sha.outputs.sha }}' `
+              -replace '{{RELEASENOTES}}', '${{ steps.notes.outputs.releasenotes }}' `
             | Set-Content $_.FullName
           }
       

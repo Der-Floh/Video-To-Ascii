@@ -19,9 +19,7 @@ public sealed class AudioPlayer : IDisposable
     private AudioFileReader? _sourceStream;
     private SoundTouchProcessor? _processor;
     private SoundTouchWaveProvider? _soundTouchProvider;
-    private readonly Lock _syncLock = new();
-
-    /// <summary>Maximum clock error (s) considered "in‑sync".</summary>
+    private readonly object _syncLock = new();
     private const double SyncThresholdSeconds = 0.05;
 
     /// <summary>
@@ -33,7 +31,7 @@ public sealed class AudioPlayer : IDisposable
     /// <param name="cancellationToken">Optional cancellation token.</param>
     public async Task PlayAsync(string audioFilePath, CancellationToken cancellationToken = default)
     {
-        StopInternal();   // guarantee clean state
+        StopInternal();
 
         _sourceStream = new AudioFileReader(audioFilePath);
         _processor = new SoundTouchProcessor
@@ -44,7 +42,7 @@ public sealed class AudioPlayer : IDisposable
         };
         _soundTouchProvider = new SoundTouchWaveProvider(_sourceStream, _processor);
 
-        _outputDevice = new WaveOutEvent();  // you can swap for WasapiOut etc.
+        _outputDevice = new WaveOutEvent();
         _outputDevice.Init(_soundTouchProvider);
         _outputDevice.Play();
 
@@ -78,18 +76,17 @@ public sealed class AudioPlayer : IDisposable
         }
         else if (diff < 0)
         {
-            // Audio is lagging → speed up proportionally (capped)
+            // Audio is lagging -> speed up proportionally (capped)
             newTempo = (float)Math.Clamp(1 + (-diff * 0.25), 1f, 1.5f);
         }
         else // diff > 0 → audio leads
         {
-            // Audio is ahead → slow down
+            // Audio is ahead -> slow down
             newTempo = (float)Math.Clamp(1 - (diff * 0.25), 0.5f, 1f);
         }
 
         lock (_syncLock)
         {
-            // Avoid thrashing the processor with imperceptible adjustments
             if (Math.Abs(_processor.Tempo - newTempo) > 0.01f)
             {
                 _processor.Tempo = newTempo;

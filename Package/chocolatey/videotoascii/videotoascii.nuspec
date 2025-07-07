@@ -27,7 +27,7 @@ A modern **.NET 9 console application** that converts videos to animated ASCII a
 * Real-time rendering of video files directly in the console  
 * Three rendering strategies: `filled-ascii`, `ascii-color`, `just-ascii`
 * Optional audio playback for a complete viewing experience
-* Supports common video formats via FFmpeg
+* Supports common video formats
 * Write results to `.txt`, `.json`, `.bat`, `.ps1`, or `.sh` files
 
 ## Requirements
@@ -70,9 +70,11 @@ videotoascii -f video.mp4 -s just-ascii -a
 videotoascii -f video.mp4 -o output.ps1
 ```
 ]]></description>
-        <releaseNotes>First Release</releaseNotes>
+        <releaseNotes><![CDATA[
+{{RELEASENOTES}}
+]]></releaseNotes>
         <dependencies>
-            <dependency id="dotnet-9.0-runtime" version="[9.0.0,10.0.0)" />
+            <dependency id="dotnet-8.0-runtime" version="[8.0.0,9.0.0)" />
             <dependency id="ffmpeg" version="3.3.1" />
         </dependencies>
     </metadata>
