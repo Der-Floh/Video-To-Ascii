@@ -1,4 +1,4 @@
-name: Update Scoop manifest
+name: Publish to Scoop bucket
 
 on:
   release:
