@@ -63,7 +63,7 @@ jobs:
 
       - name: Rewrite placeholders in winget templates
         run: |
-          $dest = "winget-pkgs/manifests/d/der_floh/videotoascii/$version"
+          $dest = "winget-pkgs/manifests/d/der_floh/videotoascii/${{ steps.ver.outputs.ver }}"
           New-Item -ItemType Directory -Path $dest -Force | Out-Null
 
           Get-ChildItem -Path 'Package/winget' -Recurse -File | ForEach-Object {

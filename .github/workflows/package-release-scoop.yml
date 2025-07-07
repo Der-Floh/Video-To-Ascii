@@ -17,7 +17,7 @@ jobs:
         shell: pwsh
 
     env:
-      FORK_REPO: Der-Floh/Extras
+      FORK_REPO: Der-Floh/scoop-bucket
       
     steps:
       # 1. Basic tooling -------------------------------------------------
