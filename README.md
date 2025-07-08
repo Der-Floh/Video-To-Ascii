@@ -20,7 +20,7 @@ Thanks to [Joel Ibaceta/video-to-ascii](https://github.com/joelibaceta/video-to-
 
 ## Requirements
 
-- Windows (Currently only Windows is supported)
+- [.NET 8 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 - [FFmpeg](https://ffmpeg.org/) for audio support
 - Terminal/console with Unicode support
 - Sufficient console size for the desired ASCII resolution
