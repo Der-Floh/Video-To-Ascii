@@ -21,7 +21,7 @@ Installers:
   NestedInstallerFiles:
   - RelativeFilePath: VideoToAscii.exe
     PortableCommandAlias: videotoascii
-  InstallerUrl: https://github.com/Der-Floh/Video-To-Ascii/releases/download/v{{VERSION}}/VideoToAscii-{{VERSION}}.zip
+  InstallerUrl: https://github.com/Der-Floh/Video-To-Ascii/releases/download/v{{VERSION}}/VideoToAscii-v{{VERSION}}.zip
   InstallerSha256: {{SHA256}}
 ManifestType: installer
 ManifestVersion: 1.10.0

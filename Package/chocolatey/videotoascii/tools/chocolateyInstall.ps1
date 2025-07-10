@@ -10,7 +10,7 @@ $packageName = $env:ChocolateyPackageName
 $version     = $env:ChocolateyPackageVersion
 $toolsDir    = Split-Path -Parent $MyInvocation.MyCommand.Definition
 
-$url = "https://github.com/Der-Floh/Video-To-Ascii/releases/download/v$version/VideoToAscii-$version.zip"
+$url = "https://github.com/Der-Floh/Video-To-Ascii/releases/download/v$version/VideoToAscii-v$version.zip"
 $checksum     = '{{SHA256}}'
 
 $packageArgs = @{
