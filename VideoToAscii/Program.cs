@@ -8,6 +8,9 @@ internal class Program
 {
     static async Task<int> Main(string[] args)
     {
+        if (args.Length == 0)
+            args = ["-h"];
+
         var fileOption = new Option<FileInfo>(
              aliases: ["-f", "--file"],
              description: "Input video file")
