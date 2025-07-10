@@ -84,19 +84,19 @@ jobs:
           git push origin HEAD --force
 
       # 5. Open PR to microsoft/winget-pkgs ----------------------------
-      - name: Create / update pull request
-        run: |
-          $body = @"
-          Automated WinGet manifest update.
-      
-          ${{ github.event.release.body }}
-          "@
-          $file = New-TemporaryFile
-          Set-Content $file $body
-      
-          gh pr create `
-            --repo $Env:UPSTREAM_REPO `
-            --head "Der-Floh:master" `
-            --title "VideoToAscii ${{ steps.ver.outputs.ver }}" `
-            --body-file $file `
-            --base master
+      #- name: Create / update pull request
+      #  run: |
+      #    $body = @"
+      #    Automated WinGet manifest update.
+      #
+      #    ${{ github.event.release.body }}
+      #    "@
+      #    $file = New-TemporaryFile
+      #    Set-Content $file $body
+      #
+      #    gh pr create `
+      #      --repo $Env:UPSTREAM_REPO `
+      #      --head "Der-Floh:master" `
+      #      --title "VideoToAscii ${{ steps.ver.outputs.ver }}" `
+      #      --body-file $file `
+      #      --base master
