@@ -42,7 +42,7 @@ jobs:
 
       - name: Download portable ZIP from release
         run: |
-          $url = "https://github.com/${{ github.repository }}/releases/download/${{ steps.ver.outputs.tag }}/VideoToAscii-${{ steps.ver.outputs.ver }}.zip"
+          $url = "https://github.com/${{ github.repository }}/releases/download/${{ steps.ver.outputs.tag }}/VideoToAscii-v${{ steps.ver.outputs.ver }}.zip"
           Invoke-WebRequest $url -OutFile app.zip
 
       - name: Compute SHA-256
