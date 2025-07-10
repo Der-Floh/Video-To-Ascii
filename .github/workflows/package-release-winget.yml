@@ -76,7 +76,7 @@ jobs:
       # 4. Commit & push branch ----------------------------------------
       - name: Commit and push
         run: |
-          cd winget
+          cd winget-pkgs
           git checkout master
           git pull origin master
           git add --all

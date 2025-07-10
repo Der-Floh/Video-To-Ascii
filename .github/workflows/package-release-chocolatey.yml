@@ -39,8 +39,14 @@ jobs:
       - name: Extract Release notes
         id: notes
         run: |
-          $raw = '${{ github.event.release.body }}'
-          echo "releasenotes=$raw" >> $Env:GITHUB_OUTPUT
+          $raw = @'
+          ${{ github.event.release.body }}
+          '@
+
+          $d = [guid]::NewGuid()
+          "releasenotes<<$d" | Out-File $env:GITHUB_OUTPUT -Append
+          $raw            | Out-File $env:GITHUB_OUTPUT -Append
+          "$d"            | Out-File $env:GITHUB_OUTPUT -Append
 
       - name: Download portable ZIP from release
         run: |
