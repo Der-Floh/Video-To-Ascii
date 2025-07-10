@@ -1,5 +1,4 @@
-using System.Collections.Concurrent;
-using System.Numerics;
+﻿using System.Numerics;
 using System.Runtime.CompilerServices;
 
 using OpenCvSharp;
@@ -12,20 +11,14 @@ public sealed class ImageProcessor
     private static readonly char[][] DensityChars =
     [
         [' ', ' ', '.', ':', '!', '+', '*', 'e', '$', '@', '8'], // Light
-        ['.', '*', 'e', 's', '◍'], // Color
-        ['░', '▒', '▓', '█'] // Filled
+        ['.', '*', 'e', 's', '◍'],                               // Color
+        ['░', '▒', '▓', '█']                                     // Filled
     ];
 
-    // Brightness to ASCII lookup tables for each density level
+    private const int BrightnessLevels = 256; // 0-255
+
+    // Pre-computed brightness-to-ASCII tables (one per density level)
     private readonly char[][] _brightnessLookupTables;
-    private const int BRIGHTNESS_LEVELS = 256; // 0-255
-
-    // Cache for color to ASCII mappings to avoid redundant calculations
-    // Using tuple as key: (R, G, B, colored, density)
-    private readonly ConcurrentDictionary<(byte R, byte G, byte B, bool Colored, int Density), string> _colorCache = new();
-
-    // ANSI color code cache for frequent colors
-    private readonly ConcurrentDictionary<(byte R, byte G, byte B), string> _ansiColorCache = new();
 
     public ImageProcessor()
     {
@@ -34,15 +27,14 @@ public sealed class ImageProcessor
 
         for (var densityIndex = 0; densityIndex < DensityChars.Length; densityIndex++)
         {
-            _brightnessLookupTables[densityIndex] = new char[BRIGHTNESS_LEVELS];
+            _brightnessLookupTables[densityIndex] = new char[BrightnessLevels];
             var chars = DensityChars[densityIndex];
             var maxIndex = chars.Length - 1;
 
-            // Pre-compute ASCII character for each brightness level (0-255)
-            for (var brightness = 0; brightness < BRIGHTNESS_LEVELS; brightness++)
+            for (var b = 0; b < BrightnessLevels; b++)
             {
-                var index = (int)(maxIndex * brightness / 255.0);
-                _brightnessLookupTables[densityIndex][brightness] = chars[index];
+                var charIndex = (int)(maxIndex * b / 255.0);
+                _brightnessLookupTables[densityIndex][b] = chars[charIndex];
             }
         }
     }
@@ -57,7 +49,7 @@ public sealed class ImageProcessor
     public char BrightnessToAscii(int brightness, int density = 0)
     {
         // Clamp values to valid ranges for safety
-        brightness = Math.Clamp(brightness, 0, BRIGHTNESS_LEVELS - 1);
+        brightness = Math.Clamp(brightness, 0, BrightnessLevels - 1);
         density = Math.Clamp(density, 0, _brightnessLookupTables.Length - 1);
 
         // Direct lookup from pre-computed table
@@ -73,165 +65,131 @@ public sealed class ImageProcessor
     /// <returns>ASCII representation</returns>
     public string PixelToAscii(Vec3b pixel, bool colored = true, int density = 0)
     {
-        var b = pixel.Item0;
-        var g = pixel.Item1;
-        var r = pixel.Item2;
+        var (b, g, r) = (pixel.Item0, pixel.Item1, pixel.Item2);
 
-        // Use cache to avoid redundant calculations and string allocations
-        return _colorCache.GetOrAdd((r, g, b, colored, density), key =>
+        if (colored)
         {
-            var (r1, g1, b1, isColored, d) = key;
-
-            if (isColored)
-            {
-                var brightness = RgbToBrightness(r1, g1, b1);
-                (r1, g1, b1) = IncreaseSaturation(r1, g1, b1); // Enhance colors
-                var asciiChar = BrightnessToAscii(brightness, d);
-
-                // ANSI color escape sequence
-                var colorCode = GetAnsiColorCode(r1, g1, b1);
-                return $"{colorCode}{asciiChar}{asciiChar}\u001b[0m";
-            }
-            else
-            {
-                var brightness = RgbToBrightness(r1, g1, b1, true); // Use grayscale formula
-                var asciiChar = BrightnessToAscii(brightness, d);
-                return $"{asciiChar}{asciiChar}";
-            }
-        });
+            var brightness = RgbToBrightness(r, g, b);
+            var (sr, sg, sb) = IncreaseSaturation(r, g, b);
+            var ascii = BrightnessToAscii(brightness, density);
+            var colorEscape = GetAnsiColorCode(sr, sg, sb);
+            return $"{colorEscape}{ascii}{ascii}\u001b[0m";
+        }
+        else
+        {
+            var brightness = RgbToBrightness(r, g, b, grayscale: true);
+            var ascii = BrightnessToAscii(brightness, density);
+            return $"{ascii}{ascii}";
+        }
     }
 
-    /// <summary>
-    /// Increase the saturation of an RGB color
-    /// </summary>
-    /// <param name="r">Red (0-255)</param>
-    /// <param name="g">Green (0-255)</param>
-    /// <param name="b">Blue (0-255)</param>
-    /// <returns>RGB tuple with increased saturation</returns>
-    private (byte r, byte g, byte b) IncreaseSaturation(byte r, byte g, byte b)
+    private static (byte r, byte g, byte b) IncreaseSaturation(byte r, byte g, byte b)
     {
         // Convert to HSV
-        var rf = r / 255.0;
-        var gf = g / 255.0;
-        var bf = b / 255.0;
+        const float inv255 = 1f / 255f; // pre-computed reciprocal
+        var rf = r * inv255;
+        var gf = g * inv255;
+        var bf = b * inv255;
 
         var max = Math.Max(rf, Math.Max(gf, bf));
         var min = Math.Min(rf, Math.Min(gf, bf));
         var delta = max - min;
 
         // Calculate HSV
-        double h = 0;
-        if (delta != 0)
+        float h = 0f;
+        if (delta != 0f)
         {
             if (max == rf)
-                h = ((gf - bf) / delta) % 6;
+                h = (gf - bf) / delta % 6f;
             else if (max == gf)
-                h = (bf - rf) / delta + 2;
+                h = ((bf - rf) / delta) + 2f;
             else
-                h = (rf - gf) / delta + 4;
+                h = ((rf - gf) / delta) + 4f;
 
-            h *= 60;
-            if (h < 0)
-                h += 360;
+            h *= 60f;
+            if (h < 0f)
+                h += 360f;
         }
 
-        var s = max == 0 ? 0 : delta / max;
+        var s = max == 0f ? 0f : delta / max;
         var v = max;
 
         // Increase saturation
-        s = Math.Min(s + 0.3, 1.0);
+        s = Math.Min(s + 0.3f, 1f);
 
         // Convert back to RGB
         var c = v * s;
-        var x = c * (1 - Math.Abs((h / 60) % 2 - 1));
+        var x = c * (1f - Math.Abs((h / 60f % 2f) - 1f));
         var m = v - c;
 
-        double r1, g1, b1;
+        float r1, g1, b1;
 
-        if (h < 60)
+        if (h < 60f)
         {
             r1 = c;
             g1 = x;
-            b1 = 0;
+            b1 = 0f;
         }
-        else if (h < 120)
+        else if (h < 120f)
         {
             r1 = x;
             g1 = c;
-            b1 = 0;
+            b1 = 0f;
         }
-        else if (h < 180)
+        else if (h < 180f)
         {
-            r1 = 0;
+            r1 = 0f;
             g1 = c;
             b1 = x;
         }
-        else if (h < 240)
+        else if (h < 240f)
         {
-            r1 = 0;
+            r1 = 0f;
             g1 = x;
             b1 = c;
         }
-        else if (h < 300)
+        else if (h < 300f)
         {
             r1 = x;
-            g1 = 0;
+            g1 = 0f;
             b1 = c;
         }
         else
         {
             r1 = c;
-            g1 = 0;
+            g1 = 0f;
             b1 = x;
         }
 
         return (
-            (byte)Math.Round(Math.Clamp((r1 + m) * 255, 0, 255)),
-            (byte)Math.Round(Math.Clamp((g1 + m) * 255, 0, 255)),
-            (byte)Math.Round(Math.Clamp((b1 + m) * 255, 0, 255))
+            (byte)Math.Round(Math.Clamp((r1 + m) * 255f, 0f, 255f)),
+            (byte)Math.Round(Math.Clamp((g1 + m) * 255f, 0f, 255f)),
+            (byte)Math.Round(Math.Clamp((b1 + m) * 255f, 0f, 255f))
         );
     }
 
-    /// <summary>
-    /// Calculate brightness from RGB color with optimized path using Vector
-    /// </summary>
-    /// <param name="r">Red (0-255)</param>
-    /// <param name="g">Green (0-255)</param>
-    /// <param name="b">Blue (0-255)</param>
-    /// <param name="grayscale">Use grayscale formula</param>
-    /// <returns>Brightness value (0-255)</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private int RgbToBrightness(byte r, byte g, byte b, bool grayscale = false)
+    private static int RgbToBrightness(byte r, byte g, byte b, bool grayscale = false)
     {
         if (Vector.IsHardwareAccelerated && grayscale)
         {
             // Use SIMD if available for the standard grayscale formula
-            Vector3 weights = new Vector3(0.2126f, 0.7152f, 0.0722f);
-            Vector3 rgb = new Vector3(r, g, b);
+            var weights = new Vector3(0.2126f, 0.7152f, 0.0722f);
+            var rgb = new Vector3(r, g, b);
             return (int)Vector3.Dot(rgb, weights);
         }
         else if (grayscale)
         {
             // Standard grayscale formula
-            return (int)(0.2126 * r + 0.7152 * g + 0.0722 * b);
+            return (int)((0.2126 * r) + (0.7152 * g) + (0.0722 * b));
         }
         else
         {
             // Custom brightness formula from original code
-            return (int)(0.267 * r + 0.642 * g + 0.091 * b);
+            return (int)((0.267 * r) + (0.642 * g) + (0.091 * b));
         }
     }
 
-    /// <summary>
-    /// Get ANSI color code for an RGB color with caching
-    /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private string GetAnsiColorCode(byte r, byte g, byte b)
-    {
-        return _ansiColorCache.GetOrAdd((r, g, b), rgb =>
-        {
-            // Using 24-bit true color ANSI escape sequence
-            return $"\u001b[38;2;{rgb.R};{rgb.G};{rgb.B}m";
-        });
-    }
+    private static string GetAnsiColorCode(byte r, byte g, byte b) => $"\u001b[38;2;{r};{g};{b}m";
 }

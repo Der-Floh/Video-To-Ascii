@@ -1,6 +1,7 @@
 using OpenCvSharp;
 
 using VideoToAscii.RenderStrategy;
+using VideoToAscii.Utils;
 
 namespace VideoToAscii;
 
@@ -29,7 +30,7 @@ public sealed class VideoEngine
     /// </summary>
     public void LoadVideoFromFile(string filename)
     {
-        _videoCapture = new VideoCapture(filename);
+        _videoCapture = OpenCVUtils.TryOpenWithHardwareAcc(filename);
         if (!_videoCapture.IsOpened())
         {
             throw new Exception($"Could not open video file: {filename}");

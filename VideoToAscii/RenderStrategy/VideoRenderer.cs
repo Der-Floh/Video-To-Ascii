@@ -44,7 +44,14 @@ public sealed class VideoRenderer
 
         using var frame = new Mat();
         var sb = new StringBuilder();
-        var writer = Console.Out;
+
+        const int BufferSize = 1 << 20;
+        var stdout = Console.OpenStandardOutput();
+        using var writer = new StreamWriter(stdout, Console.OutputEncoding, BufferSize, leaveOpen: true)
+        {
+            AutoFlush = false
+        };
+
         int prevCols = 0, prevRows = 0;
 
         var counter = 0;
@@ -84,6 +91,7 @@ public sealed class VideoRenderer
                 sb.Append("\u001b[0;0H");
                 sb.Append(asciiFrame);
                 writer.Write(sb);
+                writer.Flush();
                 sb.Clear();
 
                 counter++;
@@ -99,6 +107,7 @@ public sealed class VideoRenderer
                 }
                 catch { }
             }
+            writer.Close();
             Console.Clear();
         }
     }
@@ -228,7 +237,7 @@ public sealed class VideoRenderer
         var frameStopwatch = Stopwatch.StartNew();
 
         if (!VideoCapture.Read(frame))
-            return (null, -1);         // end of stream
+            return (null, -1); // end of stream
 
         using var resized = ResizeFrame(frame);
         var asciiFrame = Strategy.ConvertFramePixelsToAscii(resized, (cols, rows), newLineChars);
@@ -256,12 +265,10 @@ public sealed class VideoRenderer
             try
             {
                 audioPlayer = new AudioPlayer();
-                Console.WriteLine("Starting audio playback...");
                 _ = Task.Run(() => audioPlayer.PlayAsync(AudioFilePath));
             }
-            catch (Exception ex)
+            catch
             {
-                Console.WriteLine($"Audio playback error: {ex.Message}");
                 audioPlayer?.Dispose();
                 audioPlayer = null;
             }
