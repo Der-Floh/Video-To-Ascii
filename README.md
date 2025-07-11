@@ -27,6 +27,19 @@ Thanks to [Joel Ibaceta/video-to-ascii](https://github.com/joelibaceta/video-to-
 
 ## Installation
 
+### Scoop
+
+Install Scoop and add My Scoop bucket and the versions bucket:
+```bash
+scoop bucket add der_floh https://github.com/der-floh/scoop-bucket
+scoop bucket add versions
+```
+
+Then install the tool:
+```
+scoop install videotoascii
+```
+
 ### Releases
 
 Download and install the latest [Release](https://github.com/Der-Floh/Video-To-Ascii/releases/latest) or view all [Releases](https://github.com/Der-Floh/Video-To-Ascii/releases).
