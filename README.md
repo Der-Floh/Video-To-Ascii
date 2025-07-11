@@ -1,12 +1,15 @@
-# Video-To-Ascii
+# <img src="https://raw.githubusercontent.com/Der-Floh/Video-To-Ascii/refs/heads/main/VideoToAscii/Resources/icon.png" height="30"> Video-To-Ascii
+
+[![GitHub release)](https://img.shields.io/github/v/release/Der-Floh/Video-To-Ascii)](https://github.com/Der-Floh/Video-To-Ascii/releases/latest)
+[![GitHub downloads](https://img.shields.io/github/downloads/Der-Floh/Video-To-Ascii/latest/total)](https://github.com/Der-Floh/Video-To-Ascii/releases/latest)
+[![GitHub issues](https://img.shields.io/github/issues/Der-Floh/Video-To-Ascii)](https://github.com/Der-Floh/Video-To-Ascii/issues)
 
 A modern C# console application that converts videos into ASCII art with audio support.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
 ## Overview
 
-Video-To-Ascii transforms video files into ASCII art representations that can be viewed directly in the console. The application leverages the latest C# features to provide a responsive and efficient video-to-text conversion experience with synchronized audio playback.
+Video-To-Ascii transforms video files into ASCII art live in the console. The application provides a responsive and efficient video-to-text conversion experience with synchronized audio playback.
+Additionally exporting to different output formats like `.json`, `.ps1` or `.sh` is supported.
 
 Thanks to [Joel Ibaceta/video-to-ascii](https://github.com/joelibaceta/video-to-ascii) for the original project.
 
@@ -21,11 +24,15 @@ Thanks to [Joel Ibaceta/video-to-ascii](https://github.com/joelibaceta/video-to-
 ## Requirements
 
 - [.NET 8 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
-- [FFmpeg](https://ffmpeg.org/) for audio support
+- [FFmpeg](https://ffmpeg.org/) for audio support (optional)
 - Terminal/console with Unicode support
 - Sufficient console size for the desired ASCII resolution
 
 ## Installation
+
+[![Chocolatey](https://img.shields.io/badge/chocolatey-under_moderation-80B5E3)](https://community.chocolatey.org/packages/videotoascii)
+[![Scoop](https://img.shields.io/badge/scoop-available-4CA146)](https://github.com/Der-Floh/scoop-bucket?tab=readme-ov-file#available-apps)
+![WinGet](https://img.shields.io/badge/winget-under_moderation-0063B1)
 
 ### Scoop
 
@@ -82,6 +89,7 @@ videotoascii -f video.mp4 -o output.ps1
 ## Acknowledgments
 
 - [Joel Ibaceta/video-to-ascii](https://github.com/joelibaceta/video-to-ascii) for the original project
-- [FFmpeg](https://ffmpeg.org/) for video processing capabilities
-- [NAudio](https://github.com/naudio/NAudio) for audio processing
-- All contributors who have helped shape this project
+
+<br>
+
+[!["Buy me a Floppy Disk"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/der_floh)
