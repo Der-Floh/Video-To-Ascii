@@ -32,7 +32,7 @@ Thanks to [Joel Ibaceta/video-to-ascii](https://github.com/joelibaceta/video-to-
 
 [![Chocolatey](https://img.shields.io/badge/chocolatey-under_moderation-80B5E3)](https://community.chocolatey.org/packages/videotoascii)
 [![Scoop](https://img.shields.io/badge/scoop-available-4CA146)](https://github.com/Der-Floh/scoop-bucket?tab=readme-ov-file#available-apps)
-![WinGet](https://img.shields.io/badge/winget-under_moderation-0063B1)
+[![WinGet](https://img.shields.io/badge/winget-available-0063B1)](https://winget.run/search?query=videotoascii)
 
 ### Scoop
 
