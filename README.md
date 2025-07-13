@@ -34,7 +34,16 @@ Thanks to [Joel Ibaceta/video-to-ascii](https://github.com/joelibaceta/video-to-
 [![Scoop](https://img.shields.io/badge/scoop-available-4CA146)](https://github.com/Der-Floh/scoop-bucket?tab=readme-ov-file#available-apps)
 [![WinGet](https://img.shields.io/badge/winget-available-0063B1)](https://winget.run/search?query=videotoascii)
 
-### Scoop
+### <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Chocolatey_icon.svg" height="16"> Chocolatey
+
+Currently under moderation. Therefore only 1.1.2 is available and version needs to be specified.
+
+Install Chocolatey and open a terminal:
+```bash
+choco install videotoascii --version 1.1.2
+```
+
+### <img src="https://avatars.githubusercontent.com/u/16618068" height="16"> Scoop
 
 Install Scoop and add My Scoop bucket and the versions bucket:
 ```bash
@@ -47,7 +56,7 @@ Then install the tool:
 scoop install videotoascii
 ```
 
-### WinGet
+### <img src="https://raw.githubusercontent.com/microsoft/winget-cli/master/.github/images/WindowsPackageManager_Assets/ICO/PNG/_64.png" height="16"> WinGet
 
 Install WinGet and run a terminal with administrator privileges (required for dotnet):
 ```bash
