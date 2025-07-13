@@ -47,6 +47,13 @@ Then install the tool:
 scoop install videotoascii
 ```
 
+### WinGet
+
+Install WinGet and run a terminal with administrator privileges (required for dotnet):
+```bash
+winget install videotoascii
+```
+
 ### Releases
 
 Download and install the latest [Release](https://github.com/Der-Floh/Video-To-Ascii/releases/latest) or view all [Releases](https://github.com/Der-Floh/Video-To-Ascii/releases).
