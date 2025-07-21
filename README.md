@@ -36,11 +36,9 @@ Thanks to [Joel Ibaceta/video-to-ascii](https://github.com/joelibaceta/video-to-
 
 ### <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Chocolatey_icon.svg" height="16"> Chocolatey
 
-Currently under moderation. Therefore only 1.1.2 is available and version needs to be specified.
-
 Install Chocolatey and open a terminal:
 ```bash
-choco install videotoascii --version 1.1.2
+choco install videotoascii
 ```
 
 ### <img src="https://avatars.githubusercontent.com/u/16618068" height="16"> Scoop
